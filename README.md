@@ -1,5 +1,8 @@
 # Tugas Besar 2 - IF2210 Pemrograman Berorientasi Objek
 
+## Link Diagram
+https://lucid.app/lucidchart/85a782f0-3957-4a3b-9fcd-e680579d99fe/edit?invitationId=inv_5961b463-df58-4068-8b49-2401029a31f1 
+
 ## General Info
 
 ## Informasi
