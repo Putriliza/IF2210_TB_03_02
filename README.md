@@ -1,4 +1,5 @@
 # Tugas Besar 2 - IF2210 Pemrograman Berorientasi Objek
+[![Gradle Build](https://github.com/Putriliza/IF2210_TB_03_02/actions/workflows/gradle.yml/badge.svg)](https://github.com/Putriliza/IF2210_TB_03_02/actions/workflows/gradle.yml)
 
 ## Link Diagram
 https://lucid.app/lucidchart/85a782f0-3957-4a3b-9fcd-e680579d99fe/edit?invitationId=inv_5961b463-df58-4068-8b49-2401029a31f1 
