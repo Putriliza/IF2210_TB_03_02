@@ -2,15 +2,15 @@ import java.util.ArrayList;
 
 public class Player {
     // Atribut
-    private String name;
+    private String nama;
     private int healtPoints;
     private Mana mana;
     private ArrayList <Kartu> deck;
     private ArrayList <Kartu> hand;
 
     // Konstruktor
-    public Player(String name) {
-        this.name = name;
+    public Player(String nama) {
+        this.nama = nama;
         this.healtPoints = 80;
         this.mana = new Mana(1,1);
 
@@ -26,10 +26,22 @@ public class Player {
     }
 
     // Getter & Setter
+    public String getNama(){
+        return this.nama;
+    }
+
     public void setHealthPoints(int healthPoints) {
         if (healthPoints >= 0 && healthPoints <= 80) {
             this.healtPoints = healthPoints;
         }
+    }
+
+    public void setMana(int mana) {
+        // this.mana.setJumlah(mana);
+    }
+
+    public Mana getMana() {
+        return this.mana;
     }
 
     // Ambil kartu dari deck
