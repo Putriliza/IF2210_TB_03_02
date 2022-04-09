@@ -1,3 +1,5 @@
+package Menkrep.Model.Kartu;
+
 public class Kartu {
     private String nama;
     private String deskripsi;

@@ -1,3 +1,5 @@
+package Menkrep.Model.Mana;
+
 public class Mana {
     private int jumlah;
     private int giliran;
@@ -26,7 +28,7 @@ public class Mana {
 
     public void setGiliran(int giliran) {
         this.giliran = giliran;
-        if(this.giliran > 10) {
+        if (this.giliran > 10) {
             this.jumlah = 10;
         } else {
             this.jumlah = this.giliran;
@@ -35,7 +37,7 @@ public class Mana {
 
     public void tambahGiliran(int giliran) {
         this.giliran += giliran;
-        if(this.giliran > 10) {
+        if (this.giliran > 10) {
             this.jumlah = 10;
         } else {
             this.jumlah = this.giliran;
@@ -43,7 +45,7 @@ public class Mana {
     }
 
     public int getMana() {
-        if(this.giliran > 10) {
+        if (this.giliran > 10) {
             return 10;
         } else {
             return this.jumlah;

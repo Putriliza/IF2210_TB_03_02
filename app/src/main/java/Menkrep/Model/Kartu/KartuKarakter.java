@@ -1,4 +1,6 @@
-class KartuKarakter extends Kartu {
+package Menkrep.Model.Kartu;
+
+public class KartuKarakter extends Kartu{
     private String jenis;
     private int exp;
     private int level;

@@ -1,22 +1,28 @@
+package Menkrep.Model.Player;
+
 import java.util.ArrayList;
+
+import Menkrep.Model.Kartu.Kartu;
+import Menkrep.Model.Mana.Mana;
 
 public class Player {
     // Atribut
     private String nama;
-    private int healtPoints;
+    private int healthPoints;
     private Mana mana;
-    private ArrayList <Kartu> deck;
-    private ArrayList <Kartu> hand;
+    private ArrayList<Kartu> deck;
+    private ArrayList<Kartu> hand;
 
     // Konstruktor
     public Player(String nama) {
         this.nama = nama;
-        this.healtPoints = 80;
-        this.mana = new Mana(1,1);
+        this.healthPoints = 80;
+        this.mana = new Mana(1, 1);
 
         // Inisialisasi kartu di deck
         this.deck = new ArrayList<Kartu>();
-        // TO DO: Nanti kalo kartu karakter sama spell dah ada, inisiasi dengan jumlah yang sama
+        // TO DO: Nanti kalo kartu karakter sama spell dah ada, inisiasi dengan jumlah
+        // yang sama
         for (int i = 0; i < 60; i++) {
             this.deck.add(new Kartu("Kartu " + i, "Deskripsi " + i, "Tipe " + i));
         }
@@ -26,13 +32,13 @@ public class Player {
     }
 
     // Getter & Setter
-    public String getNama(){
+    public String getNama() {
         return this.nama;
     }
 
     public void setHealthPoints(int healthPoints) {
         if (healthPoints >= 0 && healthPoints <= 80) {
-            this.healtPoints = healthPoints;
+            this.healthPoints = healthPoints;
         }
     }
 
@@ -45,7 +51,7 @@ public class Player {
     }
 
     // Ambil kartu dari deck dan tambahkan ke hand
-    public void ambilKartu(){
+    public void ambilKartu() {
         // TO DO:
         // Cek apakah deck kosong
         // Cek apakah mana cukup untuk mengambil kartu
@@ -55,23 +61,23 @@ public class Player {
         // Kurangi mana
     }
 
-    public void descKartu(){
+    public void descKartu() {
         // TO DO:
         // Tampilin deskripsi kartu yang ada di deck atau hand
     }
 
-    public void descPlayer(){
+    public void descPlayer() {
         // TO DO:
         // Tampilin deskripsi player
     }
 
-    public void keluarkanKartu(){
+    public void keluarkanKartu() {
         // TO DO:
         // Keluarkan kartu yang ada di hand
         // Masukin ke dalam board, cek apakah di board masih ada slot atau ga
     }
 
-    public void keluarkanMana(){
+    public void keluarkanMana() {
         // TO DO:
         // Keluarkan mana yang dipunya
         // Pilih kartu karakter di board yang mau di pakaiin mana
