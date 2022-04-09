@@ -44,7 +44,7 @@ public class Player {
         return this.mana;
     }
 
-    // Ambil kartu dari deck
+    // Ambil kartu dari deck dan tambahkan ke hand
     public void ambilKartu(){
         // TO DO:
         // Cek apakah deck kosong
@@ -58,6 +58,11 @@ public class Player {
     public void descKartu(){
         // TO DO:
         // Tampilin deskripsi kartu yang ada di deck atau hand
+    }
+
+    public void descPlaye(){
+        // TO DO:
+        // Tampilin deskripsi player
     }
 
     public void keluarkanKartu(){
