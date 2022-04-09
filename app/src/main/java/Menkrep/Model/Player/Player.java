@@ -1,6 +1,7 @@
 package Menkrep.Model.Player;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import Menkrep.Model.Kartu.Kartu;
 import Menkrep.Model.Mana.Mana;
@@ -51,14 +52,54 @@ public class Player {
     }
 
     // Ambil kartu dari deck dan tambahkan ke hand
+    // NOTES: Mungkin nanti si ambil kartu ini bisa di return boolean kayaknya? biar tau kapan dah ga bisa ambil kartu lagi
     public void ambilKartu() {
         // TO DO:
         // Cek apakah deck kosong
-        // Cek apakah mana cukup untuk mengambil kartu
-        // Cek apakah kartu di hand sudah 5, kalo iya buang dulu yang di hand
-        // Jika sudah memenuhi semua, maka ambil kartu dari deck secara random
-        // Pindahkan kartu dari deck ke hand (kurangin yang di deck, tambahin di hand)
-        // Kurangi mana
+        int nDeck = this.deck.size();
+        ArrayList <Kartu> randDeck = new ArrayList<Kartu>();
+
+        if (nDeck > 0) {
+            int jumlahMana = this.mana.getMana();
+            if (mana.getJumlah() > 0) {
+                if (nDeck > 3) {
+                    Random rand = new Random();
+                    for (int i = 0; i < 3; i++) {
+                        int randIndex = rand.nextInt(nDeck - i);
+                        randDeck.add(this.deck.remove(randIndex));
+                    }
+                } else {
+                    randDeck.addAll(this.deck);
+                    this.deck.clear();
+                }
+                // TO DO: 
+                // Tampilin hasil kartu acakan
+                // Minta input dari user mauu pilih kartu yang mana
+                // Misalnya disini index ke 0 yaa
+                int indexPilih = 0;
+    
+                // Cek apakah kartu di hand sudah 5, kalo iya buang dulu yang di hand
+                int nHand = this.hand.size();
+                if (nHand > 5) {
+                    System.out.println("Jumlah kartu di Hand sudah 5");
+                    System.out.println("Buang kartu");
+                    // TO DO:
+                    // Minta input dari user mau buang yang mana
+                    // Misalnya disini index ke 3 yaaa
+                    int indexBuang = 3;
+                    this.hand.remove(indexBuang);
+                }
+                // Pindahkan kartu dari deck ke hand (kurangin yang di deck, tambahin di hand)
+                this.hand.add(randDeck.remove(indexPilih));
+                this.deck.addAll(randDeck);
+                this.mana.setJumlah(jumlahMana - 1);
+            } else {
+                System.out.println("Mana tidak cukup");
+            }
+
+        } else {
+            System.out.println("Kartu di deck kosong....");
+        }
     }
 
     public void descKartu() {
@@ -82,18 +123,5 @@ public class Player {
         // Keluarkan mana yang dipunya
         // Pilih kartu karakter di board yang mau di pakaiin mana
         // Kartu karakter nambah exp nya
-    }
-
-    public static void main(String[] args) {
-        Player player = new Player("Player");
-        // player.setHealtPoints(10);
-        // player.setMana(new Mana(1, 1));
-        // player.setDeck(new ArrayList<Kartu>());
-        // player.setHand(new ArrayList<Kartu>());
-        // player.getMana().setGiliran(1);
-        // player.getMana().setJumlah(1);
-        // System.out.println(player.getMana().getMana());
-        // player.getMana().tambahGiliran(1);
-        // System.out.println(player.getMana().getMana());
     }
 }
