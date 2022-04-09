@@ -60,7 +60,7 @@ public class Player {
         // Tampilin deskripsi kartu yang ada di deck atau hand
     }
 
-    public void descPlaye(){
+    public void descPlayer(){
         // TO DO:
         // Tampilin deskripsi player
     }
