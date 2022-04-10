@@ -1,6 +1,6 @@
 package Menkrep.Model.Kartu;
 
-public class KartuKarakter extends Kartu{
+public class KartuKarakter extends Kartu {
     private String jenis;
     private int exp;
     private int level;
@@ -77,8 +77,47 @@ public class KartuKarakter extends Kartu{
         this.baseHealth = baseHealth;
     }
 
-    public void attack(KartuKarakter kartu) {
+    public void naikLevel() {
+        if (this.level > 0 && this.level <= 10) {
+            this.level += 1;
+            this.health += this.baseHealth;
+            this.attack += this.baseAttack;
+        }
+    }
 
+    public void naikExp() {
+        if (this.level > 0 && this.level <= 10) {
+            this.exp += 2;
+            this.naikLevel();
+        }
+    }
+
+    public void attack(KartuKarakter kartu) {
+        if (this.getTipe() == "Overworld") {
+            if (kartu.getTipe() == "End") {
+                kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
+            } else if (kartu.getTipe() == "Nether") {
+                kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
+            } else {
+                kartu.setHealth(kartu.getHealth() - this.getAttack());
+            }
+        } else if (this.getTipe() == "Nether") {
+            if (kartu.getTipe() == "Overworld") {
+                kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
+            } else if (kartu.getTipe() == "End") {
+                kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
+            } else {
+                kartu.setHealth(kartu.getHealth() - this.getAttack());
+            }
+        } else if (this.getTipe() == "End") {
+            if (kartu.getTipe() == "Nether") {
+                kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
+            } else if (kartu.getTipe() == "Overworld") {
+                kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
+            } else {
+                kartu.setHealth(kartu.getHealth() - this.getAttack());
+            }
+        }
     }
 
 }
