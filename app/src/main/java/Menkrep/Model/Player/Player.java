@@ -44,7 +44,7 @@ public class Player {
     }
 
     public void setMana(int mana) {
-        // this.mana.setJumlah(mana);
+         this.mana.setJumlah(mana);
     }
 
     public Mana getMana() {

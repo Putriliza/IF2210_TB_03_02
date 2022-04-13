@@ -3,12 +3,21 @@
  */
 package Menkrep;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+//import Menkrep.Model.Reference.Reference;
+//
+//import java.io.IOException;
+//import java.net.URISyntaxException;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
+public class App {
+
+    public static void main(String[] args){
+//        try {
+//            Reference kartuReference = new Reference();
+//            System.out.println(kartuReference.getKarakter());
+//        } catch (IOException | URISyntaxException e) {
+//            System.out.println("Error");
+//        }
+        System.out.println("Hello world");
     }
 }

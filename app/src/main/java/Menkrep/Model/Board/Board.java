@@ -33,13 +33,15 @@ public class Board {
 
     }
 
-    // public KartuKarakter getCardPos(int id, int position) {
-    //     if (id == 1) {
-    //         return playerOne.get(position);
-    //     } else if (id == 2) {
-    //         return playerTwo.get(position);
-    //     }
-    // }
+     public KartuKarakter getCardPos(int id, int position) {
+         if (id == 1) {
+             return playerOne.get(position);
+         } else if (id == 2) {
+             return playerTwo.get(position);
+         } else{
+             return playerOne.get(position);
+         }
+     }
 
     public void setCard(int id, KartuKarakter kartu, int position) {
         if (position > 4) {
