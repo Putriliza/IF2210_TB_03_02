@@ -6,19 +6,19 @@ public class KartuKarakter extends Kartu {
     private int level;
     private int health;
     private int attack;
-    private int baseAttack;
-    private int baseHealth;
+    private int attackUp;
+    private int healthUp;
 
     public KartuKarakter(String nama, String deskripsi, String tipe, String jenis, int exp, int level, int health,
-            int attack, int baseAttack, int baseHealth) {
+            int attack, int attackUp, int healthUp) {
         super(nama, deskripsi, tipe);
         this.jenis = jenis;
         this.exp = exp;
         this.level = level;
         this.health = health;
         this.attack = attack;
-        this.baseAttack = baseAttack;
-        this.baseHealth = baseHealth;
+        this.attackUp = attackUp;
+        this.healthUp = healthUp;
     }
 
     public String getJenis() {
@@ -65,27 +65,27 @@ public class KartuKarakter extends Kartu {
         this.attack = attack;
     }
 
-    public int getBaseAttack() {
-        return baseAttack;
+    public int getAttackUp() {
+        return attackUp;
     }
 
-    public void setBaseAttack(int baseAttack) {
-        this.baseAttack = baseAttack;
+    public void setAttackUp(int attackUp) {
+        this.attackUp = attackUp;
     }
 
-    public int getBaseHealth() {
-        return baseHealth;
+    public int getHealthUp() {
+        return healthUp;
     }
 
-    public void setBaseHealth(int baseHealth) {
-        this.baseHealth = baseHealth;
+    public void setHealthUp(int healthUp) {
+        this.healthUp = healthUp;
     }
 
     public void naikLevel() {
         if (this.level > 0 && this.level <= 10) {
             this.level += 1;
-            this.health += this.baseHealth;
-            this.attack += this.baseAttack;
+            this.health += this.healthUp;
+            this.attack += this.attackUp;
         }
     }
 
