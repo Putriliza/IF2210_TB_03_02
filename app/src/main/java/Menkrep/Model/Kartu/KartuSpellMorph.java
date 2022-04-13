@@ -20,7 +20,9 @@ public class KartuSpellMorph extends KartuSpell {
         karakter.setLevel(1);
         karakter.setHealth(tujuan.getHealth());
         karakter.setAttack(tujuan.getAttack());
-        karakter.setBaseAttack(tujuan.getBaseAttack());
-        karakter.setBaseHealth(tujuan.getBaseHealth());
+        karakter.setAttackUp(tujuan.getAttackUp());
+        karakter.setHealthUp(tujuan.getHealthUp());
+        // karakter.setBaseAttack(tujuan.getBaseAttack());
+        // karakter.setBaseHealth(tujuan.getBaseHealth());
     }
 }
