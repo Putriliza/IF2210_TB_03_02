@@ -9,7 +9,17 @@ package Menkrep;
 //import java.net.URISyntaxException;
 
 
-public class App {
+import javax.swing.*;
+import java.awt.*;
+
+public class App{
+
+    private JPanel mainPanel;
+    private JButton button1;
+
+    public String getGreeting(){
+        return "Hello world";
+    }
 
     public static void main(String[] args){
 //        try {
@@ -19,5 +29,11 @@ public class App {
 //            System.out.println("Error");
 //        }
         System.out.println("Hello world");
+
+        JFrame frame = new JFrame("Menkrep");
+        frame.setContentPane(new JPanel());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 }

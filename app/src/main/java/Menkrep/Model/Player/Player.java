@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import Menkrep.Model.Kartu.Kartu;
+import Menkrep.Model.Kartu.KartuKarakter;
 import Menkrep.Model.Mana.Mana;
+import Menkrep.Model.Reference.Reference;
+import org.checkerframework.checker.units.qual.K;
 
 public class Player {
     // Atribut
@@ -13,6 +16,7 @@ public class Player {
     private Mana mana;
     private ArrayList<Kartu> deck;
     private ArrayList<Kartu> hand;
+    private ArrayList<KartuKarakter> board;
 
     // Konstruktor
     public Player(String nama) {
@@ -30,6 +34,7 @@ public class Player {
 
         // Inisiasi kartu di hand
         this.hand = new ArrayList<Kartu>();
+        this.board = new ArrayList<KartuKarakter>();
     }
 
     // Getter & Setter
@@ -49,6 +54,10 @@ public class Player {
 
     public Mana getMana() {
         return this.mana;
+    }
+
+    public ArrayList<KartuKarakter> getBoard() {
+        return board;
     }
 
     // Ambil kartu dari deck dan tambahkan ke hand
@@ -112,10 +121,14 @@ public class Player {
         // Tampilin deskripsi player
     }
 
-    public void keluarkanKartu() {
+    public void keluarkanKartu(Reference reference, int src) {
         // TO DO:
         // Keluarkan kartu yang ada di hand
         // Masukin ke dalam board, cek apakah di board masih ada slot atau ga
+        if((hand.size()-1)>src && board.size()<=6){
+            board.add(new KartuKarakter(reference.getKarakter(),hand.get(src).getNama()));
+        }
+
     }
 
     public void keluarkanMana() {

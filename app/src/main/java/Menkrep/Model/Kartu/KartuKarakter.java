@@ -1,7 +1,9 @@
 package Menkrep.Model.Kartu;
 
+import java.util.List;
+
 public class KartuKarakter extends Kartu {
-    private String jenis;
+    private String jenis; // OVERWORLD END NETHER
     private int exp;
     private int level;
     private int health;
@@ -9,9 +11,9 @@ public class KartuKarakter extends Kartu {
     private int attackUp;
     private int healthUp;
 
-    public KartuKarakter(String nama, String deskripsi, String tipe, String jenis, int exp, int level, int health,
+    public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
             int attack, int attackUp, int healthUp) {
-        super(nama, deskripsi, tipe);
+        super(nama, deskripsi, "KARAKTER");
         this.jenis = jenis;
         this.exp = exp;
         this.level = level;
@@ -19,6 +21,22 @@ public class KartuKarakter extends Kartu {
         this.attack = attack;
         this.attackUp = attackUp;
         this.healthUp = healthUp;
+    }
+
+    public KartuKarakter(List<String[]> reference, String nama){
+        super(nama, "", "KARAKTER");
+        for(String[] karakter : reference){
+            if(karakter[1].equals(nama)){
+                this.setDeskripsi(karakter[3]);
+                this.jenis = karakter[2];
+                this.exp = 0;
+                this.level = 1;
+                this.attack = Integer.parseInt(karakter[5]);
+                this.health = Integer.parseInt(karakter[6]);
+                this.attackUp = Integer.parseInt(karakter[8]);
+                this.healthUp = Integer.parseInt(karakter[8]);
+            }
+        }
     }
 
     public String getJenis() {
@@ -97,26 +115,26 @@ public class KartuKarakter extends Kartu {
     }
 
     public void attack(KartuKarakter kartu) {
-        if (this.getTipe() == "Overworld") {
-            if (kartu.getTipe() == "End") {
+        if (this.getTipe() == "OVERWORLD") {
+            if (kartu.getTipe() == "END") {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
-            } else if (kartu.getTipe() == "Nether") {
+            } else if (kartu.getTipe() == "NETHER") {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
             } else {
                 kartu.setHealth(kartu.getHealth() - this.getAttack());
             }
-        } else if (this.getTipe() == "Nether") {
-            if (kartu.getTipe() == "Overworld") {
+        } else if (this.getTipe() == "NETHER") {
+            if (kartu.getTipe() == "OVERWORLD") {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
-            } else if (kartu.getTipe() == "End") {
+            } else if (kartu.getTipe() == "END") {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
             } else {
                 kartu.setHealth(kartu.getHealth() - this.getAttack());
             }
-        } else if (this.getTipe() == "End") {
-            if (kartu.getTipe() == "Nether") {
+        } else if (this.getTipe() == "END") {
+            if (kartu.getTipe() == "NETHER") {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
-            } else if (kartu.getTipe() == "Overworld") {
+            } else if (kartu.getTipe() == "OVERWORLD") {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
             } else {
                 kartu.setHealth(kartu.getHealth() - this.getAttack());
