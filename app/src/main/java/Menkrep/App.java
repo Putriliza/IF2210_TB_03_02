@@ -3,10 +3,10 @@
  */
 package Menkrep;
 
-//import Menkrep.Model.Reference.Reference;
+import Menkrep.Model.Reference.Reference;
 //
-//import java.io.IOException;
-//import java.net.URISyntaxException;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 
 import javax.swing.*;
@@ -22,12 +22,12 @@ public class App{
     }
 
     public static void main(String[] args){
-//        try {
-//            Reference kartuReference = new Reference();
-//            System.out.println(kartuReference.getKarakter());
-//        } catch (IOException | URISyntaxException e) {
-//            System.out.println("Error");
-//        }
+        try {
+            Reference kartuReference = new Reference();
+            System.out.println(kartuReference.getKarakter());
+        } catch (IOException e) {
+            System.out.println("Error: directory not found");
+        }
         System.out.println("Hello world");
 
         JFrame frame = new JFrame("Menkrep");
