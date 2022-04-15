@@ -1,14 +1,17 @@
 package Menkrep.Model.Kartu;
 
-import Menkrep.Model.Mana.Mana;
-
 public class KartuSpellLvl extends KartuSpell {
+
+    private int levelModifier;
+
     public KartuSpellLvl() {
-        super("-", "-", "LVL", new Mana(), 0);
+        super("-", "-", "LVL", 0);
+        this.levelModifier = 0;
     }
 
-    public KartuSpellLvl(String nama, String deskripsi, Mana mana, int durasi) {
-        super(nama, deskripsi, "LVL", mana, durasi);
+    public KartuSpellLvl(String nama, String deskripsi, int mana, int levelModifier) {
+        super(nama, deskripsi, "LVL", mana);
+        this.levelModifier = levelModifier;
     }
 
     // Meningkatkan/menurunkan level dari sebuah karakter sebanyak 1

@@ -3,7 +3,7 @@ package Menkrep.Model.Kartu;
 public class Kartu {
     private String nama;
     private String deskripsi;
-    private String tipe; // KARAKTER,
+    private String tipe;
 
     public Kartu(String nama, String deskripsi, String tipe) {
         this.nama = nama;
