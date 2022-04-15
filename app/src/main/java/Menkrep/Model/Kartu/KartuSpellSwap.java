@@ -3,11 +3,11 @@ package Menkrep.Model.Kartu;
 import Menkrep.Model.Mana.Mana;
 
 public class KartuSpellSwap extends KartuSpell {
-    KartuSpellSwap() {
+    public KartuSpellSwap() {
         super("-", "-", "SWAP", new Mana(), 1);
     }
 
-    KartuSpellSwap(String nama, String deskripsi, Mana mana, int durasi) {
+    public KartuSpellSwap(String nama, String deskripsi, Mana mana, int durasi) {
         super(nama, deskripsi, "SWAP", mana, durasi);
     }
 

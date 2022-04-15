@@ -3,11 +3,11 @@ package Menkrep.Model.Kartu;
 import Menkrep.Model.Mana.Mana;
 
 public class KartuSpellPotion extends KartuSpell {
-    KartuSpellPotion() {
+    public KartuSpellPotion() {
         super("-", "-", "POTION", new Mana(), 0);
     }
 
-    KartuSpellPotion(String nama, String deskripsi, Mana mana, int durasi) {
+    public KartuSpellPotion(String nama, String deskripsi, Mana mana, int durasi) {
         super(nama, deskripsi, "POTION", mana, durasi);
     }
 

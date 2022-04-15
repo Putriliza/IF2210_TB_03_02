@@ -3,11 +3,11 @@ package Menkrep.Model.Kartu;
 import Menkrep.Model.Mana.Mana;
 
 public class KartuSpellLvl extends KartuSpell {
-    KartuSpellLvl() {
+    public KartuSpellLvl() {
         super("-", "-", "LVL", new Mana(), 0);
     }
 
-    KartuSpellLvl(String nama, String deskripsi, Mana mana, int durasi) {
+    public KartuSpellLvl(String nama, String deskripsi, Mana mana, int durasi) {
         super(nama, deskripsi, "LVL", mana, durasi);
     }
 

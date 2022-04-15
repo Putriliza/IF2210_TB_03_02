@@ -3,11 +3,11 @@ package Menkrep.Model.Kartu;
 import Menkrep.Model.Mana.Mana;
 
 public class KartuSpellMorph extends KartuSpell {
-    KartuSpellMorph() {
+    public KartuSpellMorph() {
         super("-", "-", "MORPH", new Mana(), 0);
     }
 
-    KartuSpellMorph(String nama, String deskripsi, Mana mana) {
+    public KartuSpellMorph(String nama, String deskripsi, Mana mana) {
         super(nama, deskripsi, "MORPH", mana, 0);
     }
 
