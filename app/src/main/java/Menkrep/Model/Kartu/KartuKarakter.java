@@ -1,6 +1,7 @@
 package Menkrep.Model.Kartu;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class KartuKarakter extends Kartu {
     private String jenis; // OVERWORLD END NETHER
@@ -10,9 +11,12 @@ public class KartuKarakter extends Kartu {
     private int attack;
     private int attackUp;
     private int healthUp;
+    private String imgPath;
+    private ArrayList<KartuSpell> spell;
+    // private List<String> karakter;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
-            int attack, int attackUp, int healthUp) {
+            int attack, int attackUp, int healthUp, String imgPath) {
         super(nama, deskripsi, "KARAKTER");
         this.jenis = jenis;
         this.exp = exp;
@@ -21,12 +25,13 @@ public class KartuKarakter extends Kartu {
         this.attack = attack;
         this.attackUp = attackUp;
         this.healthUp = healthUp;
+        this.imgPath = imgPath;
     }
 
-    public KartuKarakter(List<String[]> reference, String nama){
+    public KartuKarakter(List<String[]> reference, String nama) {
         super(nama, "", "KARAKTER");
-        for(String[] karakter : reference){
-            if(karakter[1].equals(nama)){
+        for (String[] karakter : reference) {
+            if (karakter[1].equals(nama)) {
                 this.setDeskripsi(karakter[3]);
                 this.jenis = karakter[2];
                 this.exp = 0;
@@ -35,6 +40,7 @@ public class KartuKarakter extends Kartu {
                 this.health = Integer.parseInt(karakter[6]);
                 this.attackUp = Integer.parseInt(karakter[8]);
                 this.healthUp = Integer.parseInt(karakter[8]);
+                this.imgPath = karakter[7];
             }
         }
     }
@@ -99,9 +105,18 @@ public class KartuKarakter extends Kartu {
         this.healthUp = healthUp;
     }
 
+    public void setImagePath(String path) {
+        this.imgPath = path;
+    }
+
+    public String getImagePath(String path) {
+        return this.imgPath;
+    }
+
     public void naikLevel() {
         if (this.level > 0 && this.level <= 10) {
             this.level += 1;
+            this.exp = 0;
             this.health += this.healthUp;
             this.attack += this.attackUp;
         }
@@ -112,6 +127,10 @@ public class KartuKarakter extends Kartu {
             this.exp += 2;
             this.naikLevel();
         }
+    }
+
+    public void addSpell(KartuSpell spell) {
+        this.spell.add(spell);
     }
 
     public void attack(KartuKarakter kartu) {
