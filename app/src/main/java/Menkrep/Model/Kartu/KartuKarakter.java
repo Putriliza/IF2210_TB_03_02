@@ -16,7 +16,7 @@ public class KartuKarakter extends Kartu {
     // private List<String> karakter;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
-        int attack, int attackUp, int healthUp, String imgPath) {
+            int attack, int attackUp, int healthUp, String imgPath) {
         super(nama, deskripsi, "KARAKTER");
         this.jenis = jenis;
         this.exp = exp;
@@ -42,6 +42,7 @@ public class KartuKarakter extends Kartu {
                 this.attackUp = Integer.parseInt(karakter[8]);
                 this.healthUp = Integer.parseInt(karakter[8]);
                 this.imgPath = karakter[7];
+                this.activeSpells = new ArrayList<KartuSpell>();
             }
         }
     }
@@ -122,7 +123,6 @@ public class KartuKarakter extends Kartu {
         this.activeSpells = activeSpells;
     }
 
-
     public void naikLevel() {
         if (this.level > 0 && this.level <= 10) {
             this.level += 1;
@@ -148,26 +148,26 @@ public class KartuKarakter extends Kartu {
     }
 
     public void attack(KartuKarakter kartu) {
-        if (this.getTipe() == "OVERWORLD") {
-            if (kartu.getTipe() == "END") {
+        if (this.getTipe().equals("OVERWORLD")) {
+            if (kartu.getTipe().equals("END")) {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
-            } else if (kartu.getTipe() == "NETHER") {
+            } else if (kartu.getTipe().equals("NETHER")) {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
             } else {
                 kartu.setHealth(kartu.getHealth() - this.getAttack());
             }
-        } else if (this.getTipe() == "NETHER") {
-            if (kartu.getTipe() == "OVERWORLD") {
+        } else if (this.getTipe().equals("NETHER")) {
+            if (kartu.getTipe().equals("OVERWORLD")) {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
-            } else if (kartu.getTipe() == "END") {
+            } else if (kartu.getTipe().equals("END")) {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
             } else {
                 kartu.setHealth(kartu.getHealth() - this.getAttack());
             }
-        } else if (this.getTipe() == "END") {
-            if (kartu.getTipe() == "NETHER") {
+        } else if (this.getTipe().equals("END")) {
+            if (kartu.getTipe().equals("NETHER")) {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
-            } else if (kartu.getTipe() == "OVERWORLD") {
+            } else if (kartu.getTipe().equals("OVERWORLD")) {
                 kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
             } else {
                 kartu.setHealth(kartu.getHealth() - this.getAttack());
