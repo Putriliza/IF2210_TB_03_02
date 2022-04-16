@@ -1,5 +1,7 @@
 package Menkrep.Model.Kartu;
 
+import java.util.ArrayList;
+
 public class KartuSpellMorph extends KartuSpell {
 
     public KartuSpellMorph() {
@@ -25,11 +27,10 @@ public class KartuSpellMorph extends KartuSpell {
         karakter.setAttack(tujuan.getAttack());
         karakter.setAttackUp(tujuan.getAttackUp());
         karakter.setHealthUp(tujuan.getHealthUp());
+        karakter.setActiveSpells(new ArrayList<KartuSpell>());
 
         // karakter.setBaseAttack(tujuan.getBaseAttack());
         // karakter.setBaseHealth(tujuan.getBaseHealth());
-
-        // TO DO
-        // Membuang seluruh spell, hapus dari list spell
+        
     }
 }

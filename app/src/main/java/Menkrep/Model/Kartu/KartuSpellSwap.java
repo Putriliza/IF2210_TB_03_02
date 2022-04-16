@@ -34,7 +34,12 @@ public class KartuSpellSwap extends KartuSpell {
         karakter.setHealth(attack);
         karakter.setAttack(health);
 
-        // TO DO
         // cek spell yang ada di karakter, apakah punya swap, jika iya, maka ditambahkan durasi
+        for (KartuSpell spell : karakter.getActiveSpells()) {
+            if (spell.getTipe().equals("SWAP")) {
+                KartuSpellSwap swap = (KartuSpellSwap) spell;
+                swap.setDuration(swap.getDuration() + this.duration);
+            }
+        }
     }
 }

@@ -12,11 +12,11 @@ public class KartuKarakter extends Kartu {
     private int attackUp;
     private int healthUp;
     private String imgPath;
-    private ArrayList<KartuSpell> spell;
+    private ArrayList<KartuSpell> activeSpells;
     // private List<String> karakter;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
-            int attack, int attackUp, int healthUp, String imgPath) {
+        int attack, int attackUp, int healthUp, String imgPath) {
         super(nama, deskripsi, "KARAKTER");
         this.jenis = jenis;
         this.exp = exp;
@@ -26,6 +26,7 @@ public class KartuKarakter extends Kartu {
         this.attackUp = attackUp;
         this.healthUp = healthUp;
         this.imgPath = imgPath;
+        this.activeSpells = new ArrayList<KartuSpell>();
     }
 
     public KartuKarakter(List<String[]> reference, String nama) {
@@ -113,6 +114,15 @@ public class KartuKarakter extends Kartu {
         return this.imgPath;
     }
 
+    public ArrayList<KartuSpell> getActiveSpells() {
+        return activeSpells;
+    }
+
+    public void setActiveSpells(ArrayList<KartuSpell> activeSpells) {
+        this.activeSpells = activeSpells;
+    }
+
+
     public void naikLevel() {
         if (this.level > 0 && this.level <= 10) {
             this.level += 1;
@@ -130,7 +140,11 @@ public class KartuKarakter extends Kartu {
     }
 
     public void addSpell(KartuSpell spell) {
-        this.spell.add(spell);
+        this.activeSpells.add(spell);
+    }
+
+    public void removeSpell(KartuSpell spell) {
+        this.activeSpells.remove(spell);
     }
 
     public void attack(KartuKarakter kartu) {
