@@ -1,5 +1,6 @@
 package Menkrep.Model.Player;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,7 +15,7 @@ import org.checkerframework.checker.units.qual.K;
 
 public class Player {
     // Atribut
-    private String nama;
+    private String name;
     private int healthPoints;
     private int mana;
     private ArrayList<Kartu> deck;
@@ -22,24 +23,36 @@ public class Player {
     private ArrayList<KartuKarakter> board;
 
     // Konstruktor
-    public Player(String nama) {
-        this.nama = nama;
+    public Player(String name) throws IOException {
+        this.name = name;
         this.healthPoints = 80;
         this.mana = 1;
 
         // Inisialisasi kartu di deck
         this.deck = new ArrayList<Kartu>();
-        // TO DO: Nanti kalo kartu karakter sama spell dah ada, inisiasi dengan jumlah
-        // yang sama
-        for (int i = 0; i < 8; i++) {
-            String cardName = "Kartu " + i;
-            this.deck.add(new KartuKarakter(cardName, "deskripsi", "OVERWORLD", 0, 1, 1, 1, 1, 1));
-            this.deck.add(new KartuKarakter(cardName, "deskripsi", "END", 0, 1, 1, 1, 1, 1));
-            this.deck.add(new KartuKarakter(cardName, "deskripsi", "NETHER", 0, 1, 1, 1, 1, 1));
-            this.deck.add(new KartuSpellLvl());
-            this.deck.add(new KartuSpellMorph());
-            this.deck.add(new KartuSpellPotion());
-            this.deck.add(new KartuSpellSwap());
+    
+        Reference ref = new Reference();
+        for (String[] karakter : ref.getKarakter()) {
+            this.deck.add(new KartuKarakter(karakter[1], karakter[2], karakter[3],
+                    Integer.parseInt(karakter[4]), Integer.parseInt(karakter[5]),
+                    Integer.parseInt(karakter[6]), Integer.parseInt(karakter[7]),
+                    Integer.parseInt(karakter[8]), Integer.parseInt(karakter[9]),
+                    karakter[10]));
+        }
+        for (String[] morph : ref.getMorph()) {
+            // this.deck.add(new KartuSpellMorph(morph[1], morph[2], morph[3],
+            //         Integer.parseInt(morph[4]), Integer.parseInt(morph[5])));
+        }
+
+        for (String[] potion : ref.getPtn()) {
+            // this.deck.add(new KartuSpellPotion(potion[1], potion[2], potion[3],
+            //         Integer.parseInt(potion[4]), Integer.parseInt(potion[5]),
+            //        Integer.parseInt(potion[6]), Integer.parseInt(potion[7])));
+        }
+
+        for (String[] lvl : ref.getSwap()) {
+            // this.deck.add(new KartuSpellLvl(lvl[1], lvl[2], lvl[3],
+            //         Integer.parseInt(lvl[4]), Integer.parseInt(lvl[5])));
         }
 
         // Inisiasi kartu di hand
@@ -48,8 +61,8 @@ public class Player {
     }
 
     // Getter & Setter
-    public String getNama() {
-        return this.nama;
+    public String getName() {
+        return this.name;
     }
 
     public int getHealthPoints(){
@@ -99,7 +112,7 @@ public class Player {
                     this.deck.clear();
                 }
                 // TO DO: 
-                // Tampilin hasil kartu acakan
+                // Tampilin hasil kartu acakan di randDeck
                 // Minta input dari user mauu pilih kartu yang mana
                 // Misalnya disini index ke 0 yaa
                 int indexPilih = 0;
