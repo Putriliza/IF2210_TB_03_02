@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1100.0" style="-fx-border-width: 1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ProgressBar layoutX="14.0" layoutY="32.0" prefHeight="23.0" prefWidth="450.0" progress="0.88" />
+      <Label layoutX="543.0" layoutY="34.0" text="Turn 1" />
+      <ProgressBar layoutX="635.0" layoutY="33.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="23.0" prefWidth="450.0" progress="1.0" />
+      <Pane layoutX="21.0" layoutY="82.0" prefHeight="250.0" prefWidth="450.0" style="-fx-border-color: #000000;">
+         <children>
+            <ImageView id="player1-image" fitHeight="77.0" fitWidth="77.0" layoutX="23.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="120.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="120.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="225.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="225.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="328.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Label layoutX="21.0" layoutY="61.0" text="Player 1" />
+      <Label layoutX="1031.0" layoutY="61.0" text="Player 2" />
+      <Pane layoutX="635.0" layoutY="82.0" prefHeight="250.0" prefWidth="450.0" style="-fx-border-color: #000000;">
+         <children>
+            <ImageView id="player2-image" fitHeight="77.0" fitWidth="77.0" layoutX="350.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="240.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="240.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="133.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="133.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="30.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@50x50.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Circle fill="#ffffff00" layoutX="564.0" layoutY="44.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button disable="true" layoutX="21.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Draw" />
+      <Button disable="true" layoutX="251.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Plan" />
+      <Button layoutX="481.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Attack" />
+      <Button disable="true" layoutX="711.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="End" />
+      <Pane layoutX="21.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;" />
+      <ImageView fitHeight="225.0" fitWidth="147.0" layoutX="491.0" layoutY="422.0" pickOnBounds="true">
+         <image>
+            <Image url="@50x50.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="985.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="77.0" text="&gt;&gt;&gt;" />
+      <Pane layoutX="113.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;" />
+      <Pane layoutX="205.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;" />
+      <Pane layoutX="297.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;" />
+      <Pane layoutX="389.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;" />
+      <Pane layoutX="649.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;" />
+      <Pane layoutX="817.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;" />
+      <Pane layoutX="1006.0" layoutY="466.0" prefHeight="51.0" prefWidth="69.0" style="-fx-border-color: black;">
+         <children>
+            <Label layoutX="17.0" layoutY="4.0" text="Deck" />
+            <Label layoutX="14.0" layoutY="27.0" text="35/40" />
+         </children>
+      </Pane>
+      <Pane layoutX="1006.0" layoutY="534.0" prefHeight="51.0" prefWidth="69.0" style="-fx-border-color: black;">
+         <children>
+            <Label layoutX="17.0" layoutY="4.0" text="Mana" />
+            <Label layoutX="24.0" layoutY="27.0" text="0/1" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
