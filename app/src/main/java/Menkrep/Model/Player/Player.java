@@ -32,7 +32,7 @@ public class Player {
         // Inisialisasi kartu di deck
         this.deck = new ArrayList<Kartu>();
     
-        Reference ref = new Reference();
+        Reference ref = Reference.getInstance();
         for (String[] karakter : ref.getKarakter()) {
             this.deck.add(new KartuKarakter(karakter[1], karakter[2], karakter[3],
                     Integer.parseInt(karakter[4]), Integer.parseInt(karakter[5]),

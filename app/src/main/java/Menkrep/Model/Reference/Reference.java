@@ -8,6 +8,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 public class Reference {
+    private static Reference refInstance;
+
     private static final String CHARACTER_CSV_FILE_PATH = "data/character.csv";
     private static final String MORPH_CSV_FILE_PATH = "data/spell_morph.csv";
     private static final String PTN_CSV_FILE_PATH = "data/spell_ptn.csv";
@@ -16,6 +18,18 @@ public class Reference {
     private final List<String[]> morph;
     private final List<String[]> ptn;
     private final List<String[]> swap;
+
+    public static Reference getInstance(){
+        if(refInstance == null){
+            try {
+                refInstance = new Reference();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return refInstance;
+    }
 
     public Reference() throws IOException {
         String cwd = System.getProperty("user.dir");
