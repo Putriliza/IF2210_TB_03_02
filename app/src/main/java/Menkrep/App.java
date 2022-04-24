@@ -3,17 +3,15 @@
  */
 package Menkrep;
 
-import Menkrep.Model.Reference.Reference;
-//
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import Menkrep.GUI.FXMLController;
-
 import static javafx.application.Application.launch;
+
+//
 
 
 public class App extends Application {

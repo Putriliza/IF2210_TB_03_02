@@ -8,75 +8,76 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1100.0" style="-fx-border-width: 1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ProgressBar layoutX="14.0" layoutY="32.0" prefHeight="23.0" prefWidth="450.0" progress="0.88" />
-      <Label layoutX="543.0" layoutY="34.0" text="Turn 1" />
-      <ProgressBar layoutX="635.0" layoutY="33.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="23.0" prefWidth="450.0" progress="1.0" />
+      <ProgressBar fx:id="bar_health_steve" layoutX="14.0" layoutY="32.0" prefHeight="23.0" prefWidth="450.0" progress="0.42" />
+      <Label fx:id="ronde" layoutX="543.0" layoutY="34.0" text="Turn 1" />
+      <ProgressBar fx:id="bar_health_alex" layoutX="635.0" layoutY="33.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="23.0" prefWidth="450.0" progress="1.0" />
       <Pane layoutX="21.0" layoutY="82.0" prefHeight="250.0" prefWidth="450.0" style="-fx-border-color: #000000;">
          <children>
             <ImageView id="player1-image" fitHeight="77.0" fitWidth="77.0" layoutX="23.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@50x50.png" />
+                  <Image url="@card/image/character/steve.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="120.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="board_steve_A" fitHeight="92.0" fitWidth="92.0" layoutX="120.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@50x50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="120.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="board_steve_C" fitHeight="92.0" fitWidth="92.0" layoutX="120.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@50x50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="225.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="board_steve_B" fitHeight="92.0" fitWidth="92.0" layoutX="225.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@50x50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="225.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="board_steve_D" fitHeight="92.0" fitWidth="92.0" layoutX="225.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@50x50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="328.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="board_steve_E" fitHeight="92.0" fitWidth="92.0" layoutX="328.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@50x50.png" />
                </image>
             </ImageView>
          </children></Pane>
-      <Label layoutX="21.0" layoutY="61.0" text="Player 1" />
-      <Label layoutX="1031.0" layoutY="61.0" text="Player 2" />
+      <Label layoutX="21.0" layoutY="61.0" text="Steve" />
+      <Label layoutX="1031.0" layoutY="61.0" text="Alex" />
       <Pane layoutX="635.0" layoutY="82.0" prefHeight="250.0" prefWidth="450.0" style="-fx-border-color: #000000;">
          <children>
             <ImageView id="player2-image" fitHeight="77.0" fitWidth="77.0" layoutX="350.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@50x50.png" />
+                  <Image url="@card/image/character/alex.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="240.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="board_alex_A" fitHeight="92.0" fitWidth="92.0" layoutX="240.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@50x50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="240.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="board_alex_C" fitHeight="92.0" fitWidth="92.0" layoutX="240.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@50x50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="133.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="board_alex_D" fitHeight="92.0" fitWidth="92.0" layoutX="133.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@50x50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="133.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="board_alex_B" fitHeight="92.0" fitWidth="92.0" layoutX="133.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@50x50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="92.0" fitWidth="92.0" layoutX="30.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="board_alex_E" fitHeight="92.0" fitWidth="92.0" layoutX="30.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@50x50.png" />
                </image>
@@ -84,33 +85,89 @@
          </children>
       </Pane>
       <Circle fill="#ffffff00" layoutX="564.0" layoutY="44.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button disable="true" layoutX="21.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Draw" />
-      <Button disable="true" layoutX="251.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Plan" />
-      <Button layoutX="481.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Attack" />
-      <Button disable="true" layoutX="711.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="End" />
-      <Pane layoutX="21.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;" />
-      <ImageView fitHeight="225.0" fitWidth="147.0" layoutX="491.0" layoutY="422.0" pickOnBounds="true">
+      <Button fx:id="button_draw" disable="true" layoutX="21.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Draw" />
+      <Button fx:id="button_plan" disable="true" layoutX="251.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Plan" />
+      <Button fx:id="button_attack" defaultButton="true" layoutX="481.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Attack" />
+      <Button fx:id="button_end" disable="true" layoutX="711.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="End" />
+      <Pane fx:id="kartu_hand_1" layoutX="21.0" layoutY="434.0" onMouseClicked="kartu_hand_1.setStyle(&quot;-fx-background-color: #FF0000&quot;);" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="gambar_kartu_hand_1" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="nama_kartu_hand_1" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
+            <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+         </children></Pane>
+      <ImageView fx:id="gambar_kartu_hand_hover" fitHeight="225.0" fitWidth="147.0" layoutX="491.0" layoutY="422.0" pickOnBounds="true">
          <image>
-            <Image url="@50x50.png" />
+            <Image url="@card/image/character/Sheep.png" />
          </image>
       </ImageView>
-      <Button layoutX="985.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="77.0" text="&gt;&gt;&gt;" />
-      <Pane layoutX="113.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;" />
-      <Pane layoutX="205.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;" />
-      <Pane layoutX="297.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;" />
-      <Pane layoutX="389.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;" />
-      <Pane layoutX="649.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;" />
-      <Pane layoutX="817.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;" />
+      <Button fx:id="button_next" layoutX="985.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="77.0" text="&gt;&gt;&gt;" />
+      <Pane layoutX="649.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;">
+         <children>
+            <Text fx:id="nama_kartu_hand_hover" layoutX="22.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Domba" />
+            <Text fx:id="spek_kartu_hand_hover" layoutX="23.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atk: 10" />
+         </children></Pane>
+      <Pane layoutX="817.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;">
+         <children>
+            <Text fx:id="deskripsi_kartu_hand_hover" layoutX="19.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;Domba itu enak dimakan dan lezat&quot;" wrappingWidth="129.6708984375" />
+         </children></Pane>
       <Pane layoutX="1006.0" layoutY="466.0" prefHeight="51.0" prefWidth="69.0" style="-fx-border-color: black;">
          <children>
             <Label layoutX="17.0" layoutY="4.0" text="Deck" />
-            <Label layoutX="14.0" layoutY="27.0" text="35/40" />
+            <Label fx:id="jumlah_deck" layoutX="14.0" layoutY="27.0" text="35/40" />
          </children>
       </Pane>
       <Pane layoutX="1006.0" layoutY="534.0" prefHeight="51.0" prefWidth="69.0" style="-fx-border-color: black;">
          <children>
             <Label layoutX="17.0" layoutY="4.0" text="Mana" />
-            <Label layoutX="24.0" layoutY="27.0" text="0/1" />
+            <Label fx:id="jumlah_mana" layoutX="24.0" layoutY="27.0" text="0/1" />
+         </children>
+      </Pane>
+      <Pane fx:id="kartu_hand_2" layoutX="113.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="gambar_kartu_hand_2" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="nama_kartu_hand_2" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
+            <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+         </children>
+      </Pane>
+      <Pane fx:id="kartu_hand_3" layoutX="205.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="gambar_kartu_hand_3" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="nama_kartu_hand_3" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
+            <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+         </children>
+      </Pane>
+      <Pane fx:id="kartu_hand_4" layoutX="297.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="gambar_kartu_hand_4" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="nama_kartu_hand_4" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
+            <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+         </children>
+      </Pane>
+      <Pane fx:id="kartu_hand_5" layoutX="389.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="gambar_kartu_hand_5" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="nama_kartu_hand_5" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
+            <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
          </children>
       </Pane>
    </children>
