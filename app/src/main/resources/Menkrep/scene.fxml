@@ -84,7 +84,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Circle fill="#ffffff00" layoutX="564.0" layoutY="44.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#ffffff00" layoutX="565.0" layoutY="45.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
       <Button fx:id="button_draw" disable="true" layoutX="21.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Draw" />
       <Button fx:id="button_plan" disable="true" layoutX="251.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Plan" />
       <Button fx:id="button_attack" defaultButton="true" layoutX="481.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Attack" />

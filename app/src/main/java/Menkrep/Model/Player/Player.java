@@ -2,6 +2,7 @@ package Menkrep.Model.Player;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import Menkrep.Model.Kartu.Kartu;
@@ -31,7 +32,7 @@ public class Player {
         // Inisialisasi kartu di deck
         this.deck = new ArrayList<Kartu>();
     
-        Reference ref = new Reference();
+        Reference ref = Reference.getInstance();
         for (String[] karakter : ref.getKarakter()) {
             this.deck.add(new KartuKarakter(karakter[1], karakter[2], karakter[3],
                     Integer.parseInt(karakter[4]), Integer.parseInt(karakter[5]),
@@ -54,6 +55,8 @@ public class Player {
             // this.deck.add(new KartuSpellLvl(lvl[1], lvl[2], lvl[3],
             //         Integer.parseInt(lvl[4]), Integer.parseInt(lvl[5])));
         }
+
+        Collections.shuffle(this.deck);
 
         // Inisiasi kartu di hand
         this.hand = new ArrayList<Kartu>();
@@ -102,10 +105,8 @@ public class Player {
         if (nDeck > 0) {
             if (this.mana > 0) {
                 if (nDeck > 3) {
-                    Random rand = new Random();
                     for (int i = 0; i < 3; i++) {
-                        int randIndex = rand.nextInt(nDeck - i);
-                        randDeck.add(this.deck.remove(randIndex));
+                        randDeck.add(this.deck.remove(i));
                     }
                 } else {
                     randDeck.addAll(this.deck);
@@ -128,6 +129,7 @@ public class Player {
                     int indexBuang = 3;
                     this.hand.remove(indexBuang);
                 }
+                
                 // Pindahkan kartu dari deck ke hand (kurangin yang di deck, tambahin di hand)
                 this.hand.add(randDeck.remove(indexPilih));
                 this.deck.addAll(randDeck);
