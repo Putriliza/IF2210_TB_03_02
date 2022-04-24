@@ -4,7 +4,7 @@ import Menkrep.Model.Enum.Phase;
 import Menkrep.Model.Player.*;
 
 public class Game {
-    public static Game gameInstance;
+    public static Game gameInstance = new Game();
 
     private int round;
     private int playerIndex;
@@ -12,9 +12,6 @@ public class Game {
     private Player[] players;
 
     public static Game getInstance() {
-        if (gameInstance == null) {
-            gameInstance = new Game();
-        }
         return gameInstance;
     }
 
