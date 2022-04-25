@@ -89,7 +89,7 @@
       <Button fx:id="button_plan" disable="true" layoutX="251.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Plan" />
       <Button fx:id="button_attack" defaultButton="true" layoutX="481.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Attack" />
       <Button fx:id="button_end" disable="true" layoutX="711.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="End" />
-      <Pane fx:id="kartu_hand_1" layoutX="21.0" layoutY="434.0" onMouseClicked="kartu_hand_1.setStyle(&quot;-fx-background-color: #FF0000&quot;);" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
+      <Pane fx:id="kartu_hand_1" layoutX="21.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
          <children>
             <ImageView fx:id="gambar_kartu_hand_1" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
