@@ -47,6 +47,7 @@ public class KartuKarakter extends Kartu {
         }
     }
 
+    // Jenis
     public String getJenis() {
         return jenis;
     }
@@ -55,6 +56,7 @@ public class KartuKarakter extends Kartu {
         this.jenis = jenis;
     }
 
+    // Exp
     public int getExp() {
         return exp;
     }
@@ -63,6 +65,7 @@ public class KartuKarakter extends Kartu {
         this.exp = exp;
     }
 
+    // Level
     public int getLevel() {
         return level;
     }
@@ -71,6 +74,7 @@ public class KartuKarakter extends Kartu {
         this.level = level;
     }
 
+    // Health
     public int getHealth() {
         return health;
     }
@@ -83,6 +87,7 @@ public class KartuKarakter extends Kartu {
         }
     }
 
+    // Attack
     public int getAttack() {
         return attack;
     }
@@ -91,22 +96,31 @@ public class KartuKarakter extends Kartu {
         this.attack = attack;
     }
 
+    // Attack Up
     public int getAttackUp() {
         return attackUp;
     }
 
     public void setAttackUp(int attackUp) {
-        this.attackUp = attackUp;
+        this.attackUp = this.getAttack() + ((this.getLevel() - 1) * attackUp);
+        // if (this.level == 10) {
+        // this.attackUp = 0;
+        // } else {
+        // this.attackUp = attackUp;
+        // }
     }
 
+    // Health Up
     public int getHealthUp() {
         return healthUp;
     }
 
     public void setHealthUp(int healthUp) {
-        this.healthUp = healthUp;
+        this.healthUp = this.getHealth() + ((this.getLevel() - 1) * healthUp);
+        // this.healthUp = healthUp;
     }
 
+    // Img Path
     public void setImagePath(String path) {
         this.imgPath = path;
     }
@@ -115,6 +129,7 @@ public class KartuKarakter extends Kartu {
         return this.imgPath;
     }
 
+    // Active Spell
     public ArrayList<KartuSpell> getActiveSpells() {
         return activeSpells;
     }
@@ -123,18 +138,22 @@ public class KartuKarakter extends Kartu {
         this.activeSpells = activeSpells;
     }
 
+    // Naik Level
     public void naikLevel() {
         if (this.level > 0 && this.level <= 10) {
-            this.level += 1;
-            this.exp = 0;
-            this.health += this.healthUp;
-            this.attack += this.attackUp;
+            while (this.exp >= 2 * this.level - 1) {
+                this.exp -= 2 * this.level - 1;
+                this.level += 1;
+                this.health += this.healthUp;
+                this.attack += this.attackUp;
+            }
         }
     }
 
-    public void naikExp() {
+    // Menambahkan Exp
+    public void naikExp(int n) {
         if (this.level > 0 && this.level <= 10) {
-            this.exp += 2;
+            this.exp += n;
             this.naikLevel();
         }
     }
