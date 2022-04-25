@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1100.0" style="-fx-border-width: 1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1100.0" style="-fx-border-width: 1;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Menkrep.GUI.FXMLController">
    <children>
       <ProgressBar fx:id="bar_health_steve" layoutX="14.0" layoutY="32.0" prefHeight="23.0" prefWidth="450.0" progress="0.42" />
       <Label fx:id="ronde" layoutX="543.0" layoutY="34.0" text="Turn 1" />
@@ -85,9 +85,9 @@
          </children>
       </Pane>
       <Circle fill="#ffffff00" layoutX="565.0" layoutY="45.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="button_draw" disable="true" layoutX="21.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Draw" />
+      <Button fx:id="button_draw" layoutX="21.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Draw" />
+      <Button fx:id="button_attack" disable="true" layoutX="481.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Attack" />
       <Button fx:id="button_plan" disable="true" layoutX="251.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Plan" />
-      <Button fx:id="button_attack" defaultButton="true" layoutX="481.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Attack" />
       <Button fx:id="button_end" disable="true" layoutX="711.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="End" />
       <Pane fx:id="kartu_hand_1" layoutX="21.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
          <children>
@@ -104,7 +104,7 @@
             <Image url="@card/image/character/Sheep.png" />
          </image>
       </ImageView>
-      <Button fx:id="button_next" layoutX="985.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="77.0" text="&gt;&gt;&gt;" />
+      <Button fx:id="button_next" layoutX="985.0" layoutY="365.0" mnemonicParsing="false" onAction="#nextPhase" prefHeight="31.0" prefWidth="77.0" text="&gt;&gt;&gt;" />
       <Pane layoutX="649.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;">
          <children>
             <Text fx:id="nama_kartu_hand_hover" layoutX="22.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Domba" />
@@ -128,7 +128,7 @@
       </Pane>
       <Pane fx:id="kartu_hand_2" layoutX="113.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
          <children>
-            <ImageView fx:id="gambar_kartu_hand_2" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="gambar_kartu_hand_2" fitHeight="85.0" fitWidth="106.0" layoutX="4.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
                </image>
