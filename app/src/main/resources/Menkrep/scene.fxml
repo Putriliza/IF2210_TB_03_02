@@ -8,12 +8,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1100.0" style="-fx-border-width: 1;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Menkrep.GUI.FXMLController">
    <children>
       <ProgressBar fx:id="bar_health_steve" layoutX="14.0" layoutY="32.0" prefHeight="23.0" prefWidth="450.0" progress="0.42" />
-      <Label fx:id="ronde" layoutX="543.0" layoutY="34.0" text="Turn 1" />
+      <Label fx:id="turn_count" layoutX="529.0" layoutY="30.0" style="-fx-font-weight: bold;" text="Turn 1">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
       <ProgressBar fx:id="bar_health_alex" layoutX="635.0" layoutY="33.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="23.0" prefWidth="450.0" progress="1.0" />
       <Pane layoutX="21.0" layoutY="82.0" prefHeight="250.0" prefWidth="450.0" style="-fx-border-color: #000000;">
          <children>
@@ -84,7 +88,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Circle fill="#ffffff00" layoutX="565.0" layoutY="45.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="circle_turn" fill="#ffffff00" layoutX="558.0" layoutY="61.0" radius="51.0" stroke="BLACK" strokeType="INSIDE" />
       <Button fx:id="button_draw" layoutX="21.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Draw" />
       <Button fx:id="button_attack" disable="true" layoutX="481.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Attack" />
       <Button fx:id="button_plan" disable="true" layoutX="251.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Plan" />
@@ -170,5 +174,10 @@
             <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
          </children>
       </Pane>
+      <Label fx:id="turn_player" layoutX="536.0" layoutY="61.0" style="-fx-font-weight: bolder;" text="ALEX" textFill="#0067d1">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

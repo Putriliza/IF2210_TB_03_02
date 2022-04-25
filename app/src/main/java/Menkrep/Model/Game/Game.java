@@ -30,8 +30,16 @@ public class Game {
         return this.round;
     }
 
+    public void setRound(int round) {
+        this.round = round;
+    }
+
     public int getPlayerIndex(){
         return this.playerIndex;
+    }
+    
+    public void setPlayerIndex(){
+        this.playerIndex = (this.playerIndex + 1) % 2;
     }
 
     public Phase getPhase(){
