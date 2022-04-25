@@ -1,15 +1,38 @@
 package Menkrep.Model.Kartu;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class KartuSpellMorph extends KartuSpell {
 
     public KartuSpellMorph() {
-        super("-", "-", "MORPH", 0);
+        super("-", "-", "MORPH", 0, "-");
     }
 
-    public KartuSpellMorph(String nama, String deskripsi, int mana) {
-        super(nama, deskripsi, "MORPH", mana);
+    public KartuSpellMorph(String nama, String deskripsi, int mana, String imgPath) {
+        super(nama, deskripsi, "MORPH", mana, imgPath);
+    }
+
+    public KartuSpellMorph(List<String[]> reference, String nama, String imgPath) {
+        super(nama, "", "MORPH", 0, "-");
+        for (String[] karakter : reference) {
+            if (karakter[1].equals(nama)) {
+                this.setDeskripsi(karakter[3]);
+                this.setMana(Integer.parseInt(karakter[5]));
+                this.setImgPath(karakter[6]);
+            }
+        }
+    }
+
+    public KartuSpellMorph(List<String[]> reference, String nama) {
+        super(nama, "", "MORPH", 0, "-");
+        for (String[] morph: reference) {
+            if (morph[1].equals(nama)) {
+                this.setDeskripsi(morph[2]);
+                this.setMana(Integer.parseInt(morph[5]));
+                this.setImgPath(morph[3]);
+            }
+        }
     }
 
 

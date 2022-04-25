@@ -1,22 +1,38 @@
 package Menkrep.Model.Kartu;
 
+import java.util.List;
+
 public class KartuSpellPotion extends KartuSpell {
     private int duration;
     private int attackModifier;
     private int healthModifier;
 
     public KartuSpellPotion() {
-        super("-", "-", "POTION", 0);
+        super("-", "-", "POTION", 0, "-");
         this.duration = 0;
         this.attackModifier = 0;
         this.healthModifier = 0;
     }
 
-    public KartuSpellPotion(String nama, String deskripsi, int mana, int duration, int attackModifier, int healthModifier) {
-        super(nama, deskripsi, "POTION", mana);
+    public KartuSpellPotion(String nama, String deskripsi, int mana, int duration, int attackModifier, int healthModifier, String imgPath) {
+        super(nama, deskripsi, "POTION", mana, imgPath);
         this.duration = duration;
         this.attackModifier = attackModifier;
         this.healthModifier = healthModifier;
+    }
+
+    public KartuSpellPotion(List<String[]> reference, String nama) {
+        super(nama, "-", "POTION", 0, "-");
+        for (String[] ptn: reference) {
+            if (ptn[1].equals(nama)) {
+                this.setDeskripsi(ptn[2]);
+                this.setMana(Integer.parseInt(ptn[6]));
+                this.duration = Integer.parseInt(ptn[7]);
+                this.attackModifier = Integer.parseInt(ptn[4]);
+                this.healthModifier = Integer.parseInt(ptn[5]);
+                this.setImgPath(ptn[3]);
+            }
+        }
     }
 
     public int getDuration() {

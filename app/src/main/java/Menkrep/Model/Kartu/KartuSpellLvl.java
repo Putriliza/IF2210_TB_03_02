@@ -1,16 +1,19 @@
 package Menkrep.Model.Kartu;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class KartuSpellLvl extends KartuSpell {
 
     private int levelModifier;
 
     public KartuSpellLvl() {
-        super("-", "-", "LVL", 0);
+        super("-", "-", "LVL", 0, "-");
         this.levelModifier = 0;
     }
 
-    public KartuSpellLvl(String nama, String deskripsi, int mana, int levelModifier) {
-        super(nama, deskripsi, "LVL", mana);
+    public KartuSpellLvl(String nama, String deskripsi, int mana, int levelModifier, String imgPath) {
+        super(nama, deskripsi, "LVL", mana, imgPath);
         this.levelModifier = levelModifier;
     }
 
