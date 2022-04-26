@@ -28,7 +28,6 @@ public class KartuKarakter extends Kartu {
         this.imgPath = imgPath;
         this.activeSpells = new ArrayList<KartuSpell>();
         super.setImgPath(imgPath);
-        super.setLevel(level);
         super.setMana(mana);
     }
 
@@ -47,7 +46,6 @@ public class KartuKarakter extends Kartu {
                 this.imgPath = karakter[7];
                 this.activeSpells = new ArrayList<KartuSpell>();
                 super.setImgPath(karakter[4]);
-                super.setLevel(1);
                 super.setMana(Integer.parseInt(karakter[7]));
             }
         }

@@ -115,26 +115,26 @@ public class FXMLController
     ImageView gambar_kartu_hand_5;
 
     @FXML
-    Text nama_kartu_hand_1;
+    Text mana_kartu_hand_1;
     @FXML
-    Text nama_kartu_hand_2;
+    Text mana_kartu_hand_2;
     @FXML
-    Text nama_kartu_hand_3;
+    Text mana_kartu_hand_3;
     @FXML
-    Text nama_kartu_hand_4;
+    Text mana_kartu_hand_4;
     @FXML
-    Text nama_kartu_hand_5;
+    Text mana_kartu_hand_5;
 
     @FXML
-    Text level_kartu_hand_1;
+    Text desc_kartu_hand_1;
     @FXML
-    Text level_kartu_hand_2;
+    Text desc_kartu_hand_2;
     @FXML
-    Text level_kartu_hand_3;
+    Text desc_kartu_hand_3;
     @FXML
-    Text level_kartu_hand_4;
+    Text desc_kartu_hand_4;
     @FXML
-    Text level_kartu_hand_5;
+    Text desc_kartu_hand_5;
 
     @FXML
     ImageView gambar_kartu_hand_hover;
@@ -158,27 +158,31 @@ public class FXMLController
             player = game.getPlayerTwo();
         }
 
-        setNamaLevelGambar(player, nama_kartu_hand_1, level_kartu_hand_1, gambar_kartu_hand_1, 0, 0 < player.getHandCard().size());
-        setNamaLevelGambar(player, nama_kartu_hand_2, level_kartu_hand_2, gambar_kartu_hand_2, 1, 1 < player.getHandCard().size());
-        setNamaLevelGambar(player, nama_kartu_hand_3, level_kartu_hand_3, gambar_kartu_hand_3, 2, 2 < player.getHandCard().size());
-        setNamaLevelGambar(player, nama_kartu_hand_4, level_kartu_hand_4, gambar_kartu_hand_4, 3, 3 < player.getHandCard().size());
-        setNamaLevelGambar(player, nama_kartu_hand_5, level_kartu_hand_5, gambar_kartu_hand_5, 4, 4 < player.getHandCard().size());
+        setNamaLevelGambar(player, mana_kartu_hand_1, desc_kartu_hand_1, gambar_kartu_hand_1, 0, 0 < player.getHandCard().size());
+        setNamaLevelGambar(player, mana_kartu_hand_2, desc_kartu_hand_2, gambar_kartu_hand_2, 1, 1 < player.getHandCard().size());
+        setNamaLevelGambar(player, mana_kartu_hand_3, desc_kartu_hand_3, gambar_kartu_hand_3, 2, 2 < player.getHandCard().size());
+        setNamaLevelGambar(player, mana_kartu_hand_4, desc_kartu_hand_4, gambar_kartu_hand_4, 3, 3 < player.getHandCard().size());
+        setNamaLevelGambar(player, mana_kartu_hand_5, desc_kartu_hand_5, gambar_kartu_hand_5, 4, 4 < player.getHandCard().size());
 
     }
 
-    public void setNamaLevelGambar(Player player, Text nama, Text level, ImageView gambar, int index, boolean isExist) {
+    public void setNamaLevelGambar(Player player, Text mana, Text desc, ImageView gambar, int index, boolean isExist) {
         if (!isExist) {
             // kosong
-            nama.setText("");
-            level.setText("");
+            mana.setText("");
+            desc.setText("");
             gambar.setImage(null);
         } else {
-            nama.setText(player.getHandCard().get(index).getNama());
+            mana.setText("MANA " + player.getHandCard().get(index).getMana());
             if (player.getHandCard().get(index).getTipe() == "KARAKTER") {
-                level.setText("Level " + player.getHandCard().get(index).getLevel());
+                desc.setText("ATK " + ((KartuKarakter)player.getHandCard().get(index)).getAttack() + "/HP " + ((KartuKarakter)player.getHandCard().get(index)).getHealth());
             } else {
-                level.setText("-");
+                desc.setText(player.getHandCard().get(index).getTipe() + "\n" + player.getHandCard().get(index).getNama());
             }
+
+            // TO DO:
+            // sesuaiin desc sama spek
+            
             String cwd = System.getProperty("user.dir");
             gambar.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + player.getHandCard().get(index).getImgPath()));
         }

@@ -5,14 +5,12 @@ public class Kartu {
     private String deskripsi;
     private String tipe;
     private String imgPath;
-    private int level;
     private int mana;
 
     public Kartu(String nama, String deskripsi, String tipe) {
         this.nama = nama;
         this.deskripsi = deskripsi;
         this.tipe = tipe;
-        this.level = 0;
     }
 
     public String getNama() {
@@ -45,14 +43,6 @@ public class Kartu {
 
     public void setImgPath(String imgPath){
         this.imgPath = imgPath;
-    }
-
-    public int getLevel(){
-        return level;
-    }
-
-    public void setLevel(int level){
-        this.level = level;
     }
 
     public int getMana(){
