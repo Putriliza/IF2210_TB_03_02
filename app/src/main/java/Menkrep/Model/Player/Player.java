@@ -52,12 +52,19 @@ public class Player {
 
         // Inisiasi kartu di hand
         this.hand = new ArrayList<Kartu>();
+        for (int i = 0; i < 5; i++) {
+            this.hand.add(this.deck.remove(0));
+        }
         this.board = new ArrayList<KartuKarakter>();
     }
 
     // Getter & Setter
     public String getName() {
         return this.name;
+    }
+
+    public ArrayList<Kartu> getHandCard(){
+        return this.hand;
     }
 
     public int getHealthPoints(){

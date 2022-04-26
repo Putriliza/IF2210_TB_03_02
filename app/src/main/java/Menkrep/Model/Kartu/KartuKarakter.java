@@ -27,6 +27,7 @@ public class KartuKarakter extends Kartu {
         this.healthUp = healthUp;
         this.imgPath = imgPath;
         this.activeSpells = new ArrayList<KartuSpell>();
+        super.setImgPath(imgPath);
     }
 
     public KartuKarakter(List<String[]> reference, String nama) {

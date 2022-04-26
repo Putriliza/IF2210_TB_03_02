@@ -2,13 +2,17 @@ package Menkrep.GUI;
 
 import Menkrep.Model.Enum.Phase;
 import Menkrep.Model.Game.Game;
+import Menkrep.Model.Player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 public class FXMLController
 {
@@ -50,20 +54,23 @@ public class FXMLController
     @FXML
     public void nextPhase(ActionEvent event){
         event.consume();
-        if (game.getPhase() == Phase.Draw){
-            button_draw.setDisable(true);
-            button_plan.setDisable(false);
-        } else if (game.getPhase() == Phase.Plan){
-            button_plan.setDisable(true);
-            button_attack.setDisable(false);
-        } else if (game.getPhase() == Phase.Attack){
-            button_attack.setDisable(true);
-            button_end.setDisable(false);
-        } else if (game.getPhase() == Phase.End){
-            button_end.setDisable(true);
-            button_draw.setDisable(false);
-        }
         game.nextPhase();
+        if (game.getPhase() == Phase.Draw){
+            button_draw.setDisable(false);
+            button_end.setDisable(true);
+            game.setRound(game.getRound() + 1);
+        } else if (game.getPhase() == Phase.Plan){
+            button_plan.setDisable(false);
+            button_draw.setDisable(true);
+        } else if (game.getPhase() == Phase.Attack){
+            button_attack.setDisable(false);
+            button_plan.setDisable(true);
+        } else if (game.getPhase() == Phase.End){
+            button_end.setDisable(false);
+            button_attack.setDisable(true);
+        }
+        setTurn(event);
+        setHandCard(event);
         setPlayerHealth(event);
     }
 
@@ -72,10 +79,63 @@ public class FXMLController
 
         turn_count.setText("Turn " + game.getRound());
         if(game.getPlayerIndex() == 0){
-            turn_player.setText("Player 1");
+            turn_player.setText(game.getPlayerOne().getName());
         } else{
-            turn_player.setText("Player 2");
+            turn_player.setText(game.getPlayerTwo().getName());
         }
+    }
+
+    @FXML
+    ImageView gambar_kartu_hand_1;
+    @FXML
+    ImageView gambar_kartu_hand_2;
+    @FXML
+    ImageView gambar_kartu_hand_3;
+    @FXML
+    ImageView gambar_kartu_hand_4;
+    @FXML
+    ImageView gambar_kartu_hand_5;
+
+    @FXML
+    Text nama_kartu_hand_1;
+    @FXML
+    Text nama_kartu_hand_2;
+    @FXML
+    Text nama_kartu_hand_3;
+    @FXML
+    Text nama_kartu_hand_4;
+    @FXML
+    Text nama_kartu_hand_5;
+
+    @FXML
+    Text level_kartu_hand_1;
+    @FXML
+    Text level_kartu_hand_2;
+    @FXML
+    Text level_kartu_hand_3;
+    @FXML
+    Text level_kartu_hand_4;
+    @FXML
+    Text level_kartu_hand_5;
+    public void setHandCard(ActionEvent event){
+        event.consume();
+        System.out.println("DI HANDDD CARD");
+
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+        // System.out.println(player.getHandCard().get(0).getImgPath());
+        // gambar_kartu_hand_1.setImage(new Image("@" + player.getHandCard().get(0).getImgPath()));
+
+        nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
+        nama_kartu_hand_2.setText(player.getHandCard().get(1).getNama());
+        nama_kartu_hand_3.setText(player.getHandCard().get(2).getNama());
+        nama_kartu_hand_4.setText(player.getHandCard().get(3).getNama());
+        nama_kartu_hand_5.setText(player.getHandCard().get(4).getNama());
+
     }
 
     public void setPlayerHealth(ActionEvent event){

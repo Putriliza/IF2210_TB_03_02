@@ -9,6 +9,7 @@ public class KartuSpell extends Kartu {
         super(nama, deskripsi, tipe);
         this.mana = mana;
         this.imgPath = imgPath;
+        super.setImgPath(imgPath);
     }
 
     public int getMana() {

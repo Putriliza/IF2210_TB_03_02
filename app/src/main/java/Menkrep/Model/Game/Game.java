@@ -26,8 +26,8 @@ public class Game {
         this.phase = Phase.Draw;
         this.players = new Player[2];
         try {
-            Player playerOne = new Player("WALA");
-            Player playerTwo = new Player("HAHA");
+            Player playerOne = new Player("Steve");
+            Player playerTwo = new Player("Alex");
             this.players[0] = playerOne;
             this.players[1] = playerTwo;
         } catch (IOException e) {
@@ -50,10 +50,6 @@ public class Game {
     public int getPlayerIndex(){
         return this.playerIndex;
     }
-    
-    public void setPlayerIndex(){
-        this.playerIndex = (this.playerIndex + 1) % 2;
-    }
 
     public Phase getPhase(){
         return this.phase;
@@ -67,12 +63,12 @@ public class Game {
         }else if (this.phase == Phase.Attack){
             this.phase = Phase.End;
         }else if (this.phase == Phase.End){
-            this.phase = Phase.Draw;
             if(this.playerIndex==0){
                 this.playerIndex=1;
             } else{
                 this.playerIndex=0;
             }
+            this.phase = Phase.Draw;
         }
 
     }

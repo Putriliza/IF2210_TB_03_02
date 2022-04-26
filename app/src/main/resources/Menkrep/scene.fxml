@@ -101,7 +101,7 @@
                </image>
             </ImageView>
             <Text fx:id="nama_kartu_hand_1" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-            <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+            <Text fx:id="level_kartu_hand_1" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
          </children></Pane>
       <ImageView fx:id="gambar_kartu_hand_hover" fitHeight="225.0" fitWidth="147.0" layoutX="491.0" layoutY="422.0" pickOnBounds="true">
          <image>
@@ -138,7 +138,7 @@
                </image>
             </ImageView>
             <Text fx:id="nama_kartu_hand_2" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-            <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+            <Text fx:id="level_kartu_hand_2" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
          </children>
       </Pane>
       <Pane fx:id="kartu_hand_3" layoutX="205.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
@@ -149,7 +149,7 @@
                </image>
             </ImageView>
             <Text fx:id="nama_kartu_hand_3" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-            <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+            <Text fx:id="level_kartu_hand_3" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
          </children>
       </Pane>
       <Pane fx:id="kartu_hand_4" layoutX="297.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
@@ -160,7 +160,7 @@
                </image>
             </ImageView>
             <Text fx:id="nama_kartu_hand_4" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-            <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+            <Text fx:id="level_kartu_hand_4" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
          </children>
       </Pane>
       <Pane fx:id="kartu_hand_5" layoutX="389.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
@@ -171,7 +171,7 @@
                </image>
             </ImageView>
             <Text fx:id="nama_kartu_hand_5" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-            <Text layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+            <Text fx:id="level_kartu_hand_5" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
          </children>
       </Pane>
       <Label fx:id="turn_player" layoutX="536.0" layoutY="61.0" style="-fx-font-weight: bolder;" text="ALEX" textFill="#0067d1">

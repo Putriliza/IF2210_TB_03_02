@@ -4,6 +4,7 @@ public class Kartu {
     private String nama;
     private String deskripsi;
     private String tipe;
+    private String imgPath;
 
     public Kartu(String nama, String deskripsi, String tipe) {
         this.nama = nama;
@@ -33,5 +34,13 @@ public class Kartu {
 
     public void setTipe(String tipe) {
         this.tipe = tipe;
+    }
+
+    public String getImgPath(){
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath){
+        this.imgPath = imgPath;
     }
 }
