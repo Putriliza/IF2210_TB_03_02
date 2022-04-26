@@ -83,6 +83,7 @@ public class FXMLController
         setHandCard(event);
         setBoardCard();
         setPlayerHealth(event);
+        setJumlahDeck(event);
     }
 
     public void setTurn(ActionEvent event){
@@ -131,9 +132,17 @@ public class FXMLController
     @FXML
     Text level_kartu_hand_5;
 
-    // List<Text> nama_kartu_hands = new ArrayList<>(List.of(nama_kartu_hand_1, nama_kartu_hand_2, nama_kartu_hand_3, nama_kartu_hand_4, nama_kartu_hand_5));
-    // List<Text> nama_kartu_hands = new ArrayList<Text>();
-    // nama_kartu_hands.add(nama_kartu_hand_1);
+    @FXML
+    ImageView gambar_kartu_hand_hover;
+    @FXML
+    Text nama_kartu_hand_hover;
+    @FXML
+    Text spek_kartu_hand_hover;
+    @FXML
+    Text deskripsi_kartu_hand_hover;
+
+    @FXML
+    Label jumlah_deck;
 
     public void setHandCard(ActionEvent event){
         event.consume();
@@ -379,4 +388,15 @@ public class FXMLController
         }
         
     }
+
+    public void setJumlahDeck(ActionEvent event){
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+        jumlah_deck.setText(player.getDeck().size() + "/40");
+    }
+
 }
