@@ -13,6 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import java.util.List;
+import java.util.ArrayList;
 
 public class FXMLController
 {
@@ -41,6 +43,7 @@ public class FXMLController
     public void initialize() {
         String javaVersion = System.getProperty("java.version");
         String javafxVersion = System.getProperty("javafx.version");
+
 
 //        label.setText("Hello, JavaFX " + javafxVersion + "\nRunning on Java " + javaVersion + ".");
     }
@@ -106,6 +109,8 @@ public class FXMLController
     Text nama_kartu_hand_4;
     @FXML
     Text nama_kartu_hand_5;
+    
+
 
     @FXML
     Text level_kartu_hand_1;
@@ -117,6 +122,11 @@ public class FXMLController
     Text level_kartu_hand_4;
     @FXML
     Text level_kartu_hand_5;
+
+    // List<Text> nama_kartu_hands = new ArrayList<>(List.of(nama_kartu_hand_1, nama_kartu_hand_2, nama_kartu_hand_3, nama_kartu_hand_4, nama_kartu_hand_5));
+    // List<Text> nama_kartu_hands = new ArrayList<Text>();
+    // nama_kartu_hands.add(nama_kartu_hand_1);
+
     public void setHandCard(ActionEvent event){
         event.consume();
         System.out.println("DI HANDDD CARD");
@@ -130,11 +140,81 @@ public class FXMLController
         // System.out.println(player.getHandCard().get(0).getImgPath());
         // gambar_kartu_hand_1.setImage(new Image("@" + player.getHandCard().get(0).getImgPath()));
 
-        nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
-        nama_kartu_hand_2.setText(player.getHandCard().get(1).getNama());
-        nama_kartu_hand_3.setText(player.getHandCard().get(2).getNama());
-        nama_kartu_hand_4.setText(player.getHandCard().get(3).getNama());
-        nama_kartu_hand_5.setText(player.getHandCard().get(4).getNama());
+        int banyak_kartu_hand = player.getHandCard().size();
+        System.out.println("BANYAK KARTU HAND : " + banyak_kartu_hand);
+
+
+        // MAAP NGESPAMM GAISS, DIBIKIN GENERAL ARRAYLIST BLOM BISA :(
+        if (banyak_kartu_hand == 5) {
+            nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
+            nama_kartu_hand_2.setText(player.getHandCard().get(1).getNama());
+            nama_kartu_hand_3.setText(player.getHandCard().get(2).getNama());
+            nama_kartu_hand_4.setText(player.getHandCard().get(3).getNama());
+            nama_kartu_hand_5.setText(player.getHandCard().get(4).getNama());
+        } else if (banyak_kartu_hand == 4) {
+            nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
+            nama_kartu_hand_2.setText(player.getHandCard().get(1).getNama());
+            nama_kartu_hand_3.setText(player.getHandCard().get(2).getNama());
+            nama_kartu_hand_4.setText(player.getHandCard().get(3).getNama());
+            nama_kartu_hand_5.setText("");
+        } else if (banyak_kartu_hand == 3) {
+            nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
+            nama_kartu_hand_2.setText(player.getHandCard().get(1).getNama());
+            nama_kartu_hand_3.setText(player.getHandCard().get(2).getNama());
+            nama_kartu_hand_4.setText("");
+            nama_kartu_hand_5.setText("");
+        } else if (banyak_kartu_hand == 2) {
+            nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
+            nama_kartu_hand_2.setText(player.getHandCard().get(1).getNama());
+            nama_kartu_hand_3.setText("");
+            nama_kartu_hand_4.setText("");
+            nama_kartu_hand_5.setText("");
+        } else if (banyak_kartu_hand == 1) {
+            nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
+            nama_kartu_hand_2.setText("");
+            nama_kartu_hand_3.setText("");
+            nama_kartu_hand_4.setText("");
+            nama_kartu_hand_5.setText("");
+        } else {
+            nama_kartu_hand_1.setText("");
+            nama_kartu_hand_2.setText("");
+            nama_kartu_hand_3.setText("");
+            nama_kartu_hand_4.setText("");
+            nama_kartu_hand_5.setText("");
+        }
+
+        if (player.getHandCard().get(0).getTipe() == "KARAKTER") {
+            nama_kartu_hand_1.setText("Level " + player.getHandCard().get(0).getLevel());
+        } else {
+            nama_kartu_hand_1.setText("-");
+        }
+
+        if (player.getHandCard().get(1).getTipe() == "KARAKTER") {
+            nama_kartu_hand_2.setText("Level " + player.getHandCard().get(1).getLevel());
+        } else {
+            nama_kartu_hand_2.setText("-");
+        }
+
+        if (player.getHandCard().get(2).getTipe() == "KARAKTER") {
+            nama_kartu_hand_3.setText("Level " + player.getHandCard().get(2).getLevel());
+        } else {
+            nama_kartu_hand_3.setText("-");
+        }
+
+        if (player.getHandCard().get(3).getTipe() == "KARAKTER") {
+            nama_kartu_hand_4.setText("Level " + player.getHandCard().get(3).getLevel());
+        } else {
+            nama_kartu_hand_4.setText("-");
+        }
+
+        if (player.getHandCard().get(4).getTipe() == "KARAKTER") {
+            nama_kartu_hand_5.setText("Level " + player.getHandCard().get(4).getLevel());
+        } else {
+            nama_kartu_hand_5.setText("-");
+        }
+        
+
+
 
     }
 

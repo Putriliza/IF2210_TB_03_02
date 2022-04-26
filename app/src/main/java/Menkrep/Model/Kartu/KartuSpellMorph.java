@@ -13,17 +13,6 @@ public class KartuSpellMorph extends KartuSpell {
         super(nama, deskripsi, "MORPH", mana, imgPath);
     }
 
-    public KartuSpellMorph(List<String[]> reference, String nama, String imgPath) {
-        super(nama, "", "MORPH", 0, "-");
-        for (String[] karakter : reference) {
-            if (karakter[1].equals(nama)) {
-                this.setDeskripsi(karakter[3]);
-                this.setMana(Integer.parseInt(karakter[5]));
-                this.setImgPath(karakter[6]);
-            }
-        }
-    }
-
     public KartuSpellMorph(List<String[]> reference, String nama) {
         super(nama, "", "MORPH", 0, "-");
         for (String[] morph: reference) {

@@ -16,7 +16,7 @@ public class KartuKarakter extends Kartu {
     // private List<String> karakter;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
-            int attack, int attackUp, int healthUp, String imgPath) {
+        int attack, int attackUp, int healthUp, String imgPath) {
         super(nama, deskripsi, "KARAKTER");
         this.jenis = jenis;
         this.exp = exp;
@@ -28,6 +28,7 @@ public class KartuKarakter extends Kartu {
         this.imgPath = imgPath;
         this.activeSpells = new ArrayList<KartuSpell>();
         super.setImgPath(imgPath);
+        super.setLevel(level);
     }
 
     public KartuKarakter(List<String[]> reference, String nama) {
@@ -44,6 +45,8 @@ public class KartuKarakter extends Kartu {
                 this.healthUp = Integer.parseInt(karakter[8]);
                 this.imgPath = karakter[7];
                 this.activeSpells = new ArrayList<KartuSpell>();
+                super.setImgPath(karakter[4]);
+                super.setLevel(1);
             }
         }
     }
