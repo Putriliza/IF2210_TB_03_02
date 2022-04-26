@@ -1,25 +1,38 @@
 package Menkrep.Model.Game;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import Menkrep.Model.Enum.Phase;
 import Menkrep.Model.Player.*;
 
 public class Game {
+
     public static Game gameInstance = new Game();
 
     private int round;
     private int playerIndex;
     private Phase phase;
     private Player[] players;
+    // private ArrayList<Player> players;
 
     public static Game getInstance() {
         return gameInstance;
     }
 
-    public Game() {
+    public Game(){
         this.round = 1;
         this.playerIndex = 0;
         this.phase = Phase.Draw;
         this.players = new Player[2];
+        try {
+            Player playerOne = new Player("WALA");
+            Player playerTwo = new Player("HAHA");
+            this.players[0] = playerOne;
+            this.players[1] = playerTwo;
+        } catch (IOException e) {
+            //TODO: handle exception
+        }
     }
 
     public int getManaCap(){

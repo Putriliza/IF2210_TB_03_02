@@ -12,7 +12,7 @@ import javafx.scene.shape.Circle;
 
 public class FXMLController
 {
-    Game game = Game.getInstance();
+    Game game = new Game();
     @FXML
     private Label label;
     @FXML
@@ -64,15 +64,11 @@ public class FXMLController
             button_draw.setDisable(false);
         }
         game.nextPhase();
-        // setPlayerHealth(event);
-        // setTurn(event);
+        setPlayerHealth(event);
     }
 
     public void setTurn(ActionEvent event){
         event.consume();
-
-        // game.setRound(game.getRound()+1);
-        // game.setPlayerIndex();
 
         turn_count.setText("Turn " + game.getRound());
         if(game.getPlayerIndex() == 0){
@@ -83,8 +79,7 @@ public class FXMLController
     }
 
     public void setPlayerHealth(ActionEvent event){
-        System.out.println("TESSS");
-        // bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/100.0);
-        // bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/100.0);
+        bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
+        bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
     }
 }

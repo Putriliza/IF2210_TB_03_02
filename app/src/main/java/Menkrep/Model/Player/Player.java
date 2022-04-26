@@ -34,26 +34,18 @@ public class Player {
     
         Reference ref = Reference.getInstance();
         for (String[] karakter : ref.getKarakter()) {
-            this.deck.add(new KartuKarakter(karakter[1], karakter[2], karakter[3],
-                    Integer.parseInt(karakter[4]), Integer.parseInt(karakter[5]),
-                    Integer.parseInt(karakter[6]), Integer.parseInt(karakter[7]),
-                    Integer.parseInt(karakter[8]), Integer.parseInt(karakter[9]),
-                    karakter[10]));
+            this.deck.add(new KartuKarakter(ref.getKarakter(), karakter[1]));
         }
         for (String[] morph : ref.getMorph()) {
-            // this.deck.add(new KartuSpellMorph(morph[1], morph[2], morph[3],
-            //         Integer.parseInt(morph[4]), Integer.parseInt(morph[5])));
+            this.deck.add(new KartuSpellMorph(morph[1], morph[2], Integer.parseInt(morph[5]), morph[3]));
         }
 
         for (String[] potion : ref.getPtn()) {
-            // this.deck.add(new KartuSpellPotion(potion[1], potion[2], potion[3],
-            //         Integer.parseInt(potion[4]), Integer.parseInt(potion[5]),
-            //        Integer.parseInt(potion[6]), Integer.parseInt(potion[7])));
+            this.deck.add(new KartuSpellPotion(ref.getPtn(), potion[1]));
         }
 
-        for (String[] lvl : ref.getSwap()) {
-            // this.deck.add(new KartuSpellLvl(lvl[1], lvl[2], lvl[3],
-            //         Integer.parseInt(lvl[4]), Integer.parseInt(lvl[5])));
+        for (String[] swap: ref.getSwap()) {
+            this.deck.add(new KartuSpellSwap(ref.getSwap(), swap[1]));
         }
 
         Collections.shuffle(this.deck);

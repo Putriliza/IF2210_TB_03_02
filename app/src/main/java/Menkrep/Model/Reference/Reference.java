@@ -33,7 +33,7 @@ public class Reference {
 
     public Reference() throws IOException {
         String cwd = System.getProperty("user.dir");
-        String cardDirectory = "\\app\\src\\main\\resources\\Menkrep\\card\\";
+        String cardDirectory = "\\src\\main\\resources\\Menkrep\\card\\";
 
         File characterCSVFile = new File(cwd + cardDirectory + CHARACTER_CSV_FILE_PATH);
         CSVReader characterReader = new CSVReader(characterCSVFile, "\t");
