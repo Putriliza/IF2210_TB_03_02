@@ -6,6 +6,7 @@ public class Kartu {
     private String tipe;
     private String imgPath;
     private int level;
+    private int mana;
 
     public Kartu(String nama, String deskripsi, String tipe) {
         this.nama = nama;
@@ -52,5 +53,13 @@ public class Kartu {
 
     public void setLevel(int level){
         this.level = level;
+    }
+
+    public int getMana(){
+        return mana;
+    }
+
+    public void setMana(int mana){
+        this.mana = mana;
     }
 }

@@ -66,14 +66,14 @@ public class Player {
 
         if (this.board.size() < 5){
             for (int index = this.board.size(); index < 5; index++) {
-                this.board.add(new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-"));
+                this.board.add(new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-", 0));
             }
         }
     }
     
     public void removeBoardCardAtIndex(int index) {
         if (index < 5) {
-            this.board.set(index, new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-"));
+            this.board.set(index, new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-", 0));
         }
     }
 
