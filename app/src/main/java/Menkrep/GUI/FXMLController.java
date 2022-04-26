@@ -2,6 +2,7 @@ package Menkrep.GUI;
 
 import Menkrep.Model.Enum.Phase;
 import Menkrep.Model.Game.Game;
+import Menkrep.Model.Kartu.Kartu;
 import Menkrep.Model.Kartu.KartuKarakter;
 import Menkrep.Model.Kartu.KartuSpell;
 import Menkrep.Model.Player.Player;
@@ -23,6 +24,17 @@ import java.nio.file.Path;
 public class FXMLController
 {
     Game game = new Game();
+    private Kartu currentHandCard;
+    private KartuKarakter currentBoardCard;
+
+    public void initialize() {
+        String javaVersion = System.getProperty("java.version");
+        String javafxVersion = System.getProperty("javafx.version");
+    }
+
+    // ----------------------------------------------------------------------------------------------------
+    // Fungsi yang mengganti phase dan button phase pada GUI setiap
+    // phase berubah dengan menekan button >>
     @FXML
     private Label label;
     @FXML
@@ -33,33 +45,6 @@ public class FXMLController
     private Button button_attack;
     @FXML
     private Button button_end;
-
-    @FXML
-    private ProgressBar bar_health_steve;
-    @FXML
-    private ProgressBar bar_health_alex;
-
-    @FXML
-    private Label turn_count;
-    @FXML
-    private Label turn_player;
-
-    public void initialize() {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-
-
-//        label.setText("Hello, JavaFX " + javafxVersion + "\nRunning on Java " + javaVersion + ".");
-    }
-
-    @FXML
-    public void print(ActionEvent event){
-        event.consume();
-        // Node node = (Node) event.getSource() ;
-        // String data = (String) node.getUserData();
-        // int value = Integer.parseInt(data);
-        // System.out.println("Hellooooooooooooooooooo " + value);
-    }
 
     @FXML
     public void nextPhase(ActionEvent event){
@@ -86,6 +71,13 @@ public class FXMLController
         setJumlahDeck(event);
     }
 
+    // ----------------------------------------------------------------------------------------------------
+    // Fungsi yang mengubah turn pada GUI setiap turn berubah
+    @FXML
+    private Label turn_count;
+    @FXML
+    private Label turn_player;
+
     public void setTurn(ActionEvent event){
         event.consume();
 
@@ -97,6 +89,20 @@ public class FXMLController
         }
     }
 
+    // ----------------------------------------------------------------------------------------------------
+    // Fungsi yang mengupdate health progress player pada GUI   
+    @FXML
+    private ProgressBar bar_health_steve;
+    @FXML
+    private ProgressBar bar_health_alex;
+    
+    public void setPlayerHealth(ActionEvent event){
+        bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
+        bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
+    }
+
+    // ----------------------------------------------------------------------------------------------------
+    // PUNYA LIZAAAA
     @FXML
     ImageView gambar_kartu_hand_1;
     @FXML
@@ -118,8 +124,6 @@ public class FXMLController
     Text nama_kartu_hand_4;
     @FXML
     Text nama_kartu_hand_5;
-    
-
 
     @FXML
     Text level_kartu_hand_1;
@@ -146,7 +150,6 @@ public class FXMLController
 
     public void setHandCard(ActionEvent event){
         event.consume();
-        System.out.println("DI HANDDD CARD");
 
         Player player;
         if (game.getPlayerIndex() == 0) {
@@ -154,9 +157,6 @@ public class FXMLController
         } else {
             player = game.getPlayerTwo();
         }
-
-
-        System.out.println("BANYAK KARTU HAND : " + player.getHandCard().size());
 
         setNamaLevelGambar(player, nama_kartu_hand_1, level_kartu_hand_1, gambar_kartu_hand_1, 0, 0 < player.getHandCard().size());
         setNamaLevelGambar(player, nama_kartu_hand_2, level_kartu_hand_2, gambar_kartu_hand_2, 1, 1 < player.getHandCard().size());
@@ -184,6 +184,8 @@ public class FXMLController
         }
     }
 
+    // ----------------------------------------------------------------------------------------------------
+    // Fungsi mengupdate kartu board pada GUI
     @FXML
     private Text sword_hover_11;
     @FXML
@@ -310,14 +312,10 @@ public class FXMLController
     @FXML
     private ImageView sword_icon_25;
 
-
-
     public void setBoardCard(){
         Player playerOne = game.getPlayerOne();
         Player playerTwo = game.getPlayerTwo();
 
-        System.out.println("KARTUU DII BOARDDD " + playerOne.getBoard().size());
-        System.out.println("KARTUU DII BOARDDD " + playerTwo.getBoard().size());
         setBoardCardGUI(heart_hover_11, sword_hover_11, exp_11, gambar_kartu_board_11, playerOne.getBoard().get(0), heart_icon_11, sword_icon_11);
         setBoardCardGUI(heart_hover_12, sword_hover_12, exp_12, gambar_kartu_board_12, playerOne.getBoard().get(1), heart_icon_12, sword_icon_12);
         setBoardCardGUI(heart_hover_13, sword_hover_13, exp_13, gambar_kartu_board_13, playerOne.getBoard().get(2), heart_icon_13, sword_icon_13);
@@ -331,6 +329,7 @@ public class FXMLController
         setBoardCardGUI(heart_hover_25, sword_hover_25, exp_25, gambar_kartu_board_25, playerTwo.getBoard().get(4), heart_icon_25, sword_icon_25);
     }
 
+    // Fungsi helper untuk setBoardCard
     public void setBoardCardGUI(Text heart, Text sword, Text exp, ImageView gambar_kartu_board, KartuKarakter kartu, ImageView heart_icon, ImageView sword_icon){
         if (kartu.getNama().equals("-")) {
             heart.setVisible(false);
@@ -355,11 +354,38 @@ public class FXMLController
         }
     }
 
-    public void setPlayerHealth(ActionEvent event){
-        bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
-        bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
+    // --------------------------------------------------------------------------------------------------------
+    // Fungsi untuk memberikan outline berwarna beda setiap ingin memindahkan kartu dari hand ke board
+    @FXML
+    private Button kartu_board_11;
+    @FXML
+    private Button kartu_board_12;
+    @FXML
+    private Button kartu_board_13;
+    @FXML
+    private Button kartu_board_14;
+    @FXML
+    private Button kartu_board_15;
+    @FXML
+    private Button kartu_board_21;
+    @FXML
+    private Button kartu_board_22;
+    @FXML
+    private Button kartu_board_23;
+    @FXML
+    private Button kartu_board_24;
+    @FXML
+    private Button kartu_board_25;
+    public void setBoardCardEffect(boolean isPlaced, Button kartu_board){
+        if (isPlaced) {
+            kartu_board.setStyle("-fx-border-color: blue;");
+        } else {
+            kartu_board.setStyle("-fx-border-color: black;");
+        }
     }
 
+    // --------------------------------------------------------------------------------------------------------
+    // Fungsi yang menangani setiap kartu di hand di click
     @FXML
     public void handCardOnClick(ActionEvent event){
         Player player;
@@ -377,18 +403,93 @@ public class FXMLController
             // Cek apakah kartu card valid
             if (idx < player.getHandCard().size()){
                 // Apabila kartu karakter
-                if (player.getHandCard().get(idx) instanceof KartuKarakter){
-                    System.out.println("KARAKTERRR");
+                currentHandCard = player.getHandCard().get(idx);
+                if (currentHandCard instanceof KartuKarakter){
+                    if (game.getPlayerIndex() == 0) {
+                        setBoardCardEffect(player.getBoard().get(0).getNama().equals("-"), kartu_board_11);
+                        setBoardCardEffect(player.getBoard().get(1).getNama().equals("-"), kartu_board_12);
+                        setBoardCardEffect(player.getBoard().get(2).getNama().equals("-"), kartu_board_13);
+                        setBoardCardEffect(player.getBoard().get(3).getNama().equals("-"), kartu_board_14);
+                        setBoardCardEffect(player.getBoard().get(4).getNama().equals("-"), kartu_board_15);
+                    } else{
+                        setBoardCardEffect(player.getBoard().get(0).getNama().equals("-"), kartu_board_21);
+                        setBoardCardEffect(player.getBoard().get(1).getNama().equals("-"), kartu_board_22);
+                        setBoardCardEffect(player.getBoard().get(2).getNama().equals("-"), kartu_board_23);
+                        setBoardCardEffect(player.getBoard().get(3).getNama().equals("-"), kartu_board_24);
+                        setBoardCardEffect(player.getBoard().get(4).getNama().equals("-"), kartu_board_25);
+                    }
                 } 
                 // Apabila kartu spell
-                else if (player.getHandCard().get(idx) instanceof KartuSpell){
-                    System.out.println("SPELLLL");
+                else if (currentHandCard instanceof KartuSpell){
+                    if (game.getPlayerIndex() == 0) {
+                        setBoardCardEffect(!player.getBoard().get(0).getNama().equals("-"), kartu_board_11);
+                        setBoardCardEffect(!player.getBoard().get(1).getNama().equals("-"), kartu_board_12);
+                        setBoardCardEffect(!player.getBoard().get(2).getNama().equals("-"), kartu_board_13);
+                        setBoardCardEffect(!player.getBoard().get(3).getNama().equals("-"), kartu_board_14);
+                        setBoardCardEffect(!player.getBoard().get(4).getNama().equals("-"), kartu_board_15);
+                    } else{
+                        setBoardCardEffect(!player.getBoard().get(0).getNama().equals("-"), kartu_board_21);
+                        setBoardCardEffect(!player.getBoard().get(1).getNama().equals("-"), kartu_board_22);
+                        setBoardCardEffect(!player.getBoard().get(2).getNama().equals("-"), kartu_board_23);
+                        setBoardCardEffect(!player.getBoard().get(3).getNama().equals("-"), kartu_board_24);
+                        setBoardCardEffect(!player.getBoard().get(4).getNama().equals("-"), kartu_board_25);
+                    }
+                }
+            }
+        }  
+    }
+
+    // --------------------------------------------------------------------------------------------------------
+    // Fungsi yang menangani setiap kartu di board di click
+    @FXML
+    public void boardCardOnClick(ActionEvent event){
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+
+        Node node = (Node) event.getSource() ;
+        String data = (String) node.getUserData();
+        int idx = Integer.parseInt(data);
+
+        if (game.getPhase() == Phase.Plan){
+            if (this.currentHandCard == null) {
+                System.out.println("BELUM MENCET KARTU APAPUN WOI");
+            } else if (this.currentHandCard instanceof KartuKarakter && !player.getBoard().get(idx).getNama().equals("-")){
+                System.out.println("KARTU KARAKTER SUDAH TERISI");
+            } else if (this.currentHandCard instanceof KartuSpell && player.getBoard().get(idx).getNama().equals("-")){
+                System.out.println("KARTU SPELL HANYA BISA DITAROH DI SPELL YANG TERISI");
+            } else {
+                if (this.currentHandCard instanceof KartuKarakter) {
+                    if (player.getMana() > 0) {
+                        player.getBoard().set(idx, (KartuKarakter) this.currentHandCard);
+                        player.getHandCard().remove(this.currentHandCard);
+                        this.currentHandCard = null;
+                        player.setMana(player.getMana() - 1);
+                        setBoardCard();
+                        setHandCard(event);
+                    } else {
+                        System.out.println("MANA HABISSS");
+                    }
+                } else if (this.currentHandCard instanceof KartuSpell) {
+                    if (player.getMana() > 0) {
+                        player.getBoard().get(idx).addSpell((KartuSpell) this.currentHandCard);
+                        player.getHandCard().remove(this.currentHandCard);
+                        this.currentHandCard = null;
+                        player.setMana(player.getMana() - 1);
+                        setBoardCard();
+                        setHandCard(event);
+                    } else {
+                        System.out.println("MANA HABISSS");
+                    }
                 }
             }
         }
-        
     }
 
+    // PUNYA LIZAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     public void setJumlahDeck(ActionEvent event){
         Player player;
         if (game.getPlayerIndex() == 0) {

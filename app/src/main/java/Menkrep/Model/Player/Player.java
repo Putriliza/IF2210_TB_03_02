@@ -52,9 +52,11 @@ public class Player {
 
         // Inisiasi kartu di hand
         this.hand = new ArrayList<Kartu>();
+    
         for (int i = 0; i < 5; i++) {
             this.hand.add(this.deck.remove(0));
         }
+
         this.board = new ArrayList<KartuKarakter>();
         for (int i = 0; i < 5; i++) {
             if (this.deck.get(i) instanceof KartuKarakter) {
