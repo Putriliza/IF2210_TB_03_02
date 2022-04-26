@@ -42,6 +42,7 @@ public class FXMLController
     @FXML
     private Label turn_player;
 
+
     public void initialize() {
         String javaVersion = System.getProperty("java.version");
         String javafxVersion = System.getProperty("javafx.version");
@@ -80,6 +81,7 @@ public class FXMLController
         setTurn(event);
         setHandCard(event);
         setPlayerHealth(event);
+        setJumlahDeck(event);
     }
 
     public void setTurn(ActionEvent event){
@@ -116,7 +118,6 @@ public class FXMLController
     Text nama_kartu_hand_5;
     
 
-
     @FXML
     Text level_kartu_hand_1;
     @FXML
@@ -128,9 +129,18 @@ public class FXMLController
     @FXML
     Text level_kartu_hand_5;
 
-    // List<Text> nama_kartu_hands = new ArrayList<>(List.of(nama_kartu_hand_1, nama_kartu_hand_2, nama_kartu_hand_3, nama_kartu_hand_4, nama_kartu_hand_5));
-    // List<Text> nama_kartu_hands = new ArrayList<Text>();
-    // nama_kartu_hands.add(nama_kartu_hand_1);
+    @FXML
+    ImageView gambar_kartu_hand_hover;
+    @FXML
+    Text nama_kartu_hand_hover;
+    @FXML
+    Text spek_kartu_hand_hover;
+    @FXML
+    Text deskripsi_kartu_hand_hover;
+
+    @FXML
+    Label jumlah_deck;
+
 
     public void setHandCard(ActionEvent event){
         event.consume();
@@ -175,5 +185,15 @@ public class FXMLController
     public void setPlayerHealth(ActionEvent event){
         bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
         bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
+    }
+
+    public void setJumlahDeck(ActionEvent event){
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+        jumlah_deck.setText("" + player.getDeck().size() + "/40");
     }
 }

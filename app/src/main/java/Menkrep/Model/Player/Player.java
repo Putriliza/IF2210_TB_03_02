@@ -93,6 +93,10 @@ public class Player {
         return board;
     }
 
+    public ArrayList<Kartu> getDeck() {
+        return deck;
+    }
+
     // Ambil kartu dari deck dan tambahkan ke hand
     // NOTES: Mungkin nanti si ambil kartu ini bisa di return boolean kayaknya? biar tau kapan dah ga bisa ambil kartu lagi
     public void shuffleCard() {
