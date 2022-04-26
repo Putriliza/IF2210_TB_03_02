@@ -56,6 +56,23 @@ public class Player {
             this.hand.add(this.deck.remove(0));
         }
         this.board = new ArrayList<KartuKarakter>();
+        for (int i = 0; i < 5; i++) {
+            if (this.deck.get(i) instanceof KartuKarakter) {
+                this.board.add((KartuKarakter) this.deck.remove(i));
+            }
+        }
+
+        if (this.board.size() < 5){
+            for (int index = this.board.size(); index < 5; index++) {
+                this.board.add(new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-"));
+            }
+        }
+    }
+    
+    public void removeBoardCardAtIndex(int index) {
+        if (index < 5) {
+            this.board.set(index, new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-"));
+        }
     }
 
     // Getter & Setter

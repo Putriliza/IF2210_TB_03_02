@@ -81,6 +81,7 @@ public class FXMLController
         }
         setTurn(event);
         setHandCard(event);
+        setBoardCard();
         setPlayerHealth(event);
     }
 
@@ -171,6 +172,177 @@ public class FXMLController
             }
             String cwd = System.getProperty("user.dir");
             gambar.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + player.getHandCard().get(index).getImgPath()));
+        }
+    }
+
+    @FXML
+    private Text sword_hover_11;
+    @FXML
+    private Text sword_hover_12;
+    @FXML
+    private Text sword_hover_13;
+    @FXML
+    private Text sword_hover_14;
+    @FXML
+    private Text sword_hover_15;
+    @FXML
+    private Text sword_hover_21;
+    @FXML
+    private Text sword_hover_22;
+    @FXML
+    private Text sword_hover_23;
+    @FXML
+    private Text sword_hover_24;
+    @FXML
+    private Text sword_hover_25;
+
+    @FXML
+    private Text heart_hover_11;
+    @FXML
+    private Text heart_hover_12;
+    @FXML
+    private Text heart_hover_13;
+    @FXML
+    private Text heart_hover_14;
+    @FXML
+    private Text heart_hover_15;
+    @FXML
+    private Text heart_hover_21;
+    @FXML
+    private Text heart_hover_22;
+    @FXML
+    private Text heart_hover_23;
+    @FXML
+    private Text heart_hover_24;
+    @FXML
+    private Text heart_hover_25;
+
+    @FXML
+    private Text exp_11;
+    @FXML
+    private Text exp_12;
+    @FXML
+    private Text exp_13;
+    @FXML
+    private Text exp_14;
+    @FXML
+    private Text exp_15;
+    @FXML
+    private Text exp_21;
+    @FXML
+    private Text exp_22;
+    @FXML
+    private Text exp_23;
+    @FXML
+    private Text exp_24;
+    @FXML
+    private Text exp_25;
+
+    @FXML
+    private ImageView gambar_kartu_board_11;
+    @FXML
+    private ImageView gambar_kartu_board_12;
+    @FXML
+    private ImageView gambar_kartu_board_13;
+    @FXML
+    private ImageView gambar_kartu_board_14;
+    @FXML
+    private ImageView gambar_kartu_board_15;
+    @FXML
+    private ImageView gambar_kartu_board_21;
+    @FXML
+    private ImageView gambar_kartu_board_22;
+    @FXML
+    private ImageView gambar_kartu_board_23;
+    @FXML
+    private ImageView gambar_kartu_board_24;
+    @FXML
+    private ImageView gambar_kartu_board_25;
+
+    @FXML
+    private ImageView heart_icon_11;
+    @FXML
+    private ImageView heart_icon_12;
+    @FXML
+    private ImageView heart_icon_13;
+    @FXML
+    private ImageView heart_icon_14;
+    @FXML
+    private ImageView heart_icon_15;
+    @FXML
+    private ImageView heart_icon_21;
+    @FXML
+    private ImageView heart_icon_22;
+    @FXML
+    private ImageView heart_icon_23;
+    @FXML
+    private ImageView heart_icon_24;
+    @FXML
+    private ImageView heart_icon_25;
+
+    @FXML
+    private ImageView sword_icon_11;
+    @FXML
+    private ImageView sword_icon_12;
+    @FXML
+    private ImageView sword_icon_13;
+    @FXML
+    private ImageView sword_icon_14;
+    @FXML
+    private ImageView sword_icon_15;
+    @FXML
+    private ImageView sword_icon_21;
+    @FXML
+    private ImageView sword_icon_22;
+    @FXML
+    private ImageView sword_icon_23;
+    @FXML
+    private ImageView sword_icon_24;
+    @FXML
+    private ImageView sword_icon_25;
+
+
+
+    public void setBoardCard(){
+        Player playerOne = game.getPlayerOne();
+        Player playerTwo = game.getPlayerTwo();
+
+        System.out.println("KARTUU DII BOARDDD " + playerOne.getBoard().size());
+        System.out.println("KARTUU DII BOARDDD " + playerTwo.getBoard().size());
+        setBoardCardGUI(heart_hover_11, sword_hover_11, exp_11, gambar_kartu_board_11, playerOne.getBoard().get(0), heart_icon_11, sword_icon_11);
+        setBoardCardGUI(heart_hover_12, sword_hover_12, exp_12, gambar_kartu_board_12, playerOne.getBoard().get(1), heart_icon_12, sword_icon_12);
+        setBoardCardGUI(heart_hover_13, sword_hover_13, exp_13, gambar_kartu_board_13, playerOne.getBoard().get(2), heart_icon_13, sword_icon_13);
+        setBoardCardGUI(heart_hover_14, sword_hover_14, exp_14, gambar_kartu_board_14, playerOne.getBoard().get(3), heart_icon_14, sword_icon_14);
+        setBoardCardGUI(heart_hover_15, sword_hover_15, exp_15, gambar_kartu_board_15, playerOne.getBoard().get(4), heart_icon_15, sword_icon_15);
+
+        setBoardCardGUI(heart_hover_21, sword_hover_21, exp_21, gambar_kartu_board_21, playerTwo.getBoard().get(0), heart_icon_21, sword_icon_21);
+        setBoardCardGUI(heart_hover_22, sword_hover_22, exp_22, gambar_kartu_board_22, playerTwo.getBoard().get(1), heart_icon_22, sword_icon_22);
+        setBoardCardGUI(heart_hover_23, sword_hover_23, exp_23, gambar_kartu_board_23, playerTwo.getBoard().get(2), heart_icon_23, sword_icon_23);
+        setBoardCardGUI(heart_hover_24, sword_hover_24, exp_24, gambar_kartu_board_24, playerTwo.getBoard().get(3), heart_icon_24, sword_icon_24);
+        setBoardCardGUI(heart_hover_25, sword_hover_25, exp_25, gambar_kartu_board_25, playerTwo.getBoard().get(4), heart_icon_25, sword_icon_25);
+    }
+
+    public void setBoardCardGUI(Text heart, Text sword, Text exp, ImageView gambar_kartu_board, KartuKarakter kartu, ImageView heart_icon, ImageView sword_icon){
+        if (kartu.getNama().equals("-")) {
+            heart.setVisible(false);
+            sword.setVisible(false);
+            exp.setVisible(false);
+            gambar_kartu_board.setVisible(false);
+            heart_icon.setVisible(false);
+            sword_icon.setVisible(false);
+        } else {
+            heart.setVisible(true);
+            sword.setVisible(true);
+            exp.setVisible(true);
+            gambar_kartu_board.setVisible(true);
+            heart_icon.setVisible(true);
+            sword_icon.setVisible(true);
+
+            heart.setText(Integer.toString(kartu.getHealth()));
+            sword.setText(Integer.toString(kartu.getAttack()));
+            exp.setText("[" + Integer.toString(kartu.getExp()) + "/10] " + Integer.toString(kartu.getLevel()));
+            String cwd = System.getProperty("user.dir"); 
+            gambar_kartu_board.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + kartu.getImgPath()));
         }
     }
 
