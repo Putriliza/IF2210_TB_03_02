@@ -93,16 +93,6 @@
       <Button fx:id="button_attack" disable="true" layoutX="481.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Attack" />
       <Button fx:id="button_plan" disable="true" layoutX="251.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="Plan" />
       <Button fx:id="button_end" disable="true" layoutX="711.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="End" />
-      <Pane fx:id="kartu_hand_1" layoutX="21.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
-         <children>
-            <ImageView fx:id="gambar_kartu_hand_1" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="nama_kartu_hand_1" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-            <Text fx:id="level_kartu_hand_1" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
-         </children></Pane>
       <ImageView fx:id="gambar_kartu_hand_hover" fitHeight="225.0" fitWidth="147.0" layoutX="491.0" layoutY="422.0" pickOnBounds="true">
          <image>
             <Image url="@card/image/character/Sheep.png" />
@@ -130,54 +120,50 @@
             <Label fx:id="jumlah_mana" layoutX="24.0" layoutY="27.0" text="0/1" />
          </children>
       </Pane>
-      <Pane fx:id="kartu_hand_2" layoutX="113.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
-         <children>
-            <ImageView fx:id="gambar_kartu_hand_2" fitHeight="85.0" fitWidth="106.0" layoutX="4.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="nama_kartu_hand_2" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-            <Text fx:id="level_kartu_hand_2" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
-         </children>
-      </Pane>
-      <Pane fx:id="kartu_hand_3" layoutX="205.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
-         <children>
-            <ImageView fx:id="gambar_kartu_hand_3" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="nama_kartu_hand_3" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-            <Text fx:id="level_kartu_hand_3" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
-         </children>
-      </Pane>
-      <Pane fx:id="kartu_hand_4" layoutX="297.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
-         <children>
-            <ImageView fx:id="gambar_kartu_hand_4" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="nama_kartu_hand_4" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-            <Text fx:id="level_kartu_hand_4" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
-         </children>
-      </Pane>
-      <Pane fx:id="kartu_hand_5" layoutX="389.0" layoutY="434.0" prefHeight="200.0" prefWidth="92.0" style="-fx-border-color: black;">
-         <children>
-            <ImageView fx:id="gambar_kartu_hand_5" fitHeight="85.0" fitWidth="106.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="nama_kartu_hand_5" layoutX="27.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-            <Text fx:id="level_kartu_hand_5" layoutX="17.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
-         </children>
-      </Pane>
       <Label fx:id="turn_player" layoutX="536.0" layoutY="61.0" style="-fx-font-weight: bolder;" text="ALEX" textFill="#0067d1">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <ImageView fx:id="gambar_kartu_hand_1" fitHeight="70.0" fitWidth="69.0" layoutX="33.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="nama_kartu_hand_1" layoutX="53.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
+      <Text fx:id="level_kartu_hand_1" layoutX="45.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+      <Button fx:id="kartu_hand_1" blendMode="MULTIPLY" layoutX="24.0" layoutY="435.0" mnemonicParsing="false" onAction="#print" userData="1" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" />
+      <ImageView fx:id="gambar_kartu_hand_2" fitHeight="70.0" fitWidth="69.0" layoutX="125.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="nama_kartu_hand_2" layoutX="145.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
+      <Text fx:id="level_kartu_hand_2" layoutX="137.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+      <Button fx:id="kartu_hand_2" blendMode="MULTIPLY" layoutX="116.0" layoutY="435.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" />
+      <ImageView fx:id="gambar_kartu_hand_3" fitHeight="70.0" fitWidth="69.0" layoutX="217.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="nama_kartu_hand_3" layoutX="237.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
+      <Text fx:id="level_kartu_hand_3" layoutX="229.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+      <Button fx:id="kartu_hand_3" blendMode="MULTIPLY" layoutX="208.0" layoutY="435.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" />
+      <ImageView fx:id="gambar_kartu_hand_4" fitHeight="70.0" fitWidth="69.0" layoutX="309.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="nama_kartu_hand_4" layoutX="329.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
+      <Text fx:id="level_kartu_hand_4" layoutX="321.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+      <Button fx:id="kartu_hand_4" blendMode="MULTIPLY" layoutX="300.0" layoutY="435.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" />
+      <ImageView fx:id="gambar_kartu_hand_5" fitHeight="70.0" fitWidth="69.0" layoutX="401.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="nama_kartu_hand_5" layoutX="421.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
+      <Text fx:id="level_kartu_hand_5" layoutX="413.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
+      <Button fx:id="kartu_hand_5" blendMode="MULTIPLY" layoutX="390.0" layoutY="435.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" />
    </children>
 </AnchorPane>

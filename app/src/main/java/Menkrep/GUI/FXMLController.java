@@ -5,6 +5,7 @@ import Menkrep.Model.Game.Game;
 import Menkrep.Model.Player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -52,7 +53,10 @@ public class FXMLController
     @FXML
     public void print(ActionEvent event){
         event.consume();
-        System.out.println("Hellooooooooooooooooooo");
+        Node node = (Node) event.getSource() ;
+        String data = (String) node.getUserData();
+        int value = Integer.parseInt(data);
+        System.out.println("Hellooooooooooooooooooo " + value);
     }
 
     @FXML
