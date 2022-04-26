@@ -15,6 +15,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import java.util.List;
 import java.util.ArrayList;
+import java.nio.file.Path;
 
 public class FXMLController
 {
@@ -137,88 +138,34 @@ public class FXMLController
         } else {
             player = game.getPlayerTwo();
         }
-        // System.out.println(player.getHandCard().get(0).getImgPath());
-        // gambar_kartu_hand_1.setImage(new Image("@" + player.getHandCard().get(0).getImgPath()));
-
-        int banyak_kartu_hand = player.getHandCard().size();
-        System.out.println("BANYAK KARTU HAND : " + banyak_kartu_hand);
 
 
-        // MAAP NGESPAMM GAISS, DIBIKIN GENERAL ARRAYLIST BLOM BISA :(
-        if (banyak_kartu_hand == 5) {
-            nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
-            nama_kartu_hand_2.setText(player.getHandCard().get(1).getNama());
-            nama_kartu_hand_3.setText(player.getHandCard().get(2).getNama());
-            nama_kartu_hand_4.setText(player.getHandCard().get(3).getNama());
-            nama_kartu_hand_5.setText(player.getHandCard().get(4).getNama());
-        } else if (banyak_kartu_hand == 4) {
-            nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
-            nama_kartu_hand_2.setText(player.getHandCard().get(1).getNama());
-            nama_kartu_hand_3.setText(player.getHandCard().get(2).getNama());
-            nama_kartu_hand_4.setText(player.getHandCard().get(3).getNama());
-            nama_kartu_hand_5.setText("");
-        } else if (banyak_kartu_hand == 3) {
-            nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
-            nama_kartu_hand_2.setText(player.getHandCard().get(1).getNama());
-            nama_kartu_hand_3.setText(player.getHandCard().get(2).getNama());
-            nama_kartu_hand_4.setText("");
-            nama_kartu_hand_5.setText("");
-        } else if (banyak_kartu_hand == 2) {
-            nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
-            nama_kartu_hand_2.setText(player.getHandCard().get(1).getNama());
-            nama_kartu_hand_3.setText("");
-            nama_kartu_hand_4.setText("");
-            nama_kartu_hand_5.setText("");
-        } else if (banyak_kartu_hand == 1) {
-            nama_kartu_hand_1.setText(player.getHandCard().get(0).getNama());
-            nama_kartu_hand_2.setText("");
-            nama_kartu_hand_3.setText("");
-            nama_kartu_hand_4.setText("");
-            nama_kartu_hand_5.setText("");
+        System.out.println("BANYAK KARTU HAND : " + player.getHandCard().size());
+
+        setNamaLevelGambar(player, nama_kartu_hand_1, level_kartu_hand_1, gambar_kartu_hand_1, 0, 0 < player.getHandCard().size());
+        setNamaLevelGambar(player, nama_kartu_hand_2, level_kartu_hand_2, gambar_kartu_hand_2, 1, 1 < player.getHandCard().size());
+        setNamaLevelGambar(player, nama_kartu_hand_3, level_kartu_hand_3, gambar_kartu_hand_3, 2, 2 < player.getHandCard().size());
+        setNamaLevelGambar(player, nama_kartu_hand_4, level_kartu_hand_4, gambar_kartu_hand_4, 3, 3 < player.getHandCard().size());
+        setNamaLevelGambar(player, nama_kartu_hand_5, level_kartu_hand_5, gambar_kartu_hand_5, 4, 4 < player.getHandCard().size());
+
+    }
+
+    public void setNamaLevelGambar(Player player, Text nama, Text level, ImageView gambar, int index, boolean isExist) {
+        if (!isExist) {
+            // kosong
+            nama.setText("");
+            level.setText("");
+            gambar.setImage(null);
         } else {
-            nama_kartu_hand_1.setText("");
-            nama_kartu_hand_2.setText("");
-            nama_kartu_hand_3.setText("");
-            nama_kartu_hand_4.setText("");
-            nama_kartu_hand_5.setText("");
+            nama.setText(player.getHandCard().get(index).getNama());
+            if (player.getHandCard().get(index).getTipe() == "KARAKTER") {
+                level.setText("Level " + player.getHandCard().get(index).getLevel());
+            } else {
+                level.setText("-");
+            }
+            String cwd = System.getProperty("user.dir");
+            gambar.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + player.getHandCard().get(index).getImgPath()));
         }
-
-        if (player.getHandCard().get(0).getTipe() == "KARAKTER") {
-            level_kartu_hand_1.setText("Level " + player.getHandCard().get(0).getLevel());
-        } else {
-            level_kartu_hand_1.setText("-");
-        }
-
-        if (player.getHandCard().get(1).getTipe() == "KARAKTER") {
-            level_kartu_hand_2.setText("Level " + player.getHandCard().get(1).getLevel());
-        } else {
-            level_kartu_hand_2.setText("-");
-        }
-
-        if (player.getHandCard().get(2).getTipe() == "KARAKTER") {
-            level_kartu_hand_3.setText("Level " + player.getHandCard().get(2).getLevel());
-        } else {
-            level_kartu_hand_3.setText("-");
-        }
-
-        if (player.getHandCard().get(3).getTipe() == "KARAKTER") {
-            level_kartu_hand_4.setText("Level " + player.getHandCard().get(3).getLevel());
-        } else {
-            level_kartu_hand_4.setText("-");
-        }
-
-        if (player.getHandCard().get(4).getTipe() == "KARAKTER") {
-            level_kartu_hand_5.setText("Level " + player.getHandCard().get(4).getLevel());
-        } else {
-            level_kartu_hand_5.setText("-");
-        }
-
-
-        // gambar_kartu_hand_1.setImage(new Image("@" + player.getHandCard().get(0).getImgPath()));
-        
-
-
-
     }
 
     public void setPlayerHealth(ActionEvent event){
