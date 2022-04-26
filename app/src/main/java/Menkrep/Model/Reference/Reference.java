@@ -5,6 +5,7 @@ import Menkrep.Util.CSVReader;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Reference {
@@ -14,10 +15,12 @@ public class Reference {
     private static final String MORPH_CSV_FILE_PATH = "data/spell_morph.csv";
     private static final String PTN_CSV_FILE_PATH = "data/spell_ptn.csv";
     private static final String SWAP_CSV_FILE_PATH = "data/spell_swap.csv";
+    private static final String LVL_CSV_FILE_PATH = "data/spell_lvl.csv";
     private final List<String[]> karakter;
     private final List<String[]> morph;
     private final List<String[]> ptn;
     private final List<String[]> swap;
+    private final List<String[]> lvl;
 
     public static Reference getInstance(){
         if(refInstance == null){
@@ -44,7 +47,7 @@ public class Reference {
         CSVReader morphReader = new CSVReader(morphCSVFile, "\t");
         morphReader.setSkipHeader(true);
         this.morph = morphReader.read();
-//
+
         File ptnCSVFile = new File(cwd + cardDirectory + PTN_CSV_FILE_PATH);
         CSVReader ptnReader = new CSVReader(ptnCSVFile, "\t");
         ptnReader.setSkipHeader(true);
@@ -54,6 +57,12 @@ public class Reference {
         CSVReader swapReader = new CSVReader(swapCSVFile, "\t");
         swapReader.setSkipHeader(true);
         this.swap = swapReader.read();
+
+        File lvlCSVFile = new File(cwd + cardDirectory + LVL_CSV_FILE_PATH);
+        CSVReader lvlReader = new CSVReader(lvlCSVFile, "\t");
+        lvlReader.setSkipHeader(true);
+        this.lvl = lvlReader.read();
+
     }
 
     public List<String[]> getKarakter() {
@@ -70,5 +79,9 @@ public class Reference {
 
     public List<String[]> getSwap() {
         return swap;
+    }
+
+    public List<String[]> getLvl() {
+        return lvl;
     }
 }

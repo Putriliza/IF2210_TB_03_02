@@ -12,7 +12,6 @@ import Menkrep.Model.Kartu.KartuSpellMorph;
 import Menkrep.Model.Kartu.KartuSpellPotion;
 import Menkrep.Model.Kartu.KartuSpellSwap;
 import Menkrep.Model.Reference.Reference;
-import org.checkerframework.checker.units.qual.K;
 
 public class Player {
     // Atribut
@@ -46,6 +45,10 @@ public class Player {
 
         for (String[] swap: ref.getSwap()) {
             this.deck.add(new KartuSpellSwap(ref.getSwap(), swap[1]));
+        }
+
+        for (String[] lvl : ref.getLvl()) {
+            this.deck.add(new KartuSpellLvl(ref.getLvl(), lvl[1]));
         }
 
         Collections.shuffle(this.deck);

@@ -5,6 +5,8 @@ import Menkrep.Model.Game.Game;
 import Menkrep.Model.Kartu.Kartu;
 import Menkrep.Model.Kartu.KartuKarakter;
 import Menkrep.Model.Kartu.KartuSpell;
+import Menkrep.Model.Kartu.KartuSpellLvl;
+import Menkrep.Model.Kartu.KartuSpellPotion;
 import Menkrep.Model.Player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -175,14 +177,38 @@ public class FXMLController
         } else {
             mana.setText("MANA " + player.getHandCard().get(index).getMana());
             if (player.getHandCard().get(index).getTipe() == "KARAKTER") {
-                desc.setText("ATK " + ((KartuKarakter)player.getHandCard().get(index)).getAttack() + "/HP " + ((KartuKarakter)player.getHandCard().get(index)).getHealth());
+                desc.setText("ATK " + ((KartuKarakter)player.getHandCard().get(index)).getAttack() + 
+                                "/HP " + ((KartuKarakter)player.getHandCard().get(index)).getHealth());
             } else {
-                desc.setText(player.getHandCard().get(index).getTipe() + "\n" + player.getHandCard().get(index).getNama());
+                if (player.getHandCard().get(index).getTipe() == "MORPH") {
+                    desc.setText("MORPH");
+                } else if (player.getHandCard().get(index).getTipe() == "POTION") {
+                    String atk;
+                    String hp;
+                    if (((KartuSpellPotion)player.getHandCard().get(index)).getAttackModifier() < 0) {
+                        atk = "" + ((KartuSpellPotion)player.getHandCard().get(index)).getAttackModifier();
+                    } else {
+                        atk = "+" + ((KartuSpellPotion)player.getHandCard().get(index)).getAttackModifier();
+                    }
+                    if (((KartuSpellPotion)player.getHandCard().get(index)).getHealthModifier() < 0) {
+                        hp = "" + ((KartuSpellPotion)player.getHandCard().get(index)).getHealthModifier();
+                    } else {
+                        hp = "+" + ((KartuSpellPotion)player.getHandCard().get(index)).getHealthModifier();
+                    }
+
+                    desc.setText("ATK" + atk + "/HP" + hp);
+                } else if (player.getHandCard().get(index).getTipe() == "SWAP") {
+                    desc.setText("ATK <-> HP");
+                } else if (player.getHandCard().get(index).getTipe() == "LVL") {
+                    desc.setText(((KartuSpellLvl)player.getHandCard().get(index)).getNama());
+                } else {
+                    desc.setText("");
+                }
             }
 
             // TO DO:
             // sesuaiin desc sama spek
-            
+
             String cwd = System.getProperty("user.dir");
             gambar.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + player.getHandCard().get(index).getImgPath()));
         }

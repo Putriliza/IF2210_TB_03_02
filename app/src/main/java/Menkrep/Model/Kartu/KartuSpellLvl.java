@@ -5,16 +5,24 @@ import java.util.ArrayList;
 
 public class KartuSpellLvl extends KartuSpell {
 
-    private int levelModifier;
-
     public KartuSpellLvl() {
         super("-", "-", "LVL", 0, "-");
-        this.levelModifier = 0;
     }
 
     public KartuSpellLvl(String nama, String deskripsi, int mana, int levelModifier, String imgPath) {
         super(nama, deskripsi, "LVL", mana, imgPath);
-        this.levelModifier = levelModifier;
+    }
+
+    public KartuSpellLvl(List<String[]> reference, String nama) {
+        super(nama, "", "LVL", 0, "-");
+        for (String[] spell : reference) {
+            if (spell[1].equals(nama)) {
+                this.setDeskripsi(spell[2]);
+                this.setImgPath(spell[3]);
+                // this.setMana(Math.ceil(karakter.getLevel()/2.0));
+                super.setMana(1);
+            }
+        }
     }
 
     // Meningkatkan/menurunkan level dari sebuah karakter sebanyak 1
