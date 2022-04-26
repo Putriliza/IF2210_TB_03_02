@@ -184,34 +184,37 @@ public class FXMLController
         }
 
         if (player.getHandCard().get(0).getTipe() == "KARAKTER") {
-            nama_kartu_hand_1.setText("Level " + player.getHandCard().get(0).getLevel());
+            level_kartu_hand_1.setText("Level " + player.getHandCard().get(0).getLevel());
         } else {
-            nama_kartu_hand_1.setText("-");
+            level_kartu_hand_1.setText("-");
         }
 
         if (player.getHandCard().get(1).getTipe() == "KARAKTER") {
-            nama_kartu_hand_2.setText("Level " + player.getHandCard().get(1).getLevel());
+            level_kartu_hand_2.setText("Level " + player.getHandCard().get(1).getLevel());
         } else {
-            nama_kartu_hand_2.setText("-");
+            level_kartu_hand_2.setText("-");
         }
 
         if (player.getHandCard().get(2).getTipe() == "KARAKTER") {
-            nama_kartu_hand_3.setText("Level " + player.getHandCard().get(2).getLevel());
+            level_kartu_hand_3.setText("Level " + player.getHandCard().get(2).getLevel());
         } else {
-            nama_kartu_hand_3.setText("-");
+            level_kartu_hand_3.setText("-");
         }
 
         if (player.getHandCard().get(3).getTipe() == "KARAKTER") {
-            nama_kartu_hand_4.setText("Level " + player.getHandCard().get(3).getLevel());
+            level_kartu_hand_4.setText("Level " + player.getHandCard().get(3).getLevel());
         } else {
-            nama_kartu_hand_4.setText("-");
+            level_kartu_hand_4.setText("-");
         }
 
         if (player.getHandCard().get(4).getTipe() == "KARAKTER") {
-            nama_kartu_hand_5.setText("Level " + player.getHandCard().get(4).getLevel());
+            level_kartu_hand_5.setText("Level " + player.getHandCard().get(4).getLevel());
         } else {
-            nama_kartu_hand_5.setText("-");
+            level_kartu_hand_5.setText("-");
         }
+
+
+        // gambar_kartu_hand_1.setImage(new Image("@" + player.getHandCard().get(0).getImgPath()));
         
 
 
