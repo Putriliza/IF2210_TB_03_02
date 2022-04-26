@@ -2,6 +2,8 @@ package Menkrep.GUI;
 
 import Menkrep.Model.Enum.Phase;
 import Menkrep.Model.Game.Game;
+import Menkrep.Model.Kartu.KartuKarakter;
+import Menkrep.Model.Kartu.KartuSpell;
 import Menkrep.Model.Player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,10 +55,10 @@ public class FXMLController
     @FXML
     public void print(ActionEvent event){
         event.consume();
-        Node node = (Node) event.getSource() ;
-        String data = (String) node.getUserData();
-        int value = Integer.parseInt(data);
-        System.out.println("Hellooooooooooooooooooo " + value);
+        // Node node = (Node) event.getSource() ;
+        // String data = (String) node.getUserData();
+        // int value = Integer.parseInt(data);
+        // System.out.println("Hellooooooooooooooooooo " + value);
     }
 
     @FXML
@@ -175,5 +177,34 @@ public class FXMLController
     public void setPlayerHealth(ActionEvent event){
         bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
         bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
+    }
+
+    @FXML
+    public void handCardOnClick(ActionEvent event){
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+
+        Node node = (Node) event.getSource() ;
+        String data = (String) node.getUserData();
+        int idx = Integer.parseInt(data);
+
+        if (game.getPhase() == Phase.Plan){
+            // Cek apakah kartu card valid
+            if (idx < player.getHandCard().size()){
+                // Apabila kartu karakter
+                if (player.getHandCard().get(idx) instanceof KartuKarakter){
+                    System.out.println("KARAKTERRR");
+                } 
+                // Apabila kartu spell
+                else if (player.getHandCard().get(idx) instanceof KartuSpell){
+                    System.out.println("SPELLLL");
+                }
+            }
+        }
+        
     }
 }
