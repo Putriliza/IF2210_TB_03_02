@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Menkrep.Model.Enum.Phase;
+import Menkrep.Model.Kartu.KartuKarakter;
 import Menkrep.Model.Player.*;
 
 public class Game {
@@ -79,5 +80,34 @@ public class Game {
 
     public Player getPlayerTwo(){
         return this.players[1];
+    }
+
+    public void attack(int idxLeft, int idxRight){
+        Player playerOne = players[0];
+        Player playerTwo = players[1];
+        KartuKarakter leftBoardSelected = playerOne.getBoard().get(idxLeft);
+        KartuKarakter rightBoardSelected = playerTwo.getBoard().get(idxRight);
+
+        leftBoardSelected.attack(rightBoardSelected);
+        rightBoardSelected.attack(leftBoardSelected);
+
+        if (leftBoardSelected.getHealth()==0 && rightBoardSelected.getHealth()!=0){
+            rightBoardSelected.naikExp(leftBoardSelected.getLevel());
+        }
+        if(rightBoardSelected.getHealth()==0 && leftBoardSelected.getHealth()!=0){
+            leftBoardSelected.naikExp(rightBoardSelected.getLevel());
+        }
+
+        if(leftBoardSelected.getHealth()==0){
+            playerOne.removeBoardCardAtIndex(idxLeft);
+        }else{
+            playerOne.getBoard().set(idxLeft, leftBoardSelected);
+        }
+
+        if(rightBoardSelected.getHealth()==0){
+            playerTwo.removeBoardCardAtIndex(idxRight);
+        }else{
+            playerTwo.getBoard().set(idxRight, rightBoardSelected);
+        }
     }
 }

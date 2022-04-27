@@ -36,10 +36,8 @@ public class FXMLController
     Game game = Game.getInstance();
     private Kartu currentHandCard;
     private KartuKarakter currentBoardCard;
-    private KartuKarakter leftBoardSelected;
-    private KartuKarakter rightBoardSelected;
-    int idxLeft;
-    int idxRight;
+    int idxLeft = -1;
+    int idxRight = -1;
 
     public void initialize() {
         String javaVersion = System.getProperty("java.version");
@@ -116,6 +114,10 @@ public class FXMLController
         setBoardCard();
         setPlayerHealth(event);
         setJumlahDeck(event);
+        idxLeft=-1;
+        idxRight=-1;
+        currentHandCard=null;
+        currentBoardCard=null;
     }
 
     // ----------------------------------------------------------------------------------------------------
@@ -616,57 +618,36 @@ public class FXMLController
         } else if(game.getPhase() == Phase.Attack){
             Player playerOne = game.getPlayerOne();
             Player playerTwo = game.getPlayerTwo();
-            if(leftBoardSelected==null && rightBoardSelected==null){
+            if(idxLeft==-1 && idxRight==-1){
                 if(game.getPlayerIndex()==0 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-")){
-                    leftBoardSelected = playerOne.getBoard().get(idx);
                     idxLeft = idx;
                 } else if(game.getPlayerIndex()==1 && right.contains(node.getId()) && !playerTwo.getBoard().get(idx).getNama().equals("-")){
-                    rightBoardSelected = playerTwo.getBoard().get(idx);
                     idxRight = idx;
                 } else{
                     System.out.println("Salah kartu");
                 }
             } else{
                 if(game.getPlayerIndex()==0 && playerTwo.boardIsEmpty()){
-                    playerTwo.reduceHP(leftBoardSelected.getAttack());
+                    System.out.println("Halo");
+                    playerTwo.reduceHP(playerOne.getBoard().get(idxLeft).getAttack());
                 } else if(game.getPlayerIndex()==1 && playerOne.boardIsEmpty()){
-                    playerOne.reduceHP(rightBoardSelected.getAttack());
+                    System.out.println("Halo");
+                    playerOne.reduceHP(playerTwo.getBoard().get(idxRight).getAttack());
                 } else{
                     if(game.getPlayerIndex()==1 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-")){
-                        leftBoardSelected = playerOne.getBoard().get(idx);
                         idxLeft = idx;
                     } else if(game.getPlayerIndex()==0 && right.contains(node.getId()) && !playerTwo.getBoard().get(idx).getNama().equals("-")){
-                        rightBoardSelected = playerTwo.getBoard().get(idx);
                         idxRight = idx;
                     } else{
                         System.out.println("Salah kartu");
                     }
 
-                    leftBoardSelected.attack(rightBoardSelected);
-                    rightBoardSelected.attack(leftBoardSelected);
-
-                    if (leftBoardSelected.getHealth()==0 && rightBoardSelected.getHealth()!=0){
-                        rightBoardSelected.naikExp(leftBoardSelected.getLevel());
-                    }
-                    if(rightBoardSelected.getHealth()==0 && leftBoardSelected.getHealth()!=0){
-                        leftBoardSelected.naikExp(rightBoardSelected.getLevel());
-                    }
-
-                    if(leftBoardSelected.getHealth()==0){
-                        playerOne.removeBoardCardAtIndex(idxLeft);
-                    }else{
-                        playerOne.getBoard().set(idxLeft, leftBoardSelected);
-                    }
-
-                    if(rightBoardSelected.getHealth()==0){
-                        playerTwo.removeBoardCardAtIndex(idxRight);
-                    }else{
-                        playerTwo.getBoard().set(idxRight, rightBoardSelected);
-                    }
-
-                    leftBoardSelected=null;
-                    rightBoardSelected=null;
+                    game.attack(idxLeft, idxRight);
                 }
+
+
+                idxLeft=-1;
+                idxRight=-1;
 
                 setBoardCard();
             }
