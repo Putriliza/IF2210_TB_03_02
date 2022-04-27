@@ -26,6 +26,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.nio.file.Path;
@@ -35,6 +36,10 @@ public class FXMLController
     Game game = Game.getInstance();
     private Kartu currentHandCard;
     private KartuKarakter currentBoardCard;
+    private KartuKarakter leftBoardSelected;
+    private KartuKarakter rightBoardSelected;
+    int idxLeft;
+    int idxRight;
 
     public void initialize() {
         String javaVersion = System.getProperty("java.version");
@@ -408,7 +413,7 @@ public class FXMLController
 
             heart.setText(Integer.toString(kartu.getHealth()));
             sword.setText(Integer.toString(kartu.getAttack()));
-            exp.setText("[" + Integer.toString(kartu.getExp()) + "/10] " + Integer.toString(kartu.getLevel()));
+            exp.setText((kartu.getExp()==0 ? "0" : Integer.toString(kartu.getExp())) +"/"+ kartu.getMaxExp() + " [" + kartu.getLevel()+ "]") ;
             String cwd = System.getProperty("user.dir"); 
             gambar_kartu_board.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + kartu.getImgPath()));
         }
@@ -573,6 +578,9 @@ public class FXMLController
         String data = (String) node.getUserData();
         int idx = Integer.parseInt(data);
 
+        List<String> left = Arrays.asList("kartu_board_11", "kartu_board_12", "kartu_board_13", "kartu_board_14", "kartu_board_15");
+        List<String> right = Arrays.asList("kartu_board_21", "kartu_board_22", "kartu_board_23", "kartu_board_24", "kartu_board_25");
+
         if (game.getPhase() == Phase.Plan){
             if (this.currentHandCard == null) {
                 System.out.println("BELUM MENCET KARTU APAPUN WOI");
@@ -604,6 +612,57 @@ public class FXMLController
                         System.out.println("MANA HABISSS");
                     }
                 }
+            }
+        } else if(game.getPhase() == Phase.Attack){
+            Player playerOne = game.getPlayerOne();
+            Player playerTwo = game.getPlayerTwo();
+            if(leftBoardSelected==null && rightBoardSelected==null){
+                if(game.getPlayerIndex()==0 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-")){
+                    leftBoardSelected = playerOne.getBoard().get(idx);
+                    idxLeft = idx;
+                } else if(game.getPlayerIndex()==1 && right.contains(node.getId()) && !playerTwo.getBoard().get(idx).getNama().equals("-")){
+                    rightBoardSelected = playerTwo.getBoard().get(idx);
+                    idxRight = idx;
+                } else{
+                    System.out.println("Salah kartu");
+                }
+            } else{
+                if(game.getPlayerIndex()==1 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-")){
+                    leftBoardSelected = playerOne.getBoard().get(idx);
+                    idxLeft = idx;
+                } else if(game.getPlayerIndex()==0 && right.contains(node.getId()) && !playerTwo.getBoard().get(idx).getNama().equals("-")){
+                    rightBoardSelected = playerTwo.getBoard().get(idx);
+                    idxRight = idx;
+                } else{
+                    System.out.println("Salah kartu");
+                }
+
+                leftBoardSelected.attack(rightBoardSelected);
+                rightBoardSelected.attack(leftBoardSelected);
+
+                if (leftBoardSelected.getHealth()==0 && rightBoardSelected.getHealth()!=0){
+                    rightBoardSelected.naikExp(leftBoardSelected.getLevel());
+                }
+                if(rightBoardSelected.getHealth()==0 && leftBoardSelected.getHealth()!=0){
+                    leftBoardSelected.naikExp(rightBoardSelected.getLevel());
+                }
+
+                if(leftBoardSelected.getHealth()==0){
+                    playerOne.removeBoardCardAtIndex(idxLeft);
+                }else{
+                    playerOne.getBoard().set(idxLeft, leftBoardSelected);
+                }
+
+                if(rightBoardSelected.getHealth()==0){
+                    playerTwo.removeBoardCardAtIndex(idxRight);
+                }else{
+                    playerTwo.getBoard().set(idxRight, rightBoardSelected);
+                }
+
+                leftBoardSelected=null;
+                rightBoardSelected=null;
+                
+                setBoardCard();
             }
         }
     }
