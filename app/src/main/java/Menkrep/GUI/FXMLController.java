@@ -627,41 +627,47 @@ public class FXMLController
                     System.out.println("Salah kartu");
                 }
             } else{
-                if(game.getPlayerIndex()==1 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-")){
-                    leftBoardSelected = playerOne.getBoard().get(idx);
-                    idxLeft = idx;
-                } else if(game.getPlayerIndex()==0 && right.contains(node.getId()) && !playerTwo.getBoard().get(idx).getNama().equals("-")){
-                    rightBoardSelected = playerTwo.getBoard().get(idx);
-                    idxRight = idx;
+                if(game.getPlayerIndex()==0 && playerTwo.boardIsEmpty()){
+                    playerTwo.reduceHP(leftBoardSelected.getAttack());
+                } else if(game.getPlayerIndex()==1 && playerOne.boardIsEmpty()){
+                    playerOne.reduceHP(rightBoardSelected.getAttack());
                 } else{
-                    System.out.println("Salah kartu");
+                    if(game.getPlayerIndex()==1 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-")){
+                        leftBoardSelected = playerOne.getBoard().get(idx);
+                        idxLeft = idx;
+                    } else if(game.getPlayerIndex()==0 && right.contains(node.getId()) && !playerTwo.getBoard().get(idx).getNama().equals("-")){
+                        rightBoardSelected = playerTwo.getBoard().get(idx);
+                        idxRight = idx;
+                    } else{
+                        System.out.println("Salah kartu");
+                    }
+
+                    leftBoardSelected.attack(rightBoardSelected);
+                    rightBoardSelected.attack(leftBoardSelected);
+
+                    if (leftBoardSelected.getHealth()==0 && rightBoardSelected.getHealth()!=0){
+                        rightBoardSelected.naikExp(leftBoardSelected.getLevel());
+                    }
+                    if(rightBoardSelected.getHealth()==0 && leftBoardSelected.getHealth()!=0){
+                        leftBoardSelected.naikExp(rightBoardSelected.getLevel());
+                    }
+
+                    if(leftBoardSelected.getHealth()==0){
+                        playerOne.removeBoardCardAtIndex(idxLeft);
+                    }else{
+                        playerOne.getBoard().set(idxLeft, leftBoardSelected);
+                    }
+
+                    if(rightBoardSelected.getHealth()==0){
+                        playerTwo.removeBoardCardAtIndex(idxRight);
+                    }else{
+                        playerTwo.getBoard().set(idxRight, rightBoardSelected);
+                    }
+
+                    leftBoardSelected=null;
+                    rightBoardSelected=null;
                 }
 
-                leftBoardSelected.attack(rightBoardSelected);
-                rightBoardSelected.attack(leftBoardSelected);
-
-                if (leftBoardSelected.getHealth()==0 && rightBoardSelected.getHealth()!=0){
-                    rightBoardSelected.naikExp(leftBoardSelected.getLevel());
-                }
-                if(rightBoardSelected.getHealth()==0 && leftBoardSelected.getHealth()!=0){
-                    leftBoardSelected.naikExp(rightBoardSelected.getLevel());
-                }
-
-                if(leftBoardSelected.getHealth()==0){
-                    playerOne.removeBoardCardAtIndex(idxLeft);
-                }else{
-                    playerOne.getBoard().set(idxLeft, leftBoardSelected);
-                }
-
-                if(rightBoardSelected.getHealth()==0){
-                    playerTwo.removeBoardCardAtIndex(idxRight);
-                }else{
-                    playerTwo.getBoard().set(idxRight, rightBoardSelected);
-                }
-
-                leftBoardSelected=null;
-                rightBoardSelected=null;
-                
                 setBoardCard();
             }
         }
