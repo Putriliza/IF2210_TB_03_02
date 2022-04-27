@@ -118,6 +118,7 @@ public class FXMLController
         idxRight=-1;
         currentHandCard=null;
         currentBoardCard=null;
+        setJumlahMana(event);
     }
 
     // ----------------------------------------------------------------------------------------------------
@@ -186,9 +187,6 @@ public class FXMLController
     Text desc_kartu_hand_4;
     @FXML
     Text desc_kartu_hand_5;
-
-    @FXML
-    Label jumlah_deck;
 
     public void setHandCard(ActionEvent event){
         event.consume();
@@ -654,7 +652,13 @@ public class FXMLController
         }
     }
 
-    // PUNYA LIZAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    
+    // -------------------------------------------------------------------------------------
+    // Fungsi untuk bind jumlah deck
+
+    @FXML
+    Label jumlah_deck;
+
     public void setJumlahDeck(ActionEvent event){
         Player player;
         if (game.getPlayerIndex() == 0) {
@@ -665,4 +669,22 @@ public class FXMLController
         jumlah_deck.setText(player.getDeck().size() + "/40");
     }
 
+    // -------------------------------------------------------------------------------------
+    // Fungsi untuk bind jumlah mana
+
+    @FXML
+    Label jumlah_mana;
+
+    public void setJumlahMana(ActionEvent event){
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+        // jumlah mana player ter reset setiap turn
+        jumlah_mana.setText(player.getMana() + "/" + game.getRound());
+    }
+
+    
 }

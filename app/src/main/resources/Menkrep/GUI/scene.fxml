@@ -377,7 +377,7 @@
       <Pane layoutX="1006.0" layoutY="534.0" prefHeight="51.0" prefWidth="69.0" style="-fx-border-color: black;">
          <children>
             <Label layoutX="17.0" layoutY="4.0" text="Mana" />
-            <Label fx:id="jumlah_mana" layoutX="24.0" layoutY="27.0" text="0/1" />
+            <Label fx:id="jumlah_mana" layoutX="24.0" layoutY="27.0" text="1/1" />
          </children>
       </Pane>
       <Label fx:id="turn_player" layoutX="536.0" layoutY="61.0" style="-fx-font-weight: bolder;" text="ALEX" textFill="#0067d1">
