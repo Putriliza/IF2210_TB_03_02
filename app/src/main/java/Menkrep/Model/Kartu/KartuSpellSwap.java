@@ -57,4 +57,10 @@ public class KartuSpellSwap extends KartuSpell {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "Mana= " + getMana() +
+                "\nDuration=" + duration;
+    }
 }

@@ -198,4 +198,15 @@ public class KartuKarakter extends Kartu {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Type=" + jenis +
+                "\nExp=" + exp +
+                "\nLevel=" + level +
+                "\nHealth=" + health +
+                "\nAttack=" + attack +
+                "\nAttackUp=" + attackUp +
+                "\nHealthUp=" + healthUp;
+    }
+
 }

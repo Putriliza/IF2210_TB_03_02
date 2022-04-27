@@ -45,4 +45,9 @@ public class KartuSpellMorph extends KartuSpell {
         // karakter.setBaseHealth(tujuan.getBaseHealth());
         
     }
+
+    @Override
+    public String toString() {
+        return "Mana=" + getMana();
+    }
 }

@@ -79,4 +79,12 @@ public class KartuSpellPotion extends KartuSpell {
         // if duration is 0, potion hilang
         // if karakter.getHealth() = 0, karakter mati
     }
+
+    @Override
+    public String toString() {
+        return "Mana = " + getMana() +
+                "\nDuration=" + duration +
+                "\nAtk=" + attackModifier +
+                "\nHp=" + healthModifier;
+    }
 }

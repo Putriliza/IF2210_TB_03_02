@@ -355,18 +355,18 @@
       <Button fx:id="button_end" disable="true" layoutX="711.0" layoutY="365.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="230.0" style="-fx-focus-traversable: false;" text="End" />
       <ImageView fx:id="gambar_kartu_hand_hover" fitHeight="225.0" fitWidth="147.0" layoutX="491.0" layoutY="422.0" pickOnBounds="true">
          <image>
-            <Image url="@card/image/character/Sheep.png" />
+            <Image url="@card/image/black_bg.jpg" />
          </image>
       </ImageView>
       <Button fx:id="button_next" layoutX="985.0" layoutY="365.0" mnemonicParsing="false" onAction="#nextPhase" prefHeight="31.0" prefWidth="77.0" text="&gt;&gt;&gt;" />
       <Pane layoutX="649.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;">
          <children>
-            <Text fx:id="nama_kartu_hand_hover" layoutX="22.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Domba" />
-            <Text fx:id="spek_kartu_hand_hover" layoutX="23.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atk: 10" />
+            <Text fx:id="nama_kartu_hand_hover" layoutX="22.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Belum ada kartu yang di hover" />
+            <Text fx:id="stat_kartu_hand_hover" layoutX="23.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
          </children></Pane>
       <Pane layoutX="817.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;">
          <children>
-            <Text fx:id="deskripsi_kartu_hand_hover" layoutX="19.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;Domba itu enak dimakan dan lezat&quot;" wrappingWidth="129.6708984375" />
+            <Text fx:id="deskripsi_kartu_hand_hover" layoutX="19.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="129.6708984375" />
          </children></Pane>
       <Pane layoutX="1006.0" layoutY="466.0" prefHeight="51.0" prefWidth="69.0" style="-fx-border-color: black;">
          <children>

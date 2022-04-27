@@ -9,7 +9,7 @@ public class KartuSpellLvl extends KartuSpell {
         super("-", "-", "LVL", 0, "-");
     }
 
-    public KartuSpellLvl(String nama, String deskripsi, int mana, int levelModifier, String imgPath) {
+    public KartuSpellLvl(String nama, String deskripsi, int mana, String imgPath) {
         super(nama, deskripsi, "LVL", mana, imgPath);
     }
 
@@ -40,5 +40,10 @@ public class KartuSpellLvl extends KartuSpell {
                 karakter.setExp(0);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Mana: " + getMana();
     }
 }

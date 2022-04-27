@@ -104,7 +104,9 @@ public class FXMLController
     }
 
     // ----------------------------------------------------------------------------------------------------
-    // PUNYA LIZAAAA
+    // Binding card to hand
+
+
     @FXML
     ImageView gambar_kartu_hand_1;
     @FXML
@@ -137,15 +139,6 @@ public class FXMLController
     Text desc_kartu_hand_4;
     @FXML
     Text desc_kartu_hand_5;
-
-    @FXML
-    ImageView gambar_kartu_hand_hover;
-    @FXML
-    Text nama_kartu_hand_hover;
-    @FXML
-    Text spek_kartu_hand_hover;
-    @FXML
-    Text deskripsi_kartu_hand_hover;
 
     @FXML
     Label jumlah_deck;
@@ -205,9 +198,6 @@ public class FXMLController
                     desc.setText("");
                 }
             }
-
-            // TO DO:
-            // sesuaiin desc sama spek
 
             String cwd = System.getProperty("user.dir");
             gambar.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + player.getHandCard().get(index).getImgPath()));
@@ -416,6 +406,28 @@ public class FXMLController
 
     // --------------------------------------------------------------------------------------------------------
     // Fungsi yang menangani setiap kartu di hand di click
+
+    @FXML
+    ImageView gambar_kartu_hand_hover;
+    @FXML
+    Text nama_kartu_hand_hover;
+    @FXML
+    Text stat_kartu_hand_hover;
+    @FXML
+    Text deskripsi_kartu_hand_hover;
+
+    @FXML
+    Button kartu_hand_1;
+    @FXML
+    Button kartu_hand_2;
+    @FXML
+    Button kartu_hand_3;
+    @FXML
+    Button kartu_hand_4;
+    @FXML
+    Button kartu_hand_5;
+
+
     @FXML
     public void handCardOnClick(ActionEvent event){
         Player player;
@@ -466,7 +478,44 @@ public class FXMLController
                     }
                 }
             }
-        }  
+        }
+
+        // Tampilkan detail handover card
+        if (idx < player.getHandCard().size()){
+            currentHandCard = player.getHandCard().get(idx);
+            String cwd = System.getProperty("user.dir");
+            gambar_kartu_hand_hover.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + currentHandCard.getImgPath()));
+            nama_kartu_hand_hover.setText(currentHandCard.getNama());
+            stat_kartu_hand_hover.setText(currentHandCard.toString());
+            deskripsi_kartu_hand_hover.setText("\""+ currentHandCard.getDeskripsi() + "\"");
+            setHandCardEffect(idx);
+        }
+        else {
+            gambar_kartu_hand_hover.setImage(null);
+            nama_kartu_hand_hover.setText("");
+            stat_kartu_hand_hover.setText("");
+            deskripsi_kartu_hand_hover.setText("");
+        }
+    }
+
+    public void setHandCardEffect(int index){
+        kartu_hand_1.setStyle("-fx-border-color: black;");
+        kartu_hand_2.setStyle("-fx-border-color: black;");
+        kartu_hand_3.setStyle("-fx-border-color: black;");
+        kartu_hand_4.setStyle("-fx-border-color: black;");
+        kartu_hand_5.setStyle("-fx-border-color: black;");
+        
+        if (index == 0) {
+            kartu_hand_1.setStyle("-fx-border-color: yellow;");
+        } else if (index == 1) {
+            kartu_hand_2.setStyle("-fx-border-color: yellow;");
+        } else if (index == 2) {
+            kartu_hand_3.setStyle("-fx-border-color: yellow;");
+        } else if (index == 3) {
+            kartu_hand_4.setStyle("-fx-border-color: yellow;");
+        } else if (index == 4) {
+            kartu_hand_5.setStyle("-fx-border-color: yellow;");
+        }
     }
 
     // --------------------------------------------------------------------------------------------------------
