@@ -99,6 +99,7 @@ public class FXMLController
             button_draw.setDisable(false);
             button_end.setDisable(true);
             game.setRound(game.getRound() + 1);
+            resetPlayerMana(event);
         } else if (game.getPhase() == Phase.Plan){
             button_plan.setDisable(false);
             button_draw.setDisable(true);
@@ -672,6 +673,16 @@ public class FXMLController
     // -------------------------------------------------------------------------------------
     // Fungsi untuk bind jumlah mana
 
+    public void resetPlayerMana(ActionEvent event){
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+        player.setMana(game.getRound());
+    }
+
     @FXML
     Label jumlah_mana;
 
@@ -682,9 +693,6 @@ public class FXMLController
         } else {
             player = game.getPlayerTwo();
         }
-        // jumlah mana player ter reset setiap turn
         jumlah_mana.setText(player.getMana() + "/" + game.getRound());
     }
-
-    
 }
