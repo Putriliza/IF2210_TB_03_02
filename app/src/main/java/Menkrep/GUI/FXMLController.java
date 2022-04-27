@@ -25,7 +25,7 @@ import java.nio.file.Path;
 
 public class FXMLController
 {
-    Game game = new Game();
+    Game game = Game.getInstance();
     private Kartu currentHandCard;
     private KartuKarakter currentBoardCard;
 
