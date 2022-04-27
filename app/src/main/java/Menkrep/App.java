@@ -5,6 +5,7 @@ package Menkrep;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -39,12 +40,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println(getClass().getResource("scene.fxml"));
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("scene.fxml"));
-        AnchorPane root = loader.load();
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("scene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/scene.fxml"));
+//        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
-//        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
         stage.setTitle("Menkrep");
         stage.setScene(scene);

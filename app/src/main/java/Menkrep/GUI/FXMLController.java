@@ -10,15 +10,22 @@ import Menkrep.Model.Kartu.KartuSpellPotion;
 import Menkrep.Model.Player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.nio.file.Path;
@@ -35,10 +42,43 @@ public class FXMLController
     }
 
     // ----------------------------------------------------------------------------------------------------
+    // Fungsi untuk mengambil kartu pada draw phase.
+    // Untuk sementara masuk ke draw stage dengan klik tombol draw
+    @FXML private Pane card2;
+
+    @FXML private Button draw_confirm_button;
+
+    public void switchToDrawPage(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+
+        event.consume();
+        stage = (Stage) button_draw.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("draw-page.fxml"));
+        root = loader.load();
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+    }
+
+    public void switchToMainPage(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+
+        event.consume();
+        stage = (Stage) draw_confirm_button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("scene.fxml"));
+        root = loader.load();
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+    }
+
+    // ----------------------------------------------------------------------------------------------------
     // Fungsi yang mengganti phase dan button phase pada GUI setiap
     // phase berubah dengan menekan button >>
-    @FXML
-    private Label label;
     @FXML
     private Button button_draw;
     @FXML
