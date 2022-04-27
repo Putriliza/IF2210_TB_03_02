@@ -82,6 +82,11 @@ public class Game {
         return this.players[1];
     }
 
+    public void resetBoardAttack(){
+        players[0].resetBoardAttack();
+        players[1].resetBoardAttack();
+    }
+
     public void attack(int idxLeft, int idxRight){
         Player playerOne = players[0];
         Player playerTwo = players[1];

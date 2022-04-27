@@ -191,4 +191,10 @@ public class Player {
         }
         return true;
     }
+
+    public void resetBoardAttack(){
+        for (KartuKarakter kartu: board) {
+            kartu.resetAttack();
+        }
+    }
 }

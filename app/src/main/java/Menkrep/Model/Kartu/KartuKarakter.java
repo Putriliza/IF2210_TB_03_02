@@ -13,6 +13,7 @@ public class KartuKarakter extends Kartu {
     private int healthUp;
     private String imgPath;
     private ArrayList<KartuSpell> activeSpells;
+    private boolean doneAttack;
     // private List<String> karakter;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
@@ -27,6 +28,7 @@ public class KartuKarakter extends Kartu {
         this.healthUp = healthUp;
         this.imgPath = imgPath;
         this.activeSpells = new ArrayList<KartuSpell>();
+        this.doneAttack=false;
         super.setImgPath(imgPath);
         super.setMana(mana);
     }
@@ -45,10 +47,21 @@ public class KartuKarakter extends Kartu {
                 this.healthUp = Integer.parseInt(karakter[9]);
                 this.imgPath = karakter[7];
                 this.activeSpells = new ArrayList<KartuSpell>();
+                this.doneAttack=false;
                 super.setImgPath(karakter[4]);
                 super.setMana(Integer.parseInt(karakter[7]));
             }
         }
+    }
+
+    public void resetAttack(){
+        this.doneAttack=false;
+    }
+    public void alrAttack(){
+        this.doneAttack=true;
+    }
+    public boolean getDoneAttack(){
+        return this.doneAttack;
     }
 
     // Jenis
