@@ -99,6 +99,13 @@ public class Player {
         }
     }
 
+    public void reduceHP(int att){
+        this.healthPoints -= att;
+        if(this.healthPoints<0){
+            this.healthPoints=0;
+        }
+    }
+
     public void setMana(int mana) {
         if (mana <= 10) {
             this.mana = mana;
@@ -167,16 +174,6 @@ public class Player {
         }
     }
 
-    public void descKartu() {
-        // TO DO:
-        // Tampilin deskripsi kartu yang ada di deck atau hand
-    }
-
-    public void descPlayer() {
-        // TO DO:
-        // Tampilin deskripsi player
-    }
-
     public void removeToBoard(Reference reference, int src) {
         // TO DO:
         // Keluarkan kartu yang ada di hand
@@ -186,47 +183,12 @@ public class Player {
         }
     }
 
-    public void removeCardFromBoard(KartuKarakter card){
-        this.board.remove(card);
-    }
-
-    public void attack(Player opponent) {
-        // Pilih kartu di board yang mau dipake
-        int idxPlayerBoard, idxOpponentBoard;
-        KartuKarakter playerCard, opponentCard;
-
-        // Semua kartu yang ada di board bakal disimpan sementara
-        // di tempPlayerBoard, jadii player bisaa attack sampai
-        // semua kartu yang ada di tempPlayerBoard habisss
-
-        // Kalo ada kartu karakter yang mati, bakal langsung 
-        // di remove di boardnya
-        ArrayList<KartuKarakter> tempPlayerBoard = new ArrayList<KartuKarakter>();
-        tempPlayerBoard.addAll(this.board);
-
-        while (tempPlayerBoard.size() > 0) {
-            // TO DO: Minta ke user mau kartu posisi yang index keberapa
-            // ATAUUU nanti bisa langsung minta kartu yang mauu dipakenya ajaa, bukan indexnya
-            idxPlayerBoard = 0;
-            playerCard = tempPlayerBoard.remove(idxPlayerBoard);
-
-            // Kalo lawan udah ga punya kartu yang bisa diattack
-            if (opponent.getBoard().size() == 0) {
-                opponent.setHealthPoints(opponent.getHealthPoints() - playerCard.getAttack());
-            } else {
-                // TO DO: Minta ke user mau lawan posisi yang index keberapa
-                idxOpponentBoard = 0;
-                opponentCard = opponent.getBoard().get(idxOpponentBoard);
-                playerCard.attack(opponentCard);
-
-                // Apabila kartu player atau opponent mati
-                if (playerCard.getHealth() <= 0) {
-                    this.removeCardFromBoard(playerCard);
-                }
-                if (opponentCard.getHealth() <= 0) {
-                    opponent.removeCardFromBoard(opponentCard);
-                }
+    public boolean boardIsEmpty(){
+        for (KartuKarakter kartu: board) {
+            if(!kartu.getNama().equals("-")){
+                return false;
             }
         }
+        return true;
     }
 }
