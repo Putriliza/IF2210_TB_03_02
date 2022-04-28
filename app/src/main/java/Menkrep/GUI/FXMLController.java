@@ -116,7 +116,6 @@ public class FXMLController
             button_end.setDisable(true);
             button_delete.setDisable(false);
             game.setHasDrawn(false);
-            game.setRound(game.getRound() + 1);
             resetPlayerMana(event);
         } else if (game.getPhase() == Phase.Plan){
             button_draw.setStyle("-fx-text-fill: black");
@@ -769,7 +768,7 @@ public class FXMLController
         } else {
             player = game.getPlayerTwo();
         }
-        player.setMana(game.getRound());
+        player.setMana(game.getManaCap());
     }
 
     @FXML
@@ -782,6 +781,6 @@ public class FXMLController
         } else {
             player = game.getPlayerTwo();
         }
-        jumlah_mana.setText(player.getMana() + "/" + game.getRound());
+        jumlah_mana.setText(player.getMana() + "/" + game.getManaCap());
     }
 }
