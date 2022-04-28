@@ -708,7 +708,7 @@ public class FXMLController
         } else {
             player = game.getPlayerTwo();
         }
-        player.setMana(game.getRound());
+        player.setMana(game.getManaCap());
     }
 
     @FXML
@@ -721,6 +721,6 @@ public class FXMLController
         } else {
             player = game.getPlayerTwo();
         }
-        jumlah_mana.setText(player.getMana() + "/" + game.getRound());
+        jumlah_mana.setText(player.getMana() + "/" + game.getManaCap());
     }
 }
