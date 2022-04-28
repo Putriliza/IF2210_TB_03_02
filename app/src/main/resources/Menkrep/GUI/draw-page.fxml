@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="drawPane" prefHeight="609.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Menkrep.GUI.DrawPageController">
@@ -32,7 +33,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ImageView id="card2" fx:id="card2_image" fitHeight="240.0" fitWidth="150.0" layoutX="27.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+            <StackPane prefHeight="300.0" prefWidth="200.0">
+               <children>
+                  <ImageView id="card2" fx:id="card2_image" fitHeight="240.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
          </children>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -50,7 +55,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ImageView id="card2" fx:id="card1_image" fitHeight="240.0" fitWidth="150.0" layoutX="27.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+            <StackPane layoutX="3.0" prefHeight="300.0" prefWidth="200.0">
+               <children>
+                  <ImageView id="card2" fx:id="card1_image" fitHeight="240.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
          </children>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -69,7 +78,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ImageView id="card2" fx:id="card3_image" fitHeight="240.0" fitWidth="150.0" layoutX="27.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+            <StackPane prefHeight="300.0" prefWidth="200.0">
+               <children>
+                  <ImageView id="card2" fx:id="card3_image" fitHeight="240.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
          </children>
          <cursor>
             <Cursor fx:constant="HAND" />

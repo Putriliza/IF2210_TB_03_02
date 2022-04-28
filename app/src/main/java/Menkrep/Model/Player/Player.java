@@ -131,62 +131,14 @@ public class Player {
 
     // Ambil kartu dari deck dan tambahkan ke hand
     // NOTES: Mungkin nanti si ambil kartu ini bisa di return boolean kayaknya? biar tau kapan dah ga bisa ambil kartu lagi
-    public void shuffleCard() {
-        // TODO:
-        // Cek apakah deck kosong
-        int nDeck = this.deck.size();
-        ArrayList <Kartu> randDeck = new ArrayList<Kartu>();
-
-        if (nDeck > 0) {
-            if (this.mana > 0) {
-                if (nDeck > 3) {
-                    for (int i = 0; i < 3; i++) {
-                        randDeck.add(this.deck.remove(i));
-                    }
-                } else {
-                    randDeck.addAll(this.deck);
-                    this.deck.clear();
-                }
-                // TO DO: 
-                // Tampilin hasil kartu acakan di randDeck
-                // Minta input dari user mauu pilih kartu yang mana
-                // Misalnya disini index ke 0 yaa
-                int indexPilih = 0;
-    
-                // Cek apakah kartu di hand sudah 5, kalo iya buang dulu yang di hand
-                int nHand = this.hand.size();
-                if (nHand > 5) {
-                    System.out.println("Jumlah kartu di Hand sudah 5");
-                    System.out.println("Buang kartu");
-                    // TO DO:
-                    // Minta input dari user mau buang yang mana
-                    // Misalnya disini index ke 3 yaaa
-                    int indexBuang = 3;
-                    this.hand.remove(indexBuang);
-                }
-                
-                // Pindahkan kartu dari deck ke hand (kurangin yang di deck, tambahin di hand)
-                this.hand.add(randDeck.remove(indexPilih));
-                this.deck.addAll(randDeck);
-                this.mana--;
-            } else {
-                System.out.println("Mana tidak cukup");
-            }
-        } else {
-            System.out.println("Kartu di deck kosong....");
-        }
-    }
-
     public DrawStatus generateDrawCard() {
-        Random rand = new Random();
         draw = new ArrayList<>();
         int deckSize = deck.size();
 
         if (deckSize > 0) {
             if (deckSize > 3) {
                 for (int i = 0; i < 3; i++) {
-                    int randomIndex = rand.nextInt(deckSize-1);
-                    draw.add(deck.remove(randomIndex));
+                    draw.add(deck.remove(0));
                 }
             } else {
                 draw.addAll(this.deck);
@@ -206,15 +158,16 @@ public class Player {
         Kartu pick = draw.remove(index);
 
         while (draw.size() > 0) {
+            // Mengembalikan kartu secara acak
+            Random rand = new Random();
+            deck.add(rand.nextInt(deck.size()), draw.remove(0));
             deck.add(draw.remove(0));
         }
 
         if (hand.size() < 5) {
             hand.add(pick);
-        } else {
-            // TODO
-            // Kalo kartu sudah penuh
         }
+
     }
 
 

@@ -1,6 +1,5 @@
 package Menkrep.GUI;
 
-import Menkrep.Model.Enum.DrawStatus;
 import Menkrep.Model.Enum.Phase;
 import Menkrep.Model.Game.Game;
 import Menkrep.Model.Kartu.Kartu;
@@ -15,17 +14,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,8 +29,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
-import java.nio.file.Path;
 
 public class FXMLController
 {
@@ -42,9 +36,6 @@ public class FXMLController
     private Kartu currentHandCard;
     private KartuKarakter currentBoardCard;
     private Parent root;
-    private Stage stage;
-    private Scene mainScene;
-    private Scene drawScene;
     int idxLeft = -1;
     int idxRight = -1;
 
@@ -61,6 +52,24 @@ public class FXMLController
     @FXML
     public void switchToDrawPage(ActionEvent event) throws IOException {
         event.consume();
+
+        if (game.getHasDrawn()) return;
+
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+
+        if (player.getHandCard().size() == 5) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Hand Card Full");
+            alert.setHeaderText("Your card is full");
+            alert.setContentText("Please remove one or more card before proceeding");
+            alert.showAndWait();
+            return;
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("draw-page.fxml"));
         root = loader.load();
@@ -81,10 +90,9 @@ public class FXMLController
             } else if (game.getPlayerIndex() == 1) {
                 game.getPlayerTwo().pickDrawCard(drawIndex);
             }
+            button_draw.setStyle("-fx-text-fill: green");
         }
-        button_draw.setStyle("-fx-text-fill: green");
         setHandCard();
-        setBoardCard();
     }
 
     // ----------------------------------------------------------------------------------------------------
@@ -106,6 +114,7 @@ public class FXMLController
         if (game.getPhase() == Phase.Draw){
             button_draw.setDisable(false);
             button_end.setDisable(true);
+            button_delete.setDisable(false);
             game.setHasDrawn(false);
             game.setRound(game.getRound() + 1);
             resetPlayerMana(event);
@@ -115,6 +124,12 @@ public class FXMLController
             button_draw.setDisable(true);
         } else if (game.getPhase() == Phase.Attack){
             resetBoardCardEffect();
+            button_delete.setDisable(true);
+            if (deleteMode) {
+                button_delete.setText("Toggle Hand Card Deletion");
+                button_delete.setStyle("-fx-text-fill: black");
+                deleteMode = false;
+            }
             button_attack.setDisable(false);
             button_plan.setDisable(true);
         } else if (game.getPhase() == Phase.End){
@@ -166,8 +181,6 @@ public class FXMLController
 
     // ----------------------------------------------------------------------------------------------------
     // Binding card to hand
-
-
     @FXML
     ImageView gambar_kartu_hand_1;
     @FXML
@@ -180,26 +193,26 @@ public class FXMLController
     ImageView gambar_kartu_hand_5;
 
     @FXML
-    Text mana_kartu_hand_1;
+    Label mana_kartu_hand_1;
     @FXML
-    Text mana_kartu_hand_2;
+    Label mana_kartu_hand_2;
     @FXML
-    Text mana_kartu_hand_3;
+    Label mana_kartu_hand_3;
     @FXML
-    Text mana_kartu_hand_4;
+    Label mana_kartu_hand_4;
     @FXML
-    Text mana_kartu_hand_5;
+    Label mana_kartu_hand_5;
 
     @FXML
-    Text desc_kartu_hand_1;
+    Label desc_kartu_hand_1;
     @FXML
-    Text desc_kartu_hand_2;
+    Label desc_kartu_hand_2;
     @FXML
-    Text desc_kartu_hand_3;
+    Label desc_kartu_hand_3;
     @FXML
-    Text desc_kartu_hand_4;
+    Label desc_kartu_hand_4;
     @FXML
-    Text desc_kartu_hand_5;
+    Label desc_kartu_hand_5;
 
     public void setHandCard(){
 
@@ -215,10 +228,9 @@ public class FXMLController
         setNamaLevelGambar(player, mana_kartu_hand_3, desc_kartu_hand_3, gambar_kartu_hand_3, 2, 2 < player.getHandCard().size());
         setNamaLevelGambar(player, mana_kartu_hand_4, desc_kartu_hand_4, gambar_kartu_hand_4, 3, 3 < player.getHandCard().size());
         setNamaLevelGambar(player, mana_kartu_hand_5, desc_kartu_hand_5, gambar_kartu_hand_5, 4, 4 < player.getHandCard().size());
-
     }
 
-    public void setNamaLevelGambar(Player player, Text mana, Text desc, ImageView gambar, int index, boolean isExist) {
+    public void setNamaLevelGambar(Player player, Label mana, Label desc, ImageView gambar, int index, boolean isExist) {
         if (!isExist) {
             // kosong
             mana.setText("");
@@ -233,20 +245,9 @@ public class FXMLController
                 if (player.getHandCard().get(index).getTipe() == "MORPH") {
                     desc.setText("MORPH");
                 } else if (player.getHandCard().get(index).getTipe() == "POTION") {
-                    String atk;
-                    String hp;
-                    if (((KartuSpellPotion)player.getHandCard().get(index)).getAttackModifier() < 0) {
-                        atk = "" + ((KartuSpellPotion)player.getHandCard().get(index)).getAttackModifier();
-                    } else {
-                        atk = "+" + ((KartuSpellPotion)player.getHandCard().get(index)).getAttackModifier();
-                    }
-                    if (((KartuSpellPotion)player.getHandCard().get(index)).getHealthModifier() < 0) {
-                        hp = "" + ((KartuSpellPotion)player.getHandCard().get(index)).getHealthModifier();
-                    } else {
-                        hp = "+" + ((KartuSpellPotion)player.getHandCard().get(index)).getHealthModifier();
-                    }
-
-                    desc.setText("ATK" + atk + "/HP" + hp);
+                    int atk = ((KartuSpellPotion)player.getHandCard().get(index)).getAttackModifier();
+                    int hp = ((KartuSpellPotion)player.getHandCard().get(index)).getHealthModifier();
+                    desc.setText(String.format("ATK%+d/HP%+d", atk, hp));
                 } else if (player.getHandCard().get(index).getTipe() == "SWAP") {
                     desc.setText("ATK <-> HP");
                 } else if (player.getHandCard().get(index).getTipe() == "LVL") {
@@ -480,7 +481,26 @@ public class FXMLController
     }
 
     // --------------------------------------------------------------------------------------------------------
-    // Fungsi yang menangani setiap kartu di hand di click
+    // Fungsi untuk menangani penghapusan kartu
+    @FXML Button button_delete;
+    public boolean deleteMode = false;
+
+    public void deleteButtonOnClick(ActionEvent event) {
+        event.consume();
+
+        if (deleteMode) {
+            button_delete.setText("Toggle Hand Card Deletion");
+            button_delete.setStyle("-fx-text-fill: black");
+            deleteMode = false;
+        } else {
+            button_delete.setText("DELETION ENABLED");
+            button_delete.setStyle("-fx-text-fill: red");
+            deleteMode = true;
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------------------
+    // Fungsi yang menangani setiap kartu di hand di-hover dan di-click
 
     @FXML
     ImageView gambar_kartu_hand_hover;
@@ -502,9 +522,10 @@ public class FXMLController
     @FXML
     Button kartu_hand_5;
 
-
     @FXML
-    public void handCardOnClick(ActionEvent event){
+    public void handCardOnHover(MouseEvent event) {
+        event.consume();
+
         Player player;
         if (game.getPlayerIndex() == 0) {
             player = game.getPlayerOne();
@@ -515,6 +536,46 @@ public class FXMLController
         Node node = (Node) event.getSource() ;
         String data = (String) node.getUserData();
         int idx = Integer.parseInt(data);
+        // Cek apakah kartu card valid
+        // Tampilkan detail handover card
+        if (idx < player.getHandCard().size()){
+            currentHandCard = player.getHandCard().get(idx);
+            String cwd = System.getProperty("user.dir");
+            gambar_kartu_hand_hover.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + currentHandCard.getImgPath()));
+            nama_kartu_hand_hover.setText(currentHandCard.getNama());
+            stat_kartu_hand_hover.setText(currentHandCard.toString());
+            deskripsi_kartu_hand_hover.setText("\""+ currentHandCard.getDeskripsi() + "\"");
+            setHandCardEffect(idx);
+        }
+        else {
+            gambar_kartu_hand_hover.setImage(null);
+            nama_kartu_hand_hover.setText("");
+            stat_kartu_hand_hover.setText("");
+            deskripsi_kartu_hand_hover.setText("");
+        }
+    }
+
+    @FXML
+    public void handCardOnClick(ActionEvent event){
+        event.consume();
+
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+
+        Node node = (Node) event.getSource() ;
+        String data = (String) node.getUserData();
+        int idx = Integer.parseInt(data);
+
+        // Penghapusan kartu
+        if (deleteMode) {
+            player.getHandCard().remove(idx);
+            setHandCard();
+            return;
+        }
 
         if (game.getPhase() == Phase.Plan){
             // Cek apakah kartu card valid

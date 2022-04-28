@@ -2,9 +2,7 @@ package Menkrep.GUI;
 
 import Menkrep.Model.Enum.DrawStatus;
 import Menkrep.Model.Game.Game;
-import Menkrep.Model.Kartu.Kartu;
-import Menkrep.Model.Kartu.KartuKarakter;
-import Menkrep.Model.Kartu.KartuSpell;
+import Menkrep.Model.Kartu.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -60,38 +58,39 @@ public class DrawPageController {
         String cwd = System.getProperty("user.dir");
         String dir = cwd + "/src/main/resources/Menkrep/";
         if (draw.size() >= 1) {
-            card2_image.setImage(new Image(dir + draw.get(0).getImgPath()));
-            card2_mana.setText(String.format("MANA %d", draw.get(0).getMana()));
-            if (draw.get(0) instanceof KartuKarakter) {
-                KartuKarakter kartu = (KartuKarakter) draw.get(0);
-                card2_atk_hp.setText("ATK " + kartu.getAttack() + "/HP " + kartu.getHealth());
-            } else {
-                KartuSpell kartu = (KartuSpell) draw.get(0);
-                card2_atk_hp.setText(kartu.getTipe());
-            }
+            setCard(draw.get(0), card2_image, card2_mana, card2_atk_hp);
         }
         if (draw.size() >= 2) {
-            card1_image.setImage(new Image(dir + draw.get(1).getImgPath()));
-            card1_mana.setText("MANA " + draw.get(1).getMana());
-            if (draw.get(1) instanceof KartuKarakter) {
-                KartuKarakter kartu = (KartuKarakter) draw.get(1);
-                card1_atk_hp.setText("ATK " + kartu.getAttack() + "/HP " + kartu.getHealth());
-            } else {
-                KartuSpell kartu = (KartuSpell) draw.get(1);
-                card1_atk_hp.setText(kartu.getTipe());
-            }
+            setCard(draw.get(1), card1_image, card1_mana, card1_atk_hp);
         }
         if (draw.size() == 3) {
-            card3_image.setImage(new Image(dir + draw.get(2).getImgPath()));
-            card3_mana.setText("MANA " + draw.get(2).getMana());
-            if (draw.get(2) instanceof KartuKarakter) {
-                KartuKarakter kartu = (KartuKarakter) draw.get(2);
-                card3_atk_hp.setText("ATK " + kartu.getAttack() + "/HP " + kartu.getHealth());
-            } else {
-                KartuSpell kartu = (KartuSpell) draw.get(2);
-                card3_atk_hp.setText(kartu.getTipe());
-            }
+            setCard(draw.get(2), card3_image, card3_mana, card3_atk_hp);
         }
+    }
+
+    private void setCard(Kartu card, ImageView image, Label mana, Label atk_hp) {
+        String cwd = System.getProperty("user.dir");
+        String dir = cwd + "/src/main/resources/Menkrep/";
+
+        image.setImage(new Image(dir + card.getImgPath()));
+        mana.setText("MANA " + draw.get(2).getMana());
+
+        String atkHpText = "";
+        if (card.getTipe() == "POTION") {
+            KartuSpellPotion potion = (KartuSpellPotion) card;
+            atkHpText = String.format("ATK%+d/HP%+d", potion.getAttackModifier(), potion.getHealthModifier());
+        } else if (card.getTipe() == "SWAP") {
+            atkHpText = "ATK <-> HP";
+        } else if (card.getTipe() == "LVL") {
+            atkHpText = card.getNama();
+        } else if (card.getTipe() == "MORPH") {
+            atkHpText = "MORPH";
+        } else {
+            // karakter
+            KartuKarakter karakter = (KartuKarakter) card;
+            atkHpText = String.format("ATK %d/HP %d", karakter.getAttack(), karakter.getHealth());
+        }
+        atk_hp.setText(atkHpText);
     }
 
     public void drawCardOnClick(MouseEvent event) {
@@ -111,7 +110,6 @@ public class DrawPageController {
             setBorderColor(card3, "red");
        }
         draw_confirm_button.setDisable(false);
-
     }
 
     public void setBorderColor(Pane card, String color) {

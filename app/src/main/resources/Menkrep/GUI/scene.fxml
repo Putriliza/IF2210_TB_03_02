@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1100.0" style="-fx-border-width: 1;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Menkrep.GUI.FXMLController">
    <children>
-      <ProgressBar fx:id="bar_health_steve" layoutX="14.0" layoutY="32.0" prefHeight="23.0" prefWidth="450.0" progress="0.42" />
+      <ProgressBar fx:id="bar_health_steve" layoutX="14.0" layoutY="32.0" prefHeight="23.0" prefWidth="450.0" progress="1.0" />
       <Label fx:id="turn_count" layoutX="529.0" layoutY="30.0" style="-fx-font-weight: bold;" text="Turn 1">
          <font>
             <Font size="19.0" />
@@ -361,7 +361,7 @@
       <Button fx:id="button_next" layoutX="985.0" layoutY="365.0" mnemonicParsing="false" onAction="#nextPhase" prefHeight="31.0" prefWidth="77.0" text="&gt;&gt;&gt;" />
       <Pane layoutX="649.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;">
          <children>
-            <Text fx:id="nama_kartu_hand_hover" layoutX="22.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Belum ada kartu yang di hover" />
+            <Text fx:id="nama_kartu_hand_hover" layoutX="22.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Belum ada kartu yang di hover" wrappingWidth="130.0" />
             <Text fx:id="stat_kartu_hand_hover" layoutX="23.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
          </children></Pane>
       <Pane layoutX="817.0" layoutY="450.0" prefHeight="168.0" prefWidth="168.0" style="-fx-border-color: black;">
@@ -380,7 +380,7 @@
             <Label fx:id="jumlah_mana" layoutX="24.0" layoutY="27.0" text="1/1" />
          </children>
       </Pane>
-      <Label fx:id="turn_player" layoutX="536.0" layoutY="61.0" style="-fx-font-weight: bolder;" text="ALEX" textFill="#0067d1">
+      <Label fx:id="turn_player" layoutX="535.0" layoutY="65.0" style="-fx-font-weight: bolder;" text="Steve" textAlignment="CENTER" textFill="#0067d1">
          <font>
             <Font size="18.0" />
          </font>
@@ -390,40 +390,61 @@
             <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
          </image>
       </ImageView>
-      <Text fx:id="mana_kartu_hand_1" layoutX="53.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-      <Text fx:id="desc_kartu_hand_1" layoutX="45.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
-      <Button fx:id="kartu_hand_1" blendMode="MULTIPLY" layoutX="24.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="0" />
       <ImageView fx:id="gambar_kartu_hand_2" fitHeight="70.0" fitWidth="69.0" layoutX="125.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
          </image>
       </ImageView>
-      <Text fx:id="mana_kartu_hand_2" layoutX="145.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-      <Text fx:id="desc_kartu_hand_2" layoutX="137.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
-      <Button fx:id="kartu_hand_2" blendMode="MULTIPLY" layoutX="116.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="1" />
       <ImageView fx:id="gambar_kartu_hand_3" fitHeight="70.0" fitWidth="69.0" layoutX="217.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
          </image>
       </ImageView>
-      <Text fx:id="mana_kartu_hand_3" layoutX="237.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-      <Text fx:id="desc_kartu_hand_3" layoutX="229.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
-      <Button fx:id="kartu_hand_3" blendMode="MULTIPLY" layoutX="208.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="2" />
       <ImageView fx:id="gambar_kartu_hand_4" fitHeight="70.0" fitWidth="69.0" layoutX="309.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
          </image>
       </ImageView>
-      <Text fx:id="mana_kartu_hand_4" layoutX="329.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-      <Text fx:id="desc_kartu_hand_4" layoutX="321.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
-      <Button fx:id="kartu_hand_4" blendMode="MULTIPLY" layoutX="300.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="3" />
       <ImageView fx:id="gambar_kartu_hand_5" fitHeight="70.0" fitWidth="69.0" layoutX="401.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
          </image>
       </ImageView>
-      <Text fx:id="mana_kartu_hand_5" layoutX="421.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana" />
-      <Text fx:id="desc_kartu_hand_5" layoutX="413.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level XX" />
-      <Button fx:id="kartu_hand_5" blendMode="MULTIPLY" layoutX="390.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="4" />
+      <Button fx:id="button_delete" layoutX="24.0" layoutY="642.0" mnemonicParsing="false" onAction="#deleteButtonOnClick" prefHeight="25.0" prefWidth="180.0" text="Toggle Hand Card Deletion" />
+      <Pane layoutX="24.0" layoutY="543.0" prefHeight="92.0" prefWidth="92.0">
+         <children>
+            <Label fx:id="mana_kartu_hand_1" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="29.0" prefHeight="17.0" prefWidth="77.0" text="Mana" textAlignment="CENTER" />
+            <Label fx:id="desc_kartu_hand_1" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="55.0" prefHeight="17.0" prefWidth="77.0" text="Level" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Pane layoutX="116.0" layoutY="543.0" prefHeight="92.0" prefWidth="92.0">
+         <children>
+            <Label fx:id="mana_kartu_hand_2" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="29.0" prefHeight="17.0" prefWidth="77.0" text="Mana" textAlignment="CENTER" />
+            <Label fx:id="desc_kartu_hand_2" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="55.0" prefHeight="17.0" prefWidth="77.0" text="Level" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Pane layoutX="208.0" layoutY="543.0" prefHeight="92.0" prefWidth="92.0">
+         <children>
+            <Label fx:id="mana_kartu_hand_3" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="29.0" prefHeight="17.0" prefWidth="77.0" text="Mana" textAlignment="CENTER" />
+            <Label fx:id="desc_kartu_hand_3" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="55.0" prefHeight="17.0" prefWidth="77.0" text="Level" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Pane layoutX="300.0" layoutY="543.0" prefHeight="92.0" prefWidth="92.0">
+         <children>
+            <Label fx:id="mana_kartu_hand_4" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="29.0" prefHeight="17.0" prefWidth="77.0" text="Mana" textAlignment="CENTER" />
+            <Label fx:id="desc_kartu_hand_4" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="55.0" prefHeight="17.0" prefWidth="77.0" text="Level" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Pane layoutX="390.0" layoutY="543.0" prefHeight="92.0" prefWidth="92.0">
+         <children>
+            <Label fx:id="mana_kartu_hand_5" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="29.0" prefHeight="17.0" prefWidth="77.0" text="Mana" textAlignment="CENTER" />
+            <Label fx:id="desc_kartu_hand_5" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="55.0" prefHeight="17.0" prefWidth="77.0" text="Level" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Button fx:id="kartu_hand_1" blendMode="MULTIPLY" layoutX="24.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" onMouseEntered="#handCardOnHover" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="0" />
+      <Button fx:id="kartu_hand_2" blendMode="MULTIPLY" layoutX="116.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" onMouseEntered="#handCardOnHover" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="1" />
+      <Button fx:id="kartu_hand_3" blendMode="MULTIPLY" layoutX="208.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" onMouseEntered="#handCardOnHover" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="2" />
+      <Button fx:id="kartu_hand_4" blendMode="MULTIPLY" layoutX="300.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" onMouseEntered="#handCardOnHover" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="3" />
+      <Button fx:id="kartu_hand_5" blendMode="MULTIPLY" layoutX="390.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" onMouseEntered="#handCardOnHover" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="4" />
    </children>
 </AnchorPane>
