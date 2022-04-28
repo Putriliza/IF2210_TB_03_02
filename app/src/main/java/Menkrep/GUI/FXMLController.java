@@ -251,6 +251,7 @@ public class FXMLController
                 } else if (player.getHandCard().get(index).getTipe() == "SWAP") {
                     desc.setText("ATK <-> HP");
                 } else if (player.getHandCard().get(index).getTipe() == "LVL") {
+                    mana.setText("MANA X");
                     desc.setText(((KartuSpellLvl)player.getHandCard().get(index)).getNama());
                 } else {
                     desc.setText("");

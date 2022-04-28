@@ -19,8 +19,7 @@ public class KartuSpellLvl extends KartuSpell {
             if (spell[1].equals(nama)) {
                 this.setDeskripsi(spell[2]);
                 this.setImgPath(spell[3]);
-                // this.setMana(Math.ceil(karakter.getLevel()/2.0));
-                super.setMana(1);
+                super.setMana(0);   // mana diset ketika akan dipakai ke character
             }
         }
     }
