@@ -174,6 +174,7 @@ public class FXMLController
     private ProgressBar bar_health_alex;
     
     public void setPlayerHealth(ActionEvent event){
+        event.consume();
         bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
         bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
     }
@@ -717,8 +718,12 @@ public class FXMLController
             } else{
                 if(game.getPlayerIndex()==0 && playerTwo.boardIsEmpty()){
                     playerTwo.reduceHP(playerOne.getBoard().get(idxLeft).getAttack());
+                    bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
+                    bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
                 } else if(game.getPlayerIndex()==1 && playerOne.boardIsEmpty()){
                     playerOne.reduceHP(playerTwo.getBoard().get(idxRight).getAttack());
+                    bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
+                    bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
                 } else{
                     if(game.getPlayerIndex()==1 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-")){
                         idxLeft = idx;
