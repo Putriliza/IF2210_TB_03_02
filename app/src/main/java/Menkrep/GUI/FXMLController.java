@@ -104,6 +104,7 @@ public class FXMLController
             button_plan.setDisable(false);
             button_draw.setDisable(true);
         } else if (game.getPhase() == Phase.Attack){
+            resetBoardCardEffect();
             button_attack.setDisable(false);
             button_plan.setDisable(true);
         } else if (game.getPhase() == Phase.End){
@@ -448,6 +449,24 @@ public class FXMLController
             kartu_board.setStyle("-fx-border-color: blue;");
         } else {
             kartu_board.setStyle("-fx-border-color: black;");
+        }
+    }
+
+    public void resetBoardCardEffect(){
+        if (game.getPlayerIndex() == 0) {
+            System.out.println("HAHAAAAAAAAAAAAAAAAAAAAAAA PLAYER KIRI");
+            kartu_board_11.setStyle("-fx-border-color: black;");
+            kartu_board_12.setStyle("-fx-border-color: black;");
+            kartu_board_13.setStyle("-fx-border-color: black;");
+            kartu_board_14.setStyle("-fx-border-color: black;");
+            kartu_board_15.setStyle("-fx-border-color: black;");
+        } else {
+            System.out.println("HAHAAAAAAAAAAAAAAAAAAAAAAA PLAYER KANANNN");
+            kartu_board_21.setStyle("-fx-border-color: black;");
+            kartu_board_22.setStyle("-fx-border-color: black;");
+            kartu_board_23.setStyle("-fx-border-color: black;");
+            kartu_board_24.setStyle("-fx-border-color: black;");
+            kartu_board_25.setStyle("-fx-border-color: black;");
         }
     }
 
