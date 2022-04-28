@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -370,14 +371,14 @@
          </children></Pane>
       <Pane layoutX="1006.0" layoutY="466.0" prefHeight="51.0" prefWidth="69.0" style="-fx-border-color: black;">
          <children>
-            <Label layoutX="17.0" layoutY="4.0" text="Deck" />
-            <Label fx:id="jumlah_deck" layoutX="14.0" layoutY="27.0" text="35/40" />
+            <Label layoutX="21.0" layoutY="7.0" text="Deck" />
+            <Label fx:id="jumlah_deck" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="26.0" prefHeight="17.0" prefWidth="47.0" text="40/40" textAlignment="CENTER" />
          </children>
       </Pane>
       <Pane layoutX="1006.0" layoutY="534.0" prefHeight="51.0" prefWidth="69.0" style="-fx-border-color: black;">
          <children>
-            <Label layoutX="17.0" layoutY="4.0" text="Mana" />
-            <Label fx:id="jumlah_mana" layoutX="24.0" layoutY="27.0" text="1/1" />
+            <Label layoutX="20.0" layoutY="6.0" text="Mana" />
+            <Label fx:id="jumlah_mana" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="27.0" prefHeight="17.0" prefWidth="37.0" text="1/1" textAlignment="CENTER" />
          </children>
       </Pane>
       <Label fx:id="turn_player" layoutX="535.0" layoutY="65.0" style="-fx-font-weight: bolder;" text="Steve" textAlignment="CENTER" textFill="#0067d1">
@@ -385,31 +386,6 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ImageView fx:id="gambar_kartu_hand_1" fitHeight="70.0" fitWidth="69.0" layoutX="33.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="gambar_kartu_hand_2" fitHeight="70.0" fitWidth="69.0" layoutX="125.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="gambar_kartu_hand_3" fitHeight="70.0" fitWidth="69.0" layoutX="217.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="gambar_kartu_hand_4" fitHeight="70.0" fitWidth="69.0" layoutX="309.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="gambar_kartu_hand_5" fitHeight="70.0" fitWidth="69.0" layoutX="401.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@card/image/spell/potion/Honey%20Bottle.png" />
-         </image>
-      </ImageView>
       <Button fx:id="button_delete" layoutX="24.0" layoutY="642.0" mnemonicParsing="false" onAction="#deleteButtonOnClick" prefHeight="25.0" prefWidth="180.0" text="Toggle Hand Card Deletion" />
       <Pane layoutX="24.0" layoutY="543.0" prefHeight="92.0" prefWidth="92.0">
          <children>
@@ -441,6 +417,31 @@
             <Label fx:id="desc_kartu_hand_5" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="55.0" prefHeight="17.0" prefWidth="77.0" text="Level" textAlignment="CENTER" />
          </children>
       </Pane>
+      <StackPane layoutX="32.0" layoutY="443.0" prefHeight="120.0" prefWidth="77.0">
+         <children>
+            <ImageView fx:id="gambar_kartu_hand_1" fitHeight="70.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="124.0" layoutY="443.0" prefHeight="120.0" prefWidth="77.0">
+         <children>
+            <ImageView fx:id="gambar_kartu_hand_2" fitHeight="70.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="216.0" layoutY="443.0" prefHeight="120.0" prefWidth="77.0">
+         <children>
+            <ImageView fx:id="gambar_kartu_hand_3" fitHeight="70.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="308.0" layoutY="443.0" prefHeight="120.0" prefWidth="77.0">
+         <children>
+            <ImageView fx:id="gambar_kartu_hand_4" fitHeight="70.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <StackPane layoutX="398.0" layoutY="443.0" prefHeight="120.0" prefWidth="77.0">
+         <children>
+            <ImageView fx:id="gambar_kartu_hand_5" fitHeight="70.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
       <Button fx:id="kartu_hand_1" blendMode="MULTIPLY" layoutX="24.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" onMouseEntered="#handCardOnHover" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="0" />
       <Button fx:id="kartu_hand_2" blendMode="MULTIPLY" layoutX="116.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" onMouseEntered="#handCardOnHover" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="1" />
       <Button fx:id="kartu_hand_3" blendMode="MULTIPLY" layoutX="208.0" layoutY="435.0" mnemonicParsing="false" onAction="#handCardOnClick" onMouseEntered="#handCardOnHover" prefHeight="200.0" prefWidth="92.0" style="-fx-focus-traversable: false; -fx-background-color: white; -fx-border-color: black;" userData="2" />

@@ -38,6 +38,8 @@ public class DrawPageController {
 
     public void initialize() {
         drawCardId = -1;
+        draw = new ArrayList<>();
+        System.out.println("INITIALIZED");
         if (game.getPlayerIndex() == 0) {
             DrawStatus status = game.getPlayerOne().generateDrawCard();
             if (status == DrawStatus.Success) {

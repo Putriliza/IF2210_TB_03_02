@@ -25,6 +25,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -42,6 +44,8 @@ public class FXMLController
     public void initialize()  {
         setBoardCard();
         setHandCard();
+        setJumlahMana();
+        setJumlahDeck();
     }
 
     // ----------------------------------------------------------------------------------------------------
@@ -71,6 +75,15 @@ public class FXMLController
             return;
         }
 
+        if (player.getDeck().size() == 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Card Left");
+            alert.setHeaderText("No Card Left");
+            alert.setContentText("You have no card left in the card deck");
+            alert.showAndWait();
+            return;
+        }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("draw-page.fxml"));
         root = loader.load();
         DrawPageController drawPageController = loader.getController();
@@ -78,21 +91,19 @@ public class FXMLController
         Stage stage = new Stage();
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(mainPane.getScene().getWindow());
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Draw Phase");
         stage.setScene(new Scene(root));
         stage.showAndWait();
 
         int drawIndex = drawPageController.getDrawCardId()-1;
-        if (drawIndex >= 0 && drawIndex < 3) {
+        if (drawIndex >= 0 && drawIndex < player.getDrawCard().size()) {
             game.setHasDrawn(true);
-            if (game.getPlayerIndex() == 0) {
-                game.getPlayerOne().pickDrawCard(drawIndex);
-            } else if (game.getPlayerIndex() == 1) {
-                game.getPlayerTwo().pickDrawCard(drawIndex);
-            }
+            player.pickDrawCard(drawIndex);
             button_draw.setStyle("-fx-text-fill: green");
+            setHandCard();
+            setJumlahDeck();
         }
-        setHandCard();
     }
 
     // ----------------------------------------------------------------------------------------------------
@@ -111,6 +122,7 @@ public class FXMLController
     public void nextPhase(ActionEvent event){
         event.consume();
         game.nextPhase();
+
         if (game.getPhase() == Phase.Draw){
             button_draw.setDisable(false);
             button_end.setDisable(true);
@@ -139,12 +151,12 @@ public class FXMLController
         setHandCard();
         setBoardCard();
         setPlayerHealth(event);
-        setJumlahDeck(event);
+        setJumlahDeck();
         idxLeft=-1;
         idxRight=-1;
         currentHandCard=null;
         currentBoardCard=null;
-        setJumlahMana(event);
+        setJumlahMana();
         game.resetBoardAttack();
     }
 
@@ -487,6 +499,9 @@ public class FXMLController
     public void deleteButtonOnClick(ActionEvent event) {
         event.consume();
 
+        for (int i = 0; i < game.getPlayerOne().getDeck().size(); i++) {
+            System.out.println(i + " " + game.getPlayerOne().getDeck().get(i).getNama());
+        }
         if (deleteMode) {
             button_delete.setText("Toggle Hand Card Deletion");
             button_delete.setStyle("-fx-text-fill: black");
@@ -571,8 +586,10 @@ public class FXMLController
 
         // Penghapusan kartu
         if (deleteMode) {
-            player.getHandCard().remove(idx);
-            setHandCard();
+            if (idx < player.getHandCard().size()) {
+                player.getHandCard().remove(idx);
+                setHandCard();
+            }
             return;
         }
 
@@ -745,23 +762,24 @@ public class FXMLController
     // -------------------------------------------------------------------------------------
     // Fungsi untuk bind jumlah deck
 
-    @FXML
-    Label jumlah_deck;
+    @FXML Label jumlah_deck;
 
-    public void setJumlahDeck(ActionEvent event){
+    public void setJumlahDeck(){
         Player player;
         if (game.getPlayerIndex() == 0) {
             player = game.getPlayerOne();
         } else {
             player = game.getPlayerTwo();
         }
-        jumlah_deck.setText(player.getDeck().size() + "/40");
+        jumlah_deck.setText(player.getDeck().size() + "/" + player.getDeckCapacity());
     }
 
     // -------------------------------------------------------------------------------------
     // Fungsi untuk bind jumlah mana
 
     public void resetPlayerMana(ActionEvent event){
+        event.consume();
+
         Player player;
         if (game.getPlayerIndex() == 0) {
             player = game.getPlayerOne();
@@ -774,7 +792,7 @@ public class FXMLController
     @FXML
     Label jumlah_mana;
 
-    public void setJumlahMana(ActionEvent event){
+    public void setJumlahMana(){
         Player player;
         if (game.getPlayerIndex() == 0) {
             player = game.getPlayerOne();

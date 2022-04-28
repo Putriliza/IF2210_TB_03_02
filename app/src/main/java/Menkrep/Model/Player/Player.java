@@ -2,16 +2,11 @@ package Menkrep.Model.Player;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 import Menkrep.Model.Enum.DrawStatus;
 import Menkrep.Model.Kartu.Kartu;
 import Menkrep.Model.Kartu.KartuKarakter;
-import Menkrep.Model.Kartu.KartuSpellLvl;
-import Menkrep.Model.Kartu.KartuSpellMorph;
-import Menkrep.Model.Kartu.KartuSpellPotion;
-import Menkrep.Model.Kartu.KartuSpellSwap;
 import Menkrep.Model.Reference.Reference;
 
 public class Player {
@@ -19,6 +14,7 @@ public class Player {
     private String name;
     private int healthPoints;
     private int mana;
+    private int deckCapacity;
     private ArrayList<Kartu> deck;
     private ArrayList<Kartu> hand;
     private ArrayList<Kartu> draw;
@@ -30,50 +26,36 @@ public class Player {
         this.healthPoints = 80;
         this.mana = 1;
 
+        // kapasitas deck random antara 40 dan 60
+        Random rand = new Random();
+        this.deckCapacity = 40 + rand.nextInt(21);
+
         // Inisialisasi kartu di deck
         this.deck = new ArrayList<Kartu>();
     
         Reference ref = Reference.getInstance();
-        for (String[] karakter : ref.getKarakter()) {
-            this.deck.add(new KartuKarakter(ref.getKarakter(), karakter[1]));
-        }
-        for (String[] morph : ref.getMorph()) {
-            this.deck.add(new KartuSpellMorph(morph[1], morph[2], Integer.parseInt(morph[5]), morph[3]));
-        }
-
-        for (String[] potion : ref.getPtn()) {
-            this.deck.add(new KartuSpellPotion(ref.getPtn(), potion[1]));
+        ArrayList<Kartu> referenceDeck = ref.getReferenceDeck();
+        for (int i = 0; i < this.deckCapacity; i++) {
+            int idx = rand.nextInt(referenceDeck.size());
+            this.deck.add(referenceDeck.get(idx));
         }
 
-        for (String[] swap: ref.getSwap()) {
-            this.deck.add(new KartuSpellSwap(ref.getSwap(), swap[1]));
+        for (int i = 0; i < this.deck.size(); i++) {
+            System.out.println(i + " " + deck.get(i).getNama());
         }
-
-        for (String[] lvl : ref.getLvl()) {
-            this.deck.add(new KartuSpellLvl(ref.getLvl(), lvl[1]));
-        }
-
-        Collections.shuffle(this.deck);
 
         // Inisiasi kartu di hand
         this.hand = new ArrayList<Kartu>();
-    
+
+        // player mengambil 3 kartu teratas
         for (int i = 0; i < 3; i++) {
             this.hand.add(this.deck.remove(0));
         }
 
-        // player mengambil 3 kartu teratas
         this.board = new ArrayList<KartuKarakter>();
-        for (int i = 0; i < 3; i++) {
-            if (this.deck.get(i) instanceof KartuKarakter) {
-                this.board.add((KartuKarakter) this.deck.remove(i));
-            }
-        }
 
-        if (this.board.size() < 5){
-            for (int index = this.board.size(); index < 5; index++) {
-                this.board.add(new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-", 0));
-            }
+        for (int index = this.board.size(); index < 5; index++) {
+            this.board.add(new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-", 0));
         }
     }
     
@@ -129,8 +111,11 @@ public class Player {
         return deck;
     }
 
+    public int getDeckCapacity() {
+        return deckCapacity;
+    }
+
     // Ambil kartu dari deck dan tambahkan ke hand
-    // NOTES: Mungkin nanti si ambil kartu ini bisa di return boolean kayaknya? biar tau kapan dah ga bisa ambil kartu lagi
     public DrawStatus generateDrawCard() {
         draw = new ArrayList<>();
         int deckSize = deck.size();
@@ -167,7 +152,6 @@ public class Player {
         if (hand.size() < 5) {
             hand.add(pick);
         }
-
     }
 
 

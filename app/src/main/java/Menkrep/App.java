@@ -25,12 +25,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GUI/scene.fxml"));
-        FXMLLoader drawLoader = new FXMLLoader(getClass().getResource("GUI/draw-page.fxml"));
         Parent mainXML = mainLoader.load();
-        Parent drawXML = drawLoader.load();
         Scene mainScene = new Scene(mainXML);
-        Scene drawScene = new Scene(drawXML);
-
 
         stage.setTitle("Menkrep");
         stage.setScene(mainScene);

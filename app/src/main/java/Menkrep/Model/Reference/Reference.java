@@ -1,10 +1,10 @@
 package Menkrep.Model.Reference;
 
+import Menkrep.Model.Kartu.*;
 import Menkrep.Util.CSVReader;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +21,7 @@ public class Reference {
     private final List<String[]> ptn;
     private final List<String[]> swap;
     private final List<String[]> lvl;
+    private ArrayList<Kartu> referenceDeck;
 
     public static Reference getInstance(){
         if(refInstance == null){
@@ -63,6 +64,22 @@ public class Reference {
         lvlReader.setSkipHeader(true);
         this.lvl = lvlReader.read();
 
+        this.referenceDeck = new ArrayList<>();
+        for (String[] karakter : karakter) {
+            this.referenceDeck.add(new KartuKarakter(getKarakter(), karakter[1]));
+        }
+        for (String[] morph : morph) {
+            this.referenceDeck.add(new KartuSpellMorph(morph[1], morph[2], Integer.parseInt(morph[5]), morph[3]));
+        }
+        for (String[] potion : ptn) {
+            this.referenceDeck.add(new KartuSpellPotion(getPtn(), potion[1]));
+        }
+        for (String[] swap: swap) {
+            this.referenceDeck.add(new KartuSpellSwap(getSwap(), swap[1]));
+        }
+        for (String[] lvl : lvl) {
+            this.referenceDeck.add(new KartuSpellLvl(getLvl(), lvl[1]));
+        }
     }
 
     public List<String[]> getKarakter() {
@@ -83,5 +100,9 @@ public class Reference {
 
     public List<String[]> getLvl() {
         return lvl;
+    }
+
+    public ArrayList<Kartu> getReferenceDeck() {
+        return referenceDeck;
     }
 }
