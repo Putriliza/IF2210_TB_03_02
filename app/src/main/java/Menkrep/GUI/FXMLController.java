@@ -29,6 +29,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.nio.file.Path;
@@ -38,6 +39,8 @@ public class FXMLController
     Game game = Game.getInstance();
     private Kartu currentHandCard;
     private KartuKarakter currentBoardCard;
+    int idxLeft = -1;
+    int idxRight = -1;
 
     public void initialize() {
         String javaVersion = System.getProperty("java.version");
@@ -205,10 +208,12 @@ public class FXMLController
             button_end.setDisable(true);
             game.setHasDrawn(false);
             game.setRound(game.getRound() + 1);
+            resetPlayerMana(event);
         } else if (game.getPhase() == Phase.Plan){
             button_plan.setDisable(false);
             button_draw.setDisable(true);
         } else if (game.getPhase() == Phase.Attack){
+            resetBoardCardEffect();
             button_attack.setDisable(false);
             button_plan.setDisable(true);
         } else if (game.getPhase() == Phase.End){
@@ -220,6 +225,12 @@ public class FXMLController
         setBoardCard();
         setPlayerHealth(event);
         setJumlahDeck(event);
+        idxLeft=-1;
+        idxRight=-1;
+        currentHandCard=null;
+        currentBoardCard=null;
+        setJumlahMana(event);
+        game.resetBoardAttack();
     }
 
     // ----------------------------------------------------------------------------------------------------
@@ -288,9 +299,6 @@ public class FXMLController
     Text desc_kartu_hand_4;
     @FXML
     Text desc_kartu_hand_5;
-
-    @FXML
-    Label jumlah_deck;
 
     public void setHandCard(ActionEvent event){
         event.consume();
@@ -517,7 +525,7 @@ public class FXMLController
 
             heart.setText(Integer.toString(kartu.getHealth()));
             sword.setText(Integer.toString(kartu.getAttack()));
-            exp.setText("[" + Integer.toString(kartu.getExp()) + "/10] " + Integer.toString(kartu.getLevel()));
+            exp.setText((kartu.getExp()==0 ? "0" : Integer.toString(kartu.getExp())) +"/"+ kartu.getMaxExp() + " [" + kartu.getLevel()+ "]") ;
             String cwd = System.getProperty("user.dir"); 
             gambar_kartu_board.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + kartu.getImgPath()));
         }
@@ -550,6 +558,24 @@ public class FXMLController
             kartu_board.setStyle("-fx-border-color: blue;");
         } else {
             kartu_board.setStyle("-fx-border-color: black;");
+        }
+    }
+
+    public void resetBoardCardEffect(){
+        if (game.getPlayerIndex() == 0) {
+            System.out.println("HAHAAAAAAAAAAAAAAAAAAAAAAA PLAYER KIRI");
+            kartu_board_11.setStyle("-fx-border-color: black;");
+            kartu_board_12.setStyle("-fx-border-color: black;");
+            kartu_board_13.setStyle("-fx-border-color: black;");
+            kartu_board_14.setStyle("-fx-border-color: black;");
+            kartu_board_15.setStyle("-fx-border-color: black;");
+        } else {
+            System.out.println("HAHAAAAAAAAAAAAAAAAAAAAAAA PLAYER KANANNN");
+            kartu_board_21.setStyle("-fx-border-color: black;");
+            kartu_board_22.setStyle("-fx-border-color: black;");
+            kartu_board_23.setStyle("-fx-border-color: black;");
+            kartu_board_24.setStyle("-fx-border-color: black;");
+            kartu_board_25.setStyle("-fx-border-color: black;");
         }
     }
 
@@ -682,6 +708,9 @@ public class FXMLController
         String data = (String) node.getUserData();
         int idx = Integer.parseInt(data);
 
+        List<String> left = Arrays.asList("kartu_board_11", "kartu_board_12", "kartu_board_13", "kartu_board_14", "kartu_board_15");
+        List<String> right = Arrays.asList("kartu_board_21", "kartu_board_22", "kartu_board_23", "kartu_board_24", "kartu_board_25");
+
         if (game.getPhase() == Phase.Plan){
             if (this.currentHandCard == null) {
                 System.out.println("BELUM MENCET KARTU APAPUN WOI");
@@ -714,10 +743,51 @@ public class FXMLController
                     }
                 }
             }
+        } else if(game.getPhase() == Phase.Attack){
+            Player playerOne = game.getPlayerOne();
+            Player playerTwo = game.getPlayerTwo();
+            if(idxLeft==-1 && idxRight==-1){
+                if(game.getPlayerIndex()==0 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-") && !playerOne.getBoard().get(idx).getDoneAttack()){
+                    idxLeft = idx;
+                } else if(game.getPlayerIndex()==1 && right.contains(node.getId()) && !playerTwo.getBoard().get(idx).getNama().equals("-") && !playerTwo.getBoard().get(idx).getDoneAttack()){
+                    idxRight = idx;
+                } else{
+                    System.out.println("Error kartu");
+                }
+            } else{
+                if(game.getPlayerIndex()==0 && playerTwo.boardIsEmpty()){
+                    playerTwo.reduceHP(playerOne.getBoard().get(idxLeft).getAttack());
+                } else if(game.getPlayerIndex()==1 && playerOne.boardIsEmpty()){
+                    playerOne.reduceHP(playerTwo.getBoard().get(idxRight).getAttack());
+                } else{
+                    if(game.getPlayerIndex()==1 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-")){
+                        idxLeft = idx;
+                        playerTwo.getBoard().get(idxRight).alrAttack();
+                        game.attack(idxLeft, idxRight);
+                    } else if(game.getPlayerIndex()==0 && right.contains(node.getId()) && !playerTwo.getBoard().get(idx).getNama().equals("-")){
+                        idxRight = idx;
+                        playerOne.getBoard().get(idxLeft).alrAttack();
+                        game.attack(idxLeft, idxRight);
+                    } else{
+                        System.out.println("Salah kartu");
+                    }
+                }
+
+                idxLeft=-1;
+                idxRight=-1;
+
+                setBoardCard();
+            }
         }
     }
 
-    // PUNYA LIZAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    
+    // -------------------------------------------------------------------------------------
+    // Fungsi untuk bind jumlah deck
+
+    @FXML
+    Label jumlah_deck;
+
     public void setJumlahDeck(ActionEvent event){
         Player player;
         if (game.getPlayerIndex() == 0) {
@@ -728,4 +798,29 @@ public class FXMLController
         jumlah_deck.setText(player.getDeck().size() + "/40");
     }
 
+    // -------------------------------------------------------------------------------------
+    // Fungsi untuk bind jumlah mana
+
+    public void resetPlayerMana(ActionEvent event){
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+        player.setMana(game.getRound());
+    }
+
+    @FXML
+    Label jumlah_mana;
+
+    public void setJumlahMana(ActionEvent event){
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+        jumlah_mana.setText(player.getMana() + "/" + game.getRound());
+    }
 }

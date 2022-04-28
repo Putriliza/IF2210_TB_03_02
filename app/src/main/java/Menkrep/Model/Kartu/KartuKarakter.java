@@ -13,6 +13,7 @@ public class KartuKarakter extends Kartu {
     private int healthUp;
     private String imgPath;
     private ArrayList<KartuSpell> activeSpells;
+    private boolean doneAttack;
     // private List<String> karakter;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
@@ -27,6 +28,7 @@ public class KartuKarakter extends Kartu {
         this.healthUp = healthUp;
         this.imgPath = imgPath;
         this.activeSpells = new ArrayList<KartuSpell>();
+        this.doneAttack=false;
         super.setImgPath(imgPath);
         super.setMana(mana);
     }
@@ -45,10 +47,21 @@ public class KartuKarakter extends Kartu {
                 this.healthUp = Integer.parseInt(karakter[9]);
                 this.imgPath = karakter[7];
                 this.activeSpells = new ArrayList<KartuSpell>();
+                this.doneAttack=false;
                 super.setImgPath(karakter[4]);
                 super.setMana(Integer.parseInt(karakter[7]));
             }
         }
+    }
+
+    public void resetAttack(){
+        this.doneAttack=false;
+    }
+    public void alrAttack(){
+        this.doneAttack=true;
+    }
+    public boolean getDoneAttack(){
+        return this.doneAttack;
     }
 
     // Jenis
@@ -64,6 +77,8 @@ public class KartuKarakter extends Kartu {
     public int getExp() {
         return exp;
     }
+
+    public int getMaxExp(){return (level*2)-1;}
 
     public void setExp(int exp) {
         this.exp = exp;
@@ -145,7 +160,7 @@ public class KartuKarakter extends Kartu {
     // Naik Level
     public void naikLevel() {
         if (this.level > 0 && this.level <= 10) {
-            while (this.exp >= 2 * this.level - 1) {
+            while (this.exp >= (2 * this.level) - 1) {
                 this.exp -= 2 * this.level - 1;
                 this.level += 1;
                 this.health += this.healthUp;
@@ -171,31 +186,37 @@ public class KartuKarakter extends Kartu {
     }
 
     public void attack(KartuKarakter kartu) {
-        if (this.getTipe().equals("OVERWORLD")) {
-            if (kartu.getTipe().equals("END")) {
-                kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
-            } else if (kartu.getTipe().equals("NETHER")) {
-                kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
+        int newHealth = kartu.getHealth();
+        if (this.getJenis().equals("OVERWORLD")) {
+            if (kartu.getJenis().equals("END")) {
+                newHealth -= this.getAttack() * 2;
+            } else if (kartu.getJenis().equals("NETHER")) {
+                newHealth -= this.getAttack() / 2;
             } else {
-                kartu.setHealth(kartu.getHealth() - this.getAttack());
+                newHealth -= this.getAttack();
             }
-        } else if (this.getTipe().equals("NETHER")) {
-            if (kartu.getTipe().equals("OVERWORLD")) {
-                kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
-            } else if (kartu.getTipe().equals("END")) {
-                kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
+        } else if (this.getJenis().equals("NETHER")) {
+            if (kartu.getJenis().equals("OVERWORLD")) {
+                newHealth -= this.getAttack() * 2;
+            } else if (kartu.getJenis().equals("END")) {
+                newHealth -= this.getAttack() / 2;
             } else {
-                kartu.setHealth(kartu.getHealth() - this.getAttack());
+                newHealth -= this.getAttack();
             }
-        } else if (this.getTipe().equals("END")) {
-            if (kartu.getTipe().equals("NETHER")) {
-                kartu.setHealth(kartu.getHealth() - this.getAttack() * 2);
-            } else if (kartu.getTipe().equals("OVERWORLD")) {
-                kartu.setHealth(kartu.getHealth() - this.getAttack() / 2);
+        } else if (this.getJenis().equals("END")) {
+            if (kartu.getJenis().equals("NETHER")) {
+                newHealth -= this.getAttack() * 2;
+            } else if (kartu.getJenis().equals("OVERWORLD")) {
+                newHealth -= this.getAttack() / 2;
             } else {
-                kartu.setHealth(kartu.getHealth() - this.getAttack());
+                newHealth -= this.getAttack();
             }
         }
+
+        if(newHealth<0){
+            newHealth = 0;
+        }
+        kartu.setHealth(newHealth);
     }
 
     @Override
