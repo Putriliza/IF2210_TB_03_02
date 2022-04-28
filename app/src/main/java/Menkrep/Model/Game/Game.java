@@ -46,8 +46,8 @@ public class Game {
         return this.round;
     }
 
-    public void setRound(int round) {
-        this.round = round;
+    public void nextRound() {
+        this.round +=1;
     }
 
     public int getPlayerIndex(){
@@ -70,6 +70,7 @@ public class Game {
                 this.playerIndex=1;
             } else{
                 this.playerIndex=0;
+                nextRound();
             }
             this.phase = Phase.Draw;
         }

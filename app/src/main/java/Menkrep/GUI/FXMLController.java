@@ -107,7 +107,6 @@ public class FXMLController
             button_draw.setDisable(false);
             button_end.setDisable(true);
             game.setHasDrawn(false);
-            game.setRound(game.getRound() + 1);
             resetPlayerMana(event);
         } else if (game.getPhase() == Phase.Plan){
             button_draw.setStyle("-fx-text-fill: black");
