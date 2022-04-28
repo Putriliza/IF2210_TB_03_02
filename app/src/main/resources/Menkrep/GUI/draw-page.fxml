@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="drawPane" prefHeight="628.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Menkrep.GUI.FXMLController">
+<AnchorPane fx:id="drawPane" prefHeight="609.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Menkrep.GUI.DrawPageController">
    <children>
       <Label layoutX="327.0" layoutY="14.0" text="Draw Phase">
          <font>
@@ -56,7 +56,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Button fx:id="draw_confirm_button" disable="true" layoutX="400.0" layoutY="589.0" mnemonicParsing="false" onAction="#switchToMainPage" prefHeight="25.0" prefWidth="101.0" text="Confirm" />
+      <Button fx:id="draw_confirm_button" disable="true" layoutX="400.0" layoutY="564.0" mnemonicParsing="false" onAction="#switchToMainPage" prefHeight="25.0" prefWidth="101.0" text="Confirm" />
       <Pane id="3" fx:id="card3" layoutX="630.0" layoutY="129.0" onMouseClicked="#drawCardOnClick" prefHeight="400.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
             <Label fx:id="card3_mana" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="298.0" prefHeight="27.0" prefWidth="132.0" textAlignment="CENTER">
@@ -75,6 +75,5 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Button fx:id="shuffle_button" layoutX="422.0" layoutY="547.0" mnemonicParsing="false" onAction="#updateDrawPage" text="Shuffle!" />
    </children>
 </AnchorPane>

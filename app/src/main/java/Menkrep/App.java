@@ -3,6 +3,8 @@
  */
 package Menkrep;
 
+import Menkrep.GUI.DrawPageController;
+import Menkrep.GUI.FXMLController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,31 +22,18 @@ public class App extends Application {
         return "Hello world";
     }
 
-//    public void start(Stage stage) {
-//        Text text = new Text();
-//        text.setText("Loading...");
-//        text.setX(50);
-//        text.setY(50);
-//
-//        Group root = new Group();
-//        root.getChildren().add(text);
-//
-//        Scene scene = new Scene(root, 1280, 720);
-//
-//        stage.setTitle("Menkrep");
-//        stage.setScene(scene);
-//        stage.show();
-//
-//        text.setText("Menkrep card battle");
-//    }
-
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/scene.fxml"));
-        Scene scene = new Scene(root);
+        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GUI/scene.fxml"));
+        FXMLLoader drawLoader = new FXMLLoader(getClass().getResource("GUI/draw-page.fxml"));
+        Parent mainXML = mainLoader.load();
+        Parent drawXML = drawLoader.load();
+        Scene mainScene = new Scene(mainXML);
+        Scene drawScene = new Scene(drawXML);
+
 
         stage.setTitle("Menkrep");
-        stage.setScene(scene);
+        stage.setScene(mainScene);
         stage.show();
     }
 

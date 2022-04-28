@@ -22,10 +22,12 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -39,152 +41,50 @@ public class FXMLController
     Game game = Game.getInstance();
     private Kartu currentHandCard;
     private KartuKarakter currentBoardCard;
+    private Parent root;
+    private Stage stage;
+    private Scene mainScene;
+    private Scene drawScene;
     int idxLeft = -1;
     int idxRight = -1;
 
-    public void initialize() {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
+    public void initialize()  {
+        setBoardCard();
+        setHandCard();
     }
 
     // ----------------------------------------------------------------------------------------------------
     // Fungsi untuk mengambil kartu pada draw phase.
     // Untuk sementara masuk ke draw stage dengan klik tombol draw
-    @FXML private Button draw_confirm_button;
-    @FXML private Pane card1;
-    @FXML private ImageView card1_image;
-    @FXML private Label card1_mana;
-    @FXML private Label card1_atk_hp;
-    @FXML private Pane card2;
-    @FXML private ImageView card2_image;
-    @FXML private Label card2_mana;
-    @FXML private Label card2_atk_hp;
-    @FXML private Pane card3;
-    @FXML private ImageView card3_image;
-    @FXML private Label card3_mana;
-    @FXML private Label card3_atk_hp;
-    @FXML private Button shuffle_button;
-    private int draw_card_id;
-    private ArrayList<Kartu> draw;
+    @FXML private AnchorPane mainPane;
 
+    @FXML
     public void switchToDrawPage(ActionEvent event) throws IOException {
         event.consume();
 
-        if (!game.getHasDrawn()) {
-            Stage stage;
-            Parent root;
-            stage = (Stage) button_draw.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("draw-page.fxml"));
-            root = loader.load();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-        }
-    }
-
-    public void updateDrawPage(ActionEvent event) {
-        event.consume();
-
-        if (game.getPlayerIndex() == 0) {
-            DrawStatus status = game.getPlayerOne().generateDrawCard();
-            if (status == DrawStatus.Success) {
-                draw = game.getPlayerOne().getDrawCard();
-            } else {
-                // Deck empty
-                draw = new ArrayList<>();
-            }
-        } else {
-            DrawStatus status = game.getPlayerTwo().generateDrawCard();
-            if (status == DrawStatus.Success) {
-                draw = game.getPlayerTwo().getDrawCard();
-            } else {
-                // Deck empty
-                draw = new ArrayList<>();
-            }
-        }
-        String cwd = System.getProperty("user.dir");
-        String dir = cwd + "/src/main/resources/Menkrep/";
-        if (draw.size() >= 1) {
-            card2_image.setImage(new Image(dir + draw.get(0).getImgPath()));
-            card2_mana.setText(String.format("MANA %d", draw.get(0).getMana()));
-            if (draw.get(0) instanceof KartuKarakter) {
-                KartuKarakter kartu = (KartuKarakter) draw.get(0);
-                card2_atk_hp.setText("ATK " + kartu.getAttack() + "/HP " + kartu.getHealth());
-            } else {
-                KartuSpell kartu = (KartuSpell) draw.get(0);
-                card2_atk_hp.setText(kartu.getTipe());
-            }
-        }
-        if (draw.size() >= 2) {
-            card1_image.setImage(new Image(dir + draw.get(1).getImgPath()));
-            card1_mana.setText("MANA " + draw.get(1).getMana());
-            if (draw.get(1) instanceof KartuKarakter) {
-                KartuKarakter kartu = (KartuKarakter) draw.get(1);
-                card1_atk_hp.setText("ATK " + kartu.getAttack() + "/HP " + kartu.getHealth());
-            } else {
-                KartuSpell kartu = (KartuSpell) draw.get(1);
-                card1_atk_hp.setText(kartu.getTipe());
-            }
-        }
-        if (draw.size() == 3) {
-            card3_image.setImage(new Image(dir + draw.get(2).getImgPath()));
-            card3_mana.setText("MANA " + draw.get(2).getMana());
-            if (draw.get(2) instanceof KartuKarakter) {
-                KartuKarakter kartu = (KartuKarakter) draw.get(2);
-                card3_atk_hp.setText("ATK " + kartu.getAttack() + "/HP " + kartu.getHealth());
-            } else {
-                KartuSpell kartu = (KartuSpell) draw.get(2);
-                card3_atk_hp.setText(kartu.getTipe());
-            }
-        }
-        shuffle_button.setDisable(true);
-    }
-
-    public void drawCardOnClick(MouseEvent event) {
-        event.consume();
-
-        if (shuffle_button.isDisable()) {
-            Pane card = (Pane) event.getSource();
-            setBorderColor(card1, "black");
-            setBorderColor(card2, "black");
-            setBorderColor(card3, "black");
-            draw_card_id = Integer.parseInt(card.getId());
-
-            if (draw_card_id == 2) {
-                setBorderColor(card1, "red");
-            } else if (draw_card_id == 1) {
-                setBorderColor(card2, "red");
-            } else if (draw_card_id == 3) {
-                setBorderColor(card3, "red");
-            }
-            draw_confirm_button.setDisable(false);
-        }
-    }
-
-    public void setBorderColor(Pane card, String color) {
-        card.setStyle("-fx-border-color: " + color);
-    }
-
-    public void switchToMainPage(ActionEvent event) throws IOException {
-        Stage stage;
-        Parent root;
-
-        event.consume();
-        game.setHasDrawn(true);
-        if (game.getPlayerIndex() == 0) {
-            game.getPlayerOne().pickDrawCard(draw_card_id-1);
-        } else if (game.getPlayerIndex() == 1) {
-            game.getPlayerTwo().pickDrawCard(draw_card_id-1);
-        }
-
-        stage = (Stage) draw_confirm_button.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("scene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("draw-page.fxml"));
         root = loader.load();
+        DrawPageController drawPageController = loader.getController();
 
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        Stage stage = new Stage();
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(mainPane.getScene().getWindow());
+        stage.setTitle("Draw Phase");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+
+        int drawIndex = drawPageController.getDrawCardId()-1;
+        if (drawIndex >= 0 && drawIndex < 3) {
+            game.setHasDrawn(true);
+            if (game.getPlayerIndex() == 0) {
+                game.getPlayerOne().pickDrawCard(drawIndex);
+            } else if (game.getPlayerIndex() == 1) {
+                game.getPlayerTwo().pickDrawCard(drawIndex);
+            }
+        }
+        button_draw.setStyle("-fx-text-fill: green");
+        setHandCard();
+        setBoardCard();
     }
 
     // ----------------------------------------------------------------------------------------------------
@@ -210,6 +110,7 @@ public class FXMLController
             game.setRound(game.getRound() + 1);
             resetPlayerMana(event);
         } else if (game.getPhase() == Phase.Plan){
+            button_draw.setStyle("-fx-text-fill: black");
             button_plan.setDisable(false);
             button_draw.setDisable(true);
         } else if (game.getPhase() == Phase.Attack){
@@ -221,7 +122,7 @@ public class FXMLController
             button_attack.setDisable(true);
         }
         setTurn(event);
-        setHandCard(event);
+        setHandCard();
         setBoardCard();
         setPlayerHealth(event);
         setJumlahDeck(event);
@@ -300,8 +201,7 @@ public class FXMLController
     @FXML
     Text desc_kartu_hand_5;
 
-    public void setHandCard(ActionEvent event){
-        event.consume();
+    public void setHandCard(){
 
         Player player;
         if (game.getPlayerIndex() == 0) {
@@ -726,7 +626,7 @@ public class FXMLController
                         this.currentHandCard = null;
                         player.setMana(player.getMana() - 1);
                         setBoardCard();
-                        setHandCard(event);
+                        setHandCard();
                     } else {
                         System.out.println("MANA HABISSS");
                     }
@@ -737,7 +637,7 @@ public class FXMLController
                         this.currentHandCard = null;
                         player.setMana(player.getMana() - 1);
                         setBoardCard();
-                        setHandCard(event);
+                        setHandCard();
                     } else {
                         System.out.println("MANA HABISSS");
                     }
