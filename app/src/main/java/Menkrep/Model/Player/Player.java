@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import Menkrep.Model.Enum.DrawStatus;
 import Menkrep.Model.Kartu.Kartu;
 import Menkrep.Model.Kartu.KartuKarakter;
 import Menkrep.Model.Kartu.KartuSpellLvl;
@@ -20,6 +21,7 @@ public class Player {
     private int mana;
     private ArrayList<Kartu> deck;
     private ArrayList<Kartu> hand;
+    private ArrayList<Kartu> draw;
     private ArrayList<KartuKarakter> board;
 
     // Konstruktor
@@ -56,12 +58,13 @@ public class Player {
         // Inisiasi kartu di hand
         this.hand = new ArrayList<Kartu>();
     
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             this.hand.add(this.deck.remove(0));
         }
 
+        // player mengambil 3 kartu teratas
         this.board = new ArrayList<KartuKarakter>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             if (this.deck.get(i) instanceof KartuKarakter) {
                 this.board.add((KartuKarakter) this.deck.remove(i));
             }
@@ -122,7 +125,7 @@ public class Player {
     // Ambil kartu dari deck dan tambahkan ke hand
     // NOTES: Mungkin nanti si ambil kartu ini bisa di return boolean kayaknya? biar tau kapan dah ga bisa ambil kartu lagi
     public void shuffleCard() {
-        // TO DO:
+        // TODO:
         // Cek apakah deck kosong
         int nDeck = this.deck.size();
         ArrayList <Kartu> randDeck = new ArrayList<Kartu>();
@@ -166,6 +169,47 @@ public class Player {
             System.out.println("Kartu di deck kosong....");
         }
     }
+
+    public DrawStatus generateDrawCard() {
+        Random rand = new Random();
+        draw = new ArrayList<>();
+        int deckSize = deck.size();
+
+        if (deckSize > 0) {
+            if (deckSize > 3) {
+                for (int i = 0; i < 3; i++) {
+                    int randomIndex = rand.nextInt(deckSize-1);
+                    draw.add(deck.remove(randomIndex));
+                }
+            } else {
+                draw.addAll(this.deck);
+                this.deck.clear();
+            }
+        } else {
+            return DrawStatus.DeckEmpty;
+        }
+        return DrawStatus.Success;
+    }
+
+    public ArrayList<Kartu> getDrawCard() {
+        return draw;
+    }
+
+    public void pickDrawCard(int index) {
+        Kartu pick = draw.remove(index);
+
+        while (draw.size() > 0) {
+            deck.add(draw.remove(0));
+        }
+
+        if (hand.size() < 5) {
+            hand.add(pick);
+        } else {
+            // TODO
+            // Kalo kartu sudah penuh
+        }
+    }
+
 
     public void descKartu() {
         // TO DO:

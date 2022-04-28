@@ -14,6 +14,7 @@ public class Game {
     private int playerIndex;
     private Phase phase;
     private Player[] players;
+    private boolean hasDrawn;
     // private ArrayList<Player> players;
 
     public static Game getInstance() {
@@ -24,6 +25,7 @@ public class Game {
         this.round = 1;
         this.playerIndex = 0;
         this.phase = Phase.Draw;
+        this.hasDrawn = false;
         this.players = new Player[2];
         try {
             Player playerOne = new Player("Steve");
@@ -79,5 +81,13 @@ public class Game {
 
     public Player getPlayerTwo(){
         return this.players[1];
+    }
+
+    public boolean getHasDrawn() {
+        return hasDrawn;
+    }
+
+    public void setHasDrawn(boolean hasDrawn) {
+        this.hasDrawn = hasDrawn;
     }
 }

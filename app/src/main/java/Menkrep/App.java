@@ -40,10 +40,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(getClass().getResource("scene.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("GUI/scene.fxml"));
-//        AnchorPane root = loader.load();
         Scene scene = new Scene(root);
 
         stage.setTitle("Menkrep");
