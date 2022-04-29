@@ -832,14 +832,16 @@ public class FXMLController
                 player.getBoard().get(idx).setHealth(player.getBoard().get(idx).getHealth() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
                 player.getBoard().get(idx).setAttack(player.getBoard().get(idx).getAttack() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
             } else {
-//                player.getBoard().get(idx).setAttackTemp(player.getBoard().get(idx).getAttackTemp() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
-//                player.getBoard().get(idx).setHealthTemp(player.getBoard().get(idx).getHealthTemp() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
+                ((KartuSpellPotion) this.currentHandCard).potion(player.getBoard().get(idx));
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
             }
+            if (player.getBoard().get(idx).getHealth() <= 0) {
+                player.removeBoardCardAtIndex(idx);
+            }
         } else if (kartu instanceof KartuSpellSwap && player.getMana() >= currentHandCard.getMana()) {
             ((KartuSpellSwap) this.currentHandCard).swap(player.getBoard().get(idx));
-            if (player.getBoard().get(idx).getHealth() == 0) {
+            if (player.getBoard().get(idx).getHealth() <= 0) {
                 player.removeBoardCardAtIndex(idx);
             }
         } else if (kartu instanceof KartuSpellMorph&& player.getMana()>=currentHandCard.getMana()) {

@@ -18,7 +18,7 @@ public class KartuKarakter extends Kartu {
 
     private ArrayList<Integer> healthTemp;
     private ArrayList<Integer> attackTemp;
-    private ArrayList<Integer> duration;
+    private ArrayList<Integer> duration = new ArrayList<>();
     private int swapDuration;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
