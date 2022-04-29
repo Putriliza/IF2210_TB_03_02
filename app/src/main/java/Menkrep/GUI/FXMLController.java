@@ -759,6 +759,7 @@ public class FXMLController
             } else{
                 if(game.getPlayerIndex()==0 && playerTwo.boardIsEmpty()){
                     playerTwo.reduceHP(playerOne.getBoard().get(idxLeft).getAttack());
+                    playerTwo.getBoard().get(idxRight).alrAttack();
                     bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
                     bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
                     if (playerTwo.getHealthPoints() <= 0) {
@@ -767,7 +768,7 @@ public class FXMLController
                     }
                 } else if(game.getPlayerIndex()==1 && playerOne.boardIsEmpty()){
                     playerOne.reduceHP(playerTwo.getBoard().get(idxRight).getAttack());
-
+                    playerOne.getBoard().get(idxLeft).alrAttack();
                     bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
                     bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
                     if (playerOne.getHealthPoints() <= 0) {
