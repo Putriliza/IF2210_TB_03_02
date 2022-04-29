@@ -60,4 +60,8 @@ public class Kartu {
     public void setMana(int mana){
         this.mana = mana;
     }
+
+    public String getDisplayString() {
+        return "";
+    }
 }

@@ -64,4 +64,9 @@ public class KartuSpellMorph extends KartuSpell {
     public String toString() {
         return "Mana=" + getMana();
     }
+
+    @Override
+    public String getDisplayString() {
+        return "MORPH";
+    }
 }
