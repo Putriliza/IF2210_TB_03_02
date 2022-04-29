@@ -855,8 +855,8 @@ public class FXMLController
                 if(kartu instanceof KartuSpellPotion) {
                     ((KartuSpellPotion) kartu).setDuration(((KartuSpellPotion) kartu).getDuration()-1);
                     if(((KartuSpellPotion) kartu).getDuration() == 0) {
-                        player.getBoard().get(i).setHealthTemp(0);
-                        player.getBoard().get(i).setAttackTemp(0);
+//                        player.getBoard().get(i).setHealthTemp(0);
+//                        player.getBoard().get(i).setAttackTemp(0);
                     }
                 }
                 System.out.println("Masukkk");
@@ -890,8 +890,8 @@ public class FXMLController
                 player.getBoard().get(idx).setHealth(player.getBoard().get(idx).getHealth() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
                 player.getBoard().get(idx).setAttack(player.getBoard().get(idx).getAttack() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
             } else {
-                player.getBoard().get(idx).setAttackTemp(player.getBoard().get(idx).getAttackTemp() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
-                player.getBoard().get(idx).setHealthTemp(player.getBoard().get(idx).getHealthTemp() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
+//                player.getBoard().get(idx).setAttackTemp(player.getBoard().get(idx).getAttackTemp() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
+//                player.getBoard().get(idx).setHealthTemp(player.getBoard().get(idx).getHealthTemp() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
             }

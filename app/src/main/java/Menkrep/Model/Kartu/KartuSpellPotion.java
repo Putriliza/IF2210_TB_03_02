@@ -80,6 +80,10 @@ public class KartuSpellPotion extends KartuSpell implements KartuSpellTemp{
         karakter.setAttack(newAttack);
         karakter.setHealth(newHealth);
 
+        karakter.getHealthTemp().add(this.healthModifier);
+        karakter.getAttackTemp().add(this.attackModifier);
+        karakter.getDuration().add(this.duration);
+
         // if duration is 0, potion hilang
         // if karakter.getHealth() = 0, karakter mati
     }
