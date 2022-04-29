@@ -1,9 +1,7 @@
 package Menkrep.Model.Kartu;
 
-import org.checkerframework.checker.units.qual.A;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class KartuKarakter extends Kartu {
     private String jenis; // OVERWORLD END NETHER
@@ -22,7 +20,7 @@ public class KartuKarakter extends Kartu {
     private int swapDuration;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
-            int attack, int attackUp, int healthUp, String imgPath, int mana) {
+                         int attack, int attackUp, int healthUp, String imgPath, int mana) {
         super(nama, deskripsi, "KARAKTER", mana, imgPath);
         this.jenis = jenis;
         this.exp = exp;
@@ -35,7 +33,6 @@ public class KartuKarakter extends Kartu {
         this.healthTemp = new ArrayList<>();
         this.attackTemp = new ArrayList<>();
         this.duration = new ArrayList<>();
-        this.doneAttack = false;
         this.doneAttack = false;
         this.swapDuration = 0;
         super.setImgPath(imgPath);
@@ -84,7 +81,7 @@ public class KartuKarakter extends Kartu {
     }
 
     public boolean reduceDuration() {
-        if(duration==null || duration.size()==0){
+        if (duration == null || duration.size() == 0) {
             return false;
         }
         for (int i = duration.size() - 1; i >= 0; i--) {
@@ -94,7 +91,7 @@ public class KartuKarakter extends Kartu {
                 duration.set(i, 0);
                 health -= healthTemp.get(i);
                 attack -= attackTemp.get(i);
-                if(health<=0){
+                if (health <= 0) {
                     return true;
                 }
             }
@@ -143,10 +140,7 @@ public class KartuKarakter extends Kartu {
     public boolean reduceSwapDuration() {
         if (swapDuration > 0) {
             swapDuration -= 1;
-            if(swapDuration==0){
-                return true;
-            }
-            return false;
+            return swapDuration == 0;
         } else {
             return false;
         }

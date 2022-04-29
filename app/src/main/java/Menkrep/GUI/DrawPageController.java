@@ -3,8 +3,6 @@ package Menkrep.GUI;
 import Menkrep.Model.Enum.DrawStatus;
 import Menkrep.Model.Game.Game;
 import Menkrep.Model.Kartu.Kartu;
-import Menkrep.Model.Kartu.KartuKarakter;
-import Menkrep.Model.Kartu.KartuSpellPotion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

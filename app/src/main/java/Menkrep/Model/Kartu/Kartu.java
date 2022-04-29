@@ -45,19 +45,19 @@ public class Kartu {
         this.tipe = tipe;
     }
 
-    public String getImgPath(){
+    public String getImgPath() {
         return imgPath;
     }
 
-    public void setImgPath(String imgPath){
+    public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }
 
-    public int getMana(){
+    public int getMana() {
         return mana;
     }
 
-    public void setMana(int mana){
+    public void setMana(int mana) {
         this.mana = mana;
     }
 

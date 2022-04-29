@@ -1,10 +1,9 @@
 package Menkrep.Model.Kartu;
 
 import java.util.List;
-import java.util.ArrayList;
 
 
-public class KartuSpellSwap extends KartuSpell implements KartuSpellTemp{
+public class KartuSpellSwap extends KartuSpell implements KartuSpellTemp {
     private int duration;
 
     public KartuSpellSwap() {
@@ -19,7 +18,7 @@ public class KartuSpellSwap extends KartuSpell implements KartuSpellTemp{
 
     public KartuSpellSwap(List<String[]> reference, String nama) {
         super(nama, "-", "SWAP", 0, "-");
-        for (String[] swap: reference) {
+        for (String[] swap : reference) {
             if (swap[1].equals(nama)) {
                 this.setDeskripsi(swap[2]);
                 this.setMana(Integer.parseInt(swap[5]));
@@ -58,7 +57,7 @@ public class KartuSpellSwap extends KartuSpell implements KartuSpellTemp{
         karakter.setHealth(attack);
         karakter.setAttack(health);
 
-        karakter.addSwapDuration(2*duration);
+        karakter.addSwapDuration(2 * duration);
     }
 
     @Override

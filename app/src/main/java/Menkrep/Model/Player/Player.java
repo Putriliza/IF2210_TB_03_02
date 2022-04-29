@@ -109,7 +109,7 @@ public class Player {
     public void reduceAllSwap() {
         for (int i = 0; i < 5; i++) {
             boolean needSwap = board.get(i).reduceSwapDuration();
-            if(needSwap){
+            if (needSwap) {
                 int health = board.get(i).getHealth();
                 board.get(i).setHealth(board.get(i).getAttack());
                 board.get(i).setAttack(health);
@@ -120,7 +120,7 @@ public class Player {
         }
     }
 
-    public void reduceAllDuration(){
+    public void reduceAllDuration() {
         for (int i = 0; i < 5; i++) {
             boolean needDelete = board.get(i).reduceDuration();
             if (needDelete) {
