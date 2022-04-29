@@ -25,10 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
+import javafx.stage.*;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -132,6 +129,15 @@ public class FXMLController
             button_delete.setDisable(false);
             game.setHasDrawn(false);
             resetPlayerMana(event);
+
+            if (game.getPlayerOne().getDeck().size() == 0 && game.getPlayerIndex() == 0) {
+                endGame(game.getPlayerTwo());
+                return;
+            }
+            if (game.getPlayerTwo().getDeck().size() == 0 && game.getPlayerIndex() == 1) {
+                endGame(game.getPlayerOne());
+                return;
+            }
         } else if (game.getPhase() == Phase.Plan){
             button_draw.setStyle("-fx-text-fill: black");
             button_plan.setDisable(false);
@@ -746,10 +752,19 @@ public class FXMLController
                     playerTwo.reduceHP(playerOne.getBoard().get(idxLeft).getAttack());
                     bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
                     bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
+                    if (playerTwo.getHealthPoints() <= 0) {
+                        // HP lawan nol
+                        endGame(playerOne);
+                    }
                 } else if(game.getPlayerIndex()==1 && playerOne.boardIsEmpty()){
                     playerOne.reduceHP(playerTwo.getBoard().get(idxRight).getAttack());
+
                     bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
                     bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
+                    if (playerOne.getHealthPoints() <= 0) {
+                        // HP lawan nol
+                        endGame(playerTwo);
+                    }
                 } else{
                     if(game.getPlayerIndex()==1 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-")){
                         idxLeft = idx;
@@ -822,5 +837,32 @@ public class FXMLController
         if((game.getPlayerIndex()==0 && game.getPlayerOne().getMana()>0) || (game.getPlayerIndex()==1 && game.getPlayerTwo().getMana()>0)){
             currAction = CAction.UpMana;
         }
+    }
+
+    // -------------------------------------------------------------------------------------
+    // Kondisi akhir game
+    public void endGame(Player player) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("end-scene.fxml"));
+            root = loader.load();
+            EndSceneController endSceneController = loader.getController();
+
+            endSceneController.setPlayer(player);
+
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(mainPane.getScene().getWindow());
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("Game Finished");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            Window mainStage = mainPane.getScene().getWindow();
+            mainStage.hide();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

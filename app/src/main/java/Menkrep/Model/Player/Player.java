@@ -23,7 +23,7 @@ public class Player implements Attackable {
     // Konstruktor
     public Player(String name) throws IOException {
         this.name = name;
-        this.healthPoints = 80;
+        this.healthPoints = 10;
         this.mana = 1;
 
         // kapasitas deck random antara 40 dan 60
@@ -38,10 +38,6 @@ public class Player implements Attackable {
         for (int i = 0; i < this.deckCapacity; i++) {
             int idx = rand.nextInt(referenceDeck.size());
             this.deck.add(referenceDeck.get(idx));
-        }
-
-        for (int i = 0; i < this.deck.size(); i++) {
-            System.out.println(i + " " + deck.get(i).getNama());
         }
 
         // Inisiasi kartu di hand
@@ -145,8 +141,11 @@ public class Player implements Attackable {
         while (draw.size() > 0) {
             // Mengembalikan kartu secara acak
             Random rand = new Random();
-            deck.add(rand.nextInt(deck.size()), draw.remove(0));
-            deck.add(draw.remove(0));
+            if (deck.size() > 0) {
+                deck.add(rand.nextInt(deck.size()), draw.remove(0));
+            } else {
+                deck.add(draw.remove(0));
+            }
         }
 
         if (hand.size() < 5) {

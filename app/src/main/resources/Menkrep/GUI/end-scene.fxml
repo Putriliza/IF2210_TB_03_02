@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Menkrep.GUI.EndSceneController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="22.0" prefHeight="70.0" prefWidth="341.0" text="Game Finished" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <StackPane layoutX="201.0" layoutY="92.0" prefHeight="127.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="winningPlayerImage" fitHeight="86.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="231.0" prefHeight="35.0" prefWidth="208.0" text="Congratulations!">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="playerNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="242.0" layoutY="266.0" prefHeight="17.0" prefWidth="119.0" text="Player" textAlignment="CENTER">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="165.0" layoutY="319.0" prefHeight="27.0" prefWidth="273.0" text="You've won the game">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="closeButton" layoutX="271.0" layoutY="361.0" mnemonicParsing="false" onAction="#onCloseButtonClicked" prefHeight="25.0" prefWidth="59.0" text="Close" />
+   </children>
+</AnchorPane>
