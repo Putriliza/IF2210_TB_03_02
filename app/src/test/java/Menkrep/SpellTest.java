@@ -44,8 +44,6 @@ public class SpellTest {
         assertEquals(1, karakterTest1.getMana());
         assertEquals(0, karakterTest1.getExp());            // reset exp jadi 0
         assertEquals(1, karakterTest1.getLevel());          // reset level jadi 1
-        assertEquals(0, karakterTest1.getAttackTemp());
-        assertEquals(0, karakterTest1.getHealthTemp());
         assertEquals(0, karakterTest1.getAttackUp());
         assertEquals(0, karakterTest1.getHealthUp());
         assertEquals(new ArrayList<KartuSpell>(), karakterTest1.getActiveSpells());
