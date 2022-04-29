@@ -133,9 +133,13 @@ public class KartuKarakter extends Kartu {
         swapDuration += newDur;
     }
 
-    public void reduceSwapDuration() {
+    public boolean reduceSwapDuration() {
         if (swapDuration > 0) {
             swapDuration -= 1;
+            if(swapDuration==0){
+                return true;
+            }
+            return false;
         }
     }
 

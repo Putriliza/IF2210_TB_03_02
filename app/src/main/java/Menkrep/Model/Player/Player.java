@@ -108,8 +108,8 @@ public class Player implements Attackable {
 
     public void reduceAllSwap() {
         for (int i = 0; i < 5; i++) {
-            board.get(i).reduceSwapDuration();
-            if(board.get(i).getSwapDuration()==0){
+            boolean needSwap = board.get(i).reduceSwapDuration();
+            if(needSwap){
                 int health = board.get(i).getHealth();
                 board.get(i).setHealth(board.get(i).getAttack());
                 board.get(i).setAttack(health);
