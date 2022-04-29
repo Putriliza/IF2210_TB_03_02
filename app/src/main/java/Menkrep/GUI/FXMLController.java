@@ -123,11 +123,11 @@ public class FXMLController
 
     @FXML
     public void cekGiliranActiveSpell() {
-        if(!giliranMain) {
-            giliranMain = true;
-        } else if (giliranMain) {
+        if(!this.giliranMain) {
+            this.giliranMain = true;
+        } else if (this.giliranMain) {
             checkActive();
-            giliranMain = false;
+            this.giliranMain = false;
         }
     }
     @FXML
@@ -139,7 +139,6 @@ public class FXMLController
             button_end.setDisable(true);
             button_delete.setDisable(false);
             game.setHasDrawn(false);
-            cekGiliranActiveSpell();
             if (game.getPlayerOne().getDeck().size() == 0 && game.getPlayerIndex() == 0) {
                 endGame(game.getPlayerTwo());
                 return;
@@ -165,6 +164,7 @@ public class FXMLController
         } else if (game.getPhase() == Phase.End){
             button_end.setDisable(false);
             button_attack.setDisable(true);
+            cekGiliranActiveSpell();
         }
         setTurn(event);
         setHandCard();
@@ -858,11 +858,8 @@ public class FXMLController
                         player.getBoard().get(i).setHealthTemp(0);
                         player.getBoard().get(i).setAttackTemp(0);
                     }
-                }
-                System.out.println("Masukkk");
-                if (kartu instanceof KartuSpellSwap) {
+                } else if (kartu instanceof KartuSpellSwap) {
                     ((KartuSpellSwap) kartu).setDuration(((KartuSpellSwap) kartu).getDuration() - 1);
-                    System.out.println(((KartuSpellSwap) kartu).getDuration());
                     if(((KartuSpellSwap) kartu).getDuration() == 0) {
                         player.getBoard().get(i).getActiveSpells().remove(kartu);
                         int health_temp = player.getBoard().get(i).getHealth();
