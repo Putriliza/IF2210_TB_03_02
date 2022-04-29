@@ -719,7 +719,6 @@ public class FXMLController
                             player.getBoard().set(idx, (KartuKarakter) this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
                             player.setMana(player.getMana() - this.currentHandCard.getMana());
-                            this.currentHandCard = null;
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -728,7 +727,6 @@ public class FXMLController
                             player.getBoard().get(idx).addSpell((KartuSpell) this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
                             player.setMana(player.getMana() - this.currentHandCard.getMana());
-                            this.currentHandCard = null;
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -782,6 +780,7 @@ public class FXMLController
                 idxRight=-1;
             }
         }
+        this.currentHandCard = null;
         setJumlahMana();
         setBoardCard();
         setHandCard();
