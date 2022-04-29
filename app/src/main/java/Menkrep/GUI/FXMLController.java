@@ -600,9 +600,9 @@ public class FXMLController
 
         if (game.getPhase() == Phase.Plan){
             // Cek apakah kartu card valid
-            if (idx < player.getHandCard().size()){
-                // Apabila kartu karakter
+            if (idx < player.getHandCard().size() && player.getMana() >= player.getHandCard().get(idx).getMana()){
                 currentHandCard = player.getHandCard().get(idx);
+                // Apabila kartu karakter
                 if (currentHandCard instanceof KartuKarakter){
                     if (game.getPlayerIndex() == 0) {
                         setBoardCardEffect(player.getBoard().get(0).getNama().equals("-"), kartu_board_11);
