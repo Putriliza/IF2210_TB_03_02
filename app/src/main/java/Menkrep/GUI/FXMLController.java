@@ -840,7 +840,7 @@ public class FXMLController
         }
         if (this.currentHandCard instanceof KartuSpellLvl && player.getMana()>=(int)Math.ceil(player.getBoard().get(idx).getLevel()/2.0)) {
             ((KartuSpellLvl) this.currentHandCard).lvl(player.getBoard().get(idx));
-        } else if (kartu instanceof KartuSpellPotion) {
+        } else if (kartu instanceof KartuSpellPotion && player.getMana()>=currentHandCard.getMana()) {
             if (((KartuSpellPotion) this.currentHandCard).getDuration() == 0) {
                 player.getBoard().get(idx).setHealth(player.getBoard().get(idx).getHealth() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
                 player.getBoard().get(idx).setAttack(player.getBoard().get(idx).getAttack() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
@@ -855,7 +855,7 @@ public class FXMLController
             if (player.getBoard().get(idx).getHealth() == 0) {
                 player.removeBoardCardAtIndex(idx);
             }
-        } else if (kartu instanceof KartuSpellMorph) {
+        } else if (kartu instanceof KartuSpellMorph&& player.getMana()>=currentHandCard.getMana()) {
             int id = ((KartuSpellMorph) this.currentHandCard).getTargetId();
             Reference ref = Reference.getInstance();
             String target_name = ref.getKarakter().get(id-1)[1];
