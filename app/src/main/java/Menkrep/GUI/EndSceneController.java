@@ -10,11 +10,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class EndSceneController {
-    @FXML Label playerNameLabel;
-    @FXML ImageView winningPlayerImage;
-    @FXML Button closeButton;
+    @FXML
+    Label playerNameLabel;
+    @FXML
+    ImageView winningPlayerImage;
+    @FXML
+    Button closeButton;
 
-    public void initialize() { }
+    public void initialize() {
+    }
 
     public void setPlayer(Player player) {
         this.playerNameLabel.setText(player.getName());
@@ -30,6 +34,6 @@ public class EndSceneController {
     public void onCloseButtonClicked(ActionEvent event) {
         event.consume();
 
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 }

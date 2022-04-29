@@ -2,7 +2,9 @@ package Menkrep.GUI;
 
 import Menkrep.Model.Enum.DrawStatus;
 import Menkrep.Model.Game.Game;
-import Menkrep.Model.Kartu.*;
+import Menkrep.Model.Kartu.Kartu;
+import Menkrep.Model.Kartu.KartuKarakter;
+import Menkrep.Model.Kartu.KartuSpellPotion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -21,18 +23,30 @@ public class DrawPageController {
 
     @FXML
     private Button draw_confirm_button;
-    @FXML private Pane card1;
-    @FXML private ImageView card1_image;
-    @FXML private Label card1_mana;
-    @FXML private Label card1_atk_hp;
-    @FXML private Pane card2;
-    @FXML private ImageView card2_image;
-    @FXML private Label card2_mana;
-    @FXML private Label card2_atk_hp;
-    @FXML private Pane card3;
-    @FXML private ImageView card3_image;
-    @FXML private Label card3_mana;
-    @FXML private Label card3_atk_hp;
+    @FXML
+    private Pane card1;
+    @FXML
+    private ImageView card1_image;
+    @FXML
+    private Label card1_mana;
+    @FXML
+    private Label card1_atk_hp;
+    @FXML
+    private Pane card2;
+    @FXML
+    private ImageView card2_image;
+    @FXML
+    private Label card2_mana;
+    @FXML
+    private Label card2_atk_hp;
+    @FXML
+    private Pane card3;
+    @FXML
+    private ImageView card3_image;
+    @FXML
+    private Label card3_mana;
+    @FXML
+    private Label card3_atk_hp;
     private int drawCardId;
     private ArrayList<Kartu> draw;
 
@@ -109,7 +123,7 @@ public class DrawPageController {
             setBorderColor(card2, "red");
         } else if (drawCardId == 3) {
             setBorderColor(card3, "red");
-       }
+        }
         draw_confirm_button.setDisable(false);
     }
 
@@ -120,7 +134,7 @@ public class DrawPageController {
     public void switchToMainPage(ActionEvent event) throws IOException {
         event.consume();
 
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     public int getDrawCardId() {
