@@ -327,13 +327,10 @@ public class KartuKarakter extends Kartu {
                 "\nAttackUp=" + attackUp +
                 "\nHealthUp=" + healthUp;
     }
-<<<<<<< HEAD
-=======
 
     @Override
     public String getDisplayString() {
         return String.format("ATK %d/HP %d", this.attack, this.health);
     }
 
->>>>>>> 40884a9c1f7c5083131378dd660948e5b9ba8f72
 }
