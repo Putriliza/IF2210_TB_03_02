@@ -83,7 +83,10 @@ public class KartuKarakter extends Kartu {
 
     }
 
-    public void reduceDuration() {
+    public boolean reduceDuration() {
+        if(duration==null || duration.size()==0){
+            return false;
+        }
         for (int i = duration.size() - 1; i >= 0; i--) {
             if (duration.get(i) > 1) {
                 duration.set(i, duration.get(i) - 1);
@@ -91,8 +94,12 @@ public class KartuKarakter extends Kartu {
                 duration.set(i, 0);
                 health -= healthTemp.get(i);
                 attack -= attackTemp.get(i);
+                if(health<=0){
+                    return true;
+                }
             }
         }
+        return false;
     }
 
     public ArrayList<Integer> getHealthTemp() {

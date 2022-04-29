@@ -122,8 +122,8 @@ public class Player implements Attackable {
 
     public void reduceAllDuration(){
         for (int i = 0; i < 5; i++) {
-            board.get(i).reduceDuration();
-            if (board.get(i).getHealth() <= 0) {
+            boolean needDelete = board.get(i).reduceDuration();
+            if (needDelete) {
                 removeBoardCardAtIndex(i);
             }
         }
