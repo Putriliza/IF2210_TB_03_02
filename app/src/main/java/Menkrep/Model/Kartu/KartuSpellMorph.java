@@ -4,13 +4,16 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class KartuSpellMorph extends KartuSpell {
+    private int targetId;
 
     public KartuSpellMorph() {
         super("-", "-", "MORPH", 0, "-");
+        targetId = -1;
     }
 
-    public KartuSpellMorph(String nama, String deskripsi, int mana, String imgPath) {
+    public KartuSpellMorph(String nama, String deskripsi, int mana, String imgPath, int targetId) {
         super(nama, deskripsi, "MORPH", mana, imgPath);
+        this.targetId = targetId;
     }
 
     public KartuSpellMorph(List<String[]> reference, String nama) {
@@ -20,6 +23,7 @@ public class KartuSpellMorph extends KartuSpell {
                 this.setDeskripsi(morph[2]);
                 this.setMana(Integer.parseInt(morph[5]));
                 this.setImgPath(morph[3]);
+                this.targetId = Integer.parseInt(morph[4]);
             }
         }
     }
