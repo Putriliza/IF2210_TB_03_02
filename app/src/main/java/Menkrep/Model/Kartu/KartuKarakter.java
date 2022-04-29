@@ -95,7 +95,9 @@ public class KartuKarakter extends Kartu {
         return exp;
     }
 
-    public int getMaxExp(){return (level*2)-1;}
+    public int getMaxExp() {
+        return (level*2)-1;
+    }
 
     public void setExp(int exp) {
         this.exp = exp;
@@ -138,7 +140,7 @@ public class KartuKarakter extends Kartu {
     }
 
     public void setAttackUp(int attackUp) {
-//        this.attackUp = this.getAttack() + ((this.getLevel() - 1) * attackUp);
+        // this.attackUp = this.getAttack() + ((this.getLevel() - 1) * attackUp);
         this.attackUp = attackUp;
     }
 
@@ -148,7 +150,7 @@ public class KartuKarakter extends Kartu {
     }
 
     public void setHealthUp(int healthUp) {
-//        this.healthUp = this.getHealth() + ((this.getLevel() - 1) * healthUp);
+        // this.healthUp = this.getHealth() + ((this.getLevel() - 1) * healthUp);
         this.healthUp = healthUp;
     }
 
@@ -249,5 +251,4 @@ public class KartuKarakter extends Kartu {
                 "\nAttackUp=" + attackUp +
                 "\nHealthUp=" + healthUp;
     }
-
 }
