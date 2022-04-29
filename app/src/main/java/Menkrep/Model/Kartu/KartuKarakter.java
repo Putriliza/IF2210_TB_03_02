@@ -64,11 +64,6 @@ public class KartuKarakter extends Kartu {
     }
 
     public void addSwapDuration(int newDur){
-        if(swapDuration==0){
-            int temp = health;
-            attack = health;
-            health = temp;
-        }
         swapDuration += newDur;
     }
 

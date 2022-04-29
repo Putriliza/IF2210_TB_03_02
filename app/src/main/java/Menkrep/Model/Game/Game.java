@@ -76,6 +76,8 @@ public class Game {
         }
         players[0].setMana(getManaCap());
         players[1].setMana(getManaCap());
+        players[0].reduceAllSwap();
+        players[0].reduceAllSwap();
     }
 
     public Player getPlayerOne(){

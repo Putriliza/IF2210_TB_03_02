@@ -895,7 +895,7 @@ public class FXMLController
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
             }
-        } else if (kartu instanceof KartuSpellSwap) {
+        } else if (kartu instanceof KartuSpellSwap && player.getMana() >= currentHandCard.getMana()) {
             ((KartuSpellSwap) this.currentHandCard).swap(player.getBoard().get(idx));
             if (player.getBoard().get(idx).getHealth() == 0) {
                 player.removeBoardCardAtIndex(idx);
