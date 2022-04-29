@@ -118,18 +118,7 @@ public class FXMLController
     private Button button_attack;
     @FXML
     private Button button_end;
-    @FXML
-    private boolean giliranMain = false;
 
-    @FXML
-    public void cekGiliranActiveSpell() {
-        if(!this.giliranMain) {
-            this.giliranMain = true;
-        } else if (this.giliranMain) {
-            checkActive();
-            this.giliranMain = false;
-        }
-    }
     @FXML
     public void nextPhase(ActionEvent event){
         event.consume();
@@ -164,7 +153,6 @@ public class FXMLController
         } else if (game.getPhase() == Phase.End){
             button_end.setDisable(false);
             button_attack.setDisable(true);
-            cekGiliranActiveSpell();
         }
         setTurn(event);
         setHandCard();
@@ -842,36 +830,6 @@ public class FXMLController
 
     // Fungsi untuk aplikasi spell
 
-    public void checkActive(int idx) {
-        Player player;
-        if (idx == 0) {
-            player = game.getPlayerOne();
-        } else {
-            player = game.getPlayerTwo();
-        }
-        System.out.println("Utama");
-        for(int i = 0; i < 5; i++) {
-            for(KartuSpell kartu: player.getBoard().get(i).getActiveSpells()) {
-                if(kartu instanceof KartuSpellPotion) {
-                    ((KartuSpellPotion) kartu).setDuration(((KartuSpellPotion) kartu).getDuration()-1);
-                    if(((KartuSpellPotion) kartu).getDuration() == 0) {
-                        player.getBoard().get(i).setHealthTemp(0);
-                        player.getBoard().get(i).setAttackTemp(0);
-                    }
-                } else if (kartu instanceof KartuSpellSwap) {
-                    ((KartuSpellSwap) kartu).setDuration(((KartuSpellSwap) kartu).getDuration() - 1);
-                    if(((KartuSpellSwap) kartu).getDuration() == 0) {
-                        player.getBoard().get(i).getActiveSpells().remove(kartu);
-                        int health_temp = player.getBoard().get(i).getHealth();
-                        int attack_temp = player.getBoard().get(i).getAttack();
-
-                        player.getBoard().get(i).setHealth(attack_temp);
-                        player.getBoard().get(i).setAttack(health_temp);
-                    }
-                }
-            }
-        }
-    }
 
     public void applySpell(int idx, Kartu kartu) {
         Player player;
@@ -887,8 +845,8 @@ public class FXMLController
                 player.getBoard().get(idx).setHealth(player.getBoard().get(idx).getHealth() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
                 player.getBoard().get(idx).setAttack(player.getBoard().get(idx).getAttack() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
             } else {
-                player.getBoard().get(idx).setAttackTemp(player.getBoard().get(idx).getAttackTemp() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
-                player.getBoard().get(idx).setHealthTemp(player.getBoard().get(idx).getHealthTemp() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
+//                player.getBoard().get(idx).setAttackTemp(player.getBoard().get(idx).getAttackTemp() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
+//                player.getBoard().get(idx).setHealthTemp(player.getBoard().get(idx).getHealthTemp() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
             }

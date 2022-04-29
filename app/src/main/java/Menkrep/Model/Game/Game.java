@@ -67,6 +67,8 @@ public class Game {
             }
             players[0].reduceAllSwap();
             players[1].reduceAllSwap();
+//            players[0].reduceAllDuration();
+//            players[1].reduceAllDuration();
             this.phase = Phase.Draw;
         }
         players[0].setMana(getManaCap());
