@@ -66,11 +66,12 @@ public class KartuKarakter extends Kartu {
     public void addSwapDuration(int newDur){
         if(newDur==0){
             swapDuration=0;
-        }
-        if(swapDuration==-1){
-            swapDuration=0;
+        } else{
+            if(swapDuration==-1){
+                swapDuration=0;
+            }
             swapDuration += newDur;
-        } else if(newDur==0)
+        }
     }
 
     public void reduceSwapDuration(){
