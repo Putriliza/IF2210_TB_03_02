@@ -143,15 +143,6 @@ public class KartuKarakter extends Kartu {
         // this.healthUp = healthUp;
     }
 
-    // Img Path
-    public void setImagePath(String path) {
-        this.imgPath = path;
-    }
-
-    public String getImagePath(String path) {
-        return this.imgPath;
-    }
-
     // Active Spell
     public ArrayList<KartuSpell> getActiveSpells() {
         return activeSpells;

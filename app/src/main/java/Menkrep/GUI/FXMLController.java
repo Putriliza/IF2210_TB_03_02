@@ -739,6 +739,7 @@ public class FXMLController
                             applySpell(idx, this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
                             player.setMana(player.getMana() - this.currentHandCard.getMana());
+                            System.out.println(player.getBoard().get(idx).getNama());
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -900,21 +901,11 @@ public class FXMLController
                 player.removeBoardCardAtIndex(idx);
             }
         } else if (kartu instanceof KartuSpellMorph) {
-            System.out.println("Testing_1");
             int id = ((KartuSpellMorph) this.currentHandCard).getTargetId();
             Reference ref = Reference.getInstance();
-            System.out.println(id);
-            for (String[] morph: ref.getMorph()) {
-                System.out.println(morph[4]);
-                if (morph[4].equals(Integer.toString(id))) {
-                    System.out.println("Testing_2");
-                    System.out.println(morph[1]);
-                    KartuKarakter kartu_karakter = new KartuKarakter(ref.getKarakter(), morph[1]);
-                    System.out.println("Testing_3");
-                    ((KartuSpellMorph) this.currentHandCard).morph(player.getBoard().get(idx), kartu_karakter);
-                    System.out.println("Testing_4");
-                }
-            }
+            String target_name = ref.getKarakter().get(id-1)[1];
+            KartuKarakter kartu_karakter = new KartuKarakter(ref.getKarakter(), target_name);
+            ((KartuSpellMorph) this.currentHandCard).morph(player.getBoard().get(idx), kartu_karakter);
         }
     }
     // Kondisi akhir game

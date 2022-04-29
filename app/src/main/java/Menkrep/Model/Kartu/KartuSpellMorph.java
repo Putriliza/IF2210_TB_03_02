@@ -47,6 +47,7 @@ public class KartuSpellMorph extends KartuSpell {
         karakter.setAttack(tujuan.getAttack());
         karakter.setAttackUp(tujuan.getAttackUp());
         karakter.setHealthUp(tujuan.getHealthUp());
+        karakter.setImgPath(tujuan.getImgPath());
         karakter.setActiveSpells(new ArrayList<KartuSpell>());
 
         // karakter.setBaseAttack(tujuan.getBaseAttack());
