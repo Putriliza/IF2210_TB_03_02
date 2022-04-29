@@ -154,6 +154,12 @@ public class Player {
         }
     }
 
+    public void upMana(int idx){
+        if(!board.get(idx).getNama().equals("-")){
+            board.get(idx).naikExp(1);
+            setMana(mana-1);
+        }
+    }
 
     public void descKartu() {
         // TO DO:
