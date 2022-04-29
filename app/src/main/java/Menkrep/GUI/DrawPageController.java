@@ -39,7 +39,6 @@ public class DrawPageController {
     public void initialize() {
         drawCardId = -1;
         draw = new ArrayList<>();
-        System.out.println("INITIALIZED");
         if (game.getPlayerIndex() == 0) {
             DrawStatus status = game.getPlayerOne().generateDrawCard();
             if (status == DrawStatus.Success) {
@@ -75,7 +74,7 @@ public class DrawPageController {
         String dir = cwd + "/src/main/resources/Menkrep/";
 
         image.setImage(new Image(dir + card.getImgPath()));
-        mana.setText("MANA " + draw.get(2).getMana());
+        mana.setText("MANA " + card.getMana());
 
         String atkHpText = "";
         if (card.getTipe() == "POTION") {

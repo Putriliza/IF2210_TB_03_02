@@ -40,10 +40,6 @@ public class Player implements Attackable {
             this.deck.add(referenceDeck.get(idx));
         }
 
-        for (int i = 0; i < this.deck.size(); i++) {
-            System.out.println(i + " " + deck.get(i).getNama());
-        }
-
         // Inisiasi kartu di hand
         this.hand = new ArrayList<Kartu>();
 
@@ -145,8 +141,11 @@ public class Player implements Attackable {
         while (draw.size() > 0) {
             // Mengembalikan kartu secara acak
             Random rand = new Random();
-            deck.add(rand.nextInt(deck.size()), draw.remove(0));
-            deck.add(draw.remove(0));
+            if (deck.size() > 0) {
+                deck.add(rand.nextInt(deck.size()), draw.remove(0));
+            } else {
+                deck.add(draw.remove(0));
+            }
         }
 
         if (hand.size() < 5) {

@@ -3,6 +3,7 @@ package Menkrep.GUI;
 import Menkrep.Model.Enum.CAction;
 import Menkrep.Model.Enum.Phase;
 import Menkrep.Model.Game.Game;
+import Menkrep.Model.Reference.Reference;
 import Menkrep.Model.Kartu.*;
 import Menkrep.Model.Player.Player;
 import javafx.event.ActionEvent;
@@ -26,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import java.util.ArrayList;
+import javafx.stage.*;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -136,6 +138,15 @@ public class FXMLController
             button_delete.setDisable(false);
             game.setHasDrawn(false);
             resetPlayerMana(event);
+
+            if (game.getPlayerOne().getDeck().size() == 0 && game.getPlayerIndex() == 0) {
+                endGame(game.getPlayerTwo());
+                return;
+            }
+            if (game.getPlayerTwo().getDeck().size() == 0 && game.getPlayerIndex() == 1) {
+                endGame(game.getPlayerOne());
+                return;
+            }
         } else if (game.getPhase() == Phase.Plan){
             button_draw.setStyle("-fx-text-fill: black");
             button_plan.setDisable(false);
@@ -562,12 +573,12 @@ public class FXMLController
         // Cek apakah kartu card valid
         // Tampilkan detail handover card
         if (idx < player.getHandCard().size()){
-            currentHandCard = player.getHandCard().get(idx);
+            Kartu currentSelectd = player.getHandCard().get(idx);
             String cwd = System.getProperty("user.dir");
-            gambar_kartu_hand_hover.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + currentHandCard.getImgPath()));
-            nama_kartu_hand_hover.setText(currentHandCard.getNama());
-            stat_kartu_hand_hover.setText(currentHandCard.toString());
-            deskripsi_kartu_hand_hover.setText("\""+ currentHandCard.getDeskripsi() + "\"");
+            gambar_kartu_hand_hover.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + currentSelectd.getImgPath()));
+            nama_kartu_hand_hover.setText(currentSelectd.getNama());
+            stat_kartu_hand_hover.setText(currentSelectd.toString());
+            deskripsi_kartu_hand_hover.setText("\""+ currentSelectd.getDeskripsi() + "\"");
             setHandCardEffect(idx);
         }
         else {
@@ -604,9 +615,9 @@ public class FXMLController
 
         if (game.getPhase() == Phase.Plan){
             // Cek apakah kartu card valid
-            if (idx < player.getHandCard().size()){
-                // Apabila kartu karakter
+            if (idx < player.getHandCard().size() && player.getMana() >= player.getHandCard().get(idx).getMana()){
                 currentHandCard = player.getHandCard().get(idx);
+                // Apabila kartu karakter
                 if (currentHandCard instanceof KartuKarakter){
                     if (game.getPlayerIndex() == 0) {
                         setBoardCardEffect(player.getBoard().get(0).getNama().equals("-"), kartu_board_11);
@@ -643,12 +654,12 @@ public class FXMLController
 
         // Tampilkan detail handover card
         if (idx < player.getHandCard().size()){
-            currentHandCard = player.getHandCard().get(idx);
+            Kartu currentSelected = player.getHandCard().get(idx);
             String cwd = System.getProperty("user.dir");
-            gambar_kartu_hand_hover.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + currentHandCard.getImgPath()));
-            nama_kartu_hand_hover.setText(currentHandCard.getNama());
-            stat_kartu_hand_hover.setText(currentHandCard.toString());
-            deskripsi_kartu_hand_hover.setText("\""+ currentHandCard.getDeskripsi() + "\"");
+            gambar_kartu_hand_hover.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + currentSelected.getImgPath()));
+            nama_kartu_hand_hover.setText(currentSelected.getNama());
+            stat_kartu_hand_hover.setText(currentSelected.toString());
+            deskripsi_kartu_hand_hover.setText("\""+ currentSelected.getDeskripsi() + "\"");
             setHandCardEffect(idx);
         }
         else {
@@ -751,10 +762,19 @@ public class FXMLController
                     playerTwo.reduceHP(playerOne.getBoard().get(idxLeft).getAttack());
                     bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
                     bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
+                    if (playerTwo.getHealthPoints() <= 0) {
+                        // HP lawan nol
+                        endGame(playerOne);
+                    }
                 } else if(game.getPlayerIndex()==1 && playerOne.boardIsEmpty()){
                     playerOne.reduceHP(playerTwo.getBoard().get(idxRight).getAttack());
+
                     bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
                     bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
+                    if (playerOne.getHealthPoints() <= 0) {
+                        // HP lawan nol
+                        endGame(playerTwo);
+                    }
                 } else{
                     if(game.getPlayerIndex()==1 && left.contains(node.getId()) && !playerOne.getBoard().get(idx).getNama().equals("-")){
                         idxLeft = idx;
@@ -830,6 +850,7 @@ public class FXMLController
     }
 
     // -------------------------------------------------------------------------------------
+
     // Fungsi untuk aplikasi spell
 
     public void checkActive() {
@@ -873,14 +894,10 @@ public class FXMLController
         } else {
             player = game.getPlayerTwo();
         }
-        if(this.currentHandCard instanceof KartuSpellLvl) {
-            if(this.currentHandCard.getNama().equals("LVLUP")) {
-                ((KartuSpellLvl) this.currentHandCard).lvl(player.getBoard().get(idx), true);
-            } else {
-                ((KartuSpellLvl) this.currentHandCard).lvl(player.getBoard().get(idx), false);
-            }
-        } else if (kartu instanceof  KartuSpellPotion) {
-            if(((KartuSpellPotion) this.currentHandCard).getDuration() == 0) {
+        if (this.currentHandCard instanceof KartuSpellLvl) {
+            ((KartuSpellLvl) this.currentHandCard).lvl(player.getBoard().get(idx));
+        } else if (kartu instanceof KartuSpellPotion) {
+            if (((KartuSpellPotion) this.currentHandCard).getDuration() == 0) {
                 player.getBoard().get(idx).setHealth(player.getBoard().get(idx).getHealth() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
                 player.getBoard().get(idx).setAttack(player.getBoard().get(idx).getAttack() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
             } else {
@@ -889,14 +906,45 @@ public class FXMLController
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
             }
-        } else if (kartu instanceof  KartuSpellSwap) {
-            ((KartuSpellSwap)this.currentHandCard).swap(player.getBoard().get(idx));
-            if(player.getBoard().get(idx).getHealth() == 0) {
+        } else if (kartu instanceof KartuSpellSwap) {
+            ((KartuSpellSwap) this.currentHandCard).swap(player.getBoard().get(idx));
+            if (player.getBoard().get(idx).getHealth() == 0) {
                 player.removeBoardCardAtIndex(idx);
             }
-        } else if (kartu instanceof  KartuSpellMorph) {
-            // ((KartuSpellMorph) this.currentHandCard).morph(player.getBoard().get(idx));
+        } else if (kartu instanceof KartuSpellMorph) {
+            int id = ((KartuSpellMorph) this.currentHandCard).getTargetId();
+            Reference ref = Reference.getInstance();
+            for (String[] morph: ref.getMorph()) {
+                if (morph[4].equals(id)) {
+                    KartuKarakter kartu_karakter = new KartuKarakter(ref.getMorph(), morph[1]);
+                    ((KartuSpellMorph) this.currentHandCard).morph(player.getBoard().get(idx), kartu_karakter);
+                    break;
+                }
+            }
         }
+    }
+    // Kondisi akhir game
+    public void endGame(Player player) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("end-scene.fxml"));
+            root = loader.load();
+            EndSceneController endSceneController = loader.getController();
 
+            endSceneController.setPlayer(player);
+
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(mainPane.getScene().getWindow());
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("Game Finished");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            Window mainStage = mainPane.getScene().getWindow();
+            mainStage.hide();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
