@@ -66,7 +66,7 @@ public class Game {
                 nextRound();
             }
             players[0].reduceAllSwap();
-            players[0].reduceAllSwap();
+            players[1].reduceAllSwap();
             this.phase = Phase.Draw;
         }
         players[0].setMana(getManaCap());

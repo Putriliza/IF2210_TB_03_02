@@ -13,13 +13,14 @@ public class KartuKarakter extends Kartu {
     private int healthUp;
     private int healthTemp;
     private int attackTemp;
+    private String imgPath;
     private ArrayList<KartuSpell> activeSpells;
     private boolean doneAttack;
     private int swapDuration;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
         int attack, int attackUp, int healthUp, String imgPath, int mana) {
-        super(nama, deskripsi, "KARAKTER");
+        super(nama, deskripsi, "KARAKTER", mana, imgPath);
         this.jenis = jenis;
         this.exp = exp;
         this.level = level;
@@ -27,6 +28,7 @@ public class KartuKarakter extends Kartu {
         this.attack = attack;
         this.attackUp = attackUp;
         this.healthUp = healthUp;
+        this.imgPath = imgPath;
         this.activeSpells = new ArrayList<KartuSpell>();
         this.doneAttack = false;
         this.attackTemp = 0;
@@ -37,7 +39,7 @@ public class KartuKarakter extends Kartu {
     }
 
     public KartuKarakter(List<String[]> reference, String nama) {
-        super(nama, "", "KARAKTER");
+        super(nama, "", "KARAKTER", 0, "-");
         for (String[] karakter : reference) {
             if (karakter[1].equals(nama)) {
                 this.setDeskripsi(karakter[3]);
@@ -48,6 +50,7 @@ public class KartuKarakter extends Kartu {
                 this.health = Integer.parseInt(karakter[6]);
                 this.attackUp = Integer.parseInt(karakter[8]);
                 this.healthUp = Integer.parseInt(karakter[9]);
+                this.imgPath = karakter[7];
                 this.activeSpells = new ArrayList<KartuSpell>();
                 this.doneAttack=false;
                 super.setImgPath(karakter[4]);
@@ -155,22 +158,18 @@ public class KartuKarakter extends Kartu {
     }
 
     public void setAttackUp(int attackUp) {
-        this.attackUp = this.getAttack() + ((this.getLevel() - 1) * attackUp);
-        // if (this.level == 10) {
-        // this.attackUp = 0;
-        // } else {
-        // this.attackUp = attackUp;
-        // }
+//        this.attackUp = this.getAttack() + ((this.getLevel() - 1) * attackUp);
+        this.attackUp = attackUp;
     }
 
     // Health Up
     public int getHealthUp() {
-        return healthUp + this.healthTemp;
+        return healthUp;
     }
 
     public void setHealthUp(int healthUp) {
-        this.healthUp = this.getHealth() + ((this.getLevel() - 1) * healthUp);
-        // this.healthUp = healthUp;
+//        this.healthUp = this.getHealth() + ((this.getLevel() - 1) * healthUp);
+        this.healthUp = healthUp;
     }
 
     // Active Spell
