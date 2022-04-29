@@ -47,8 +47,16 @@ KartuSpellPotion                               | :green_square:
 Game                                           | :green_square:
 Player                                         | :green_square:
 Reference                                      | :green_square:
-CSVReader                                      | :green_square:
 App                                            | :green_square:
+
+**Testing**
+Kumpulan Testing                                 | Status
+-----------                                       | ------
+CharacterTest                                          | :green_square:
+GameTest                                 | :green_square:
+PlayerTest                                    | :green_square:
+ReferenceTest                                 | :green_square:
+SpellTest                               | :green_square:
                                        
 ## Laporan
 **Status : Done** :green_square: \
