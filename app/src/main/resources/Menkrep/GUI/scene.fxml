@@ -375,8 +375,9 @@
             <Label fx:id="jumlah_deck" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="26.0" prefHeight="17.0" prefWidth="47.0" text="40/40" textAlignment="CENTER" />
          </children>
       </Pane>
-      <Pane fx:id="mana_pane" layoutX="1006.0" layoutY="534.0" onMouseClicked="#upExp" prefHeight="51.0" prefWidth="69.0" style="-fx-border-color: black;">
+      <Pane layoutX="1006.0" layoutY="534.0" prefHeight="51.0" prefWidth="69.0" style="-fx-border-color: black;">
          <children>
+            <Button blendMode="OVERLAY" mnemonicParsing="false" onAction="#upExp" prefHeight="51.0" prefWidth="69.0" />
             <Label layoutX="20.0" layoutY="6.0" text="Mana" />
             <Label fx:id="jumlah_mana" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="27.0" prefHeight="17.0" prefWidth="37.0" text="1/1" textAlignment="CENTER" />
          </children>

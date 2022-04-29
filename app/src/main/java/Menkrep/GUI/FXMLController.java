@@ -695,42 +695,38 @@ public class FXMLController
 
         if (game.getPhase() == Phase.Plan){
             if(currAction == CAction.UpMana){
+                System.out.println("Halo");
                 if(game.getPlayerIndex()==0){
                     game.getPlayerOne().upMana(idx);
                 }else{
                     game.getPlayerTwo().upMana(idx);
                 }
-            }
-            if (this.currentHandCard == null) {
-                System.out.println("BELUM MENCET KARTU APAPUN WOI");
-            } else if (this.currentHandCard instanceof KartuKarakter && !player.getBoard().get(idx).getNama().equals("-")){
-                System.out.println("KARTU KARAKTER SUDAH TERISI");
-            } else if (this.currentHandCard instanceof KartuSpell && player.getBoard().get(idx).getNama().equals("-")){
-                System.out.println("KARTU SPELL HANYA BISA DITAROH DI SPELL YANG TERISI");
-            } else {
-                if (this.currentHandCard instanceof KartuKarakter) {
-                    if (player.getMana() > 0) {
-                        player.getBoard().set(idx, (KartuKarakter) this.currentHandCard);
-                        player.getHandCard().remove(this.currentHandCard);
-                        this.currentHandCard = null;
-                        player.setMana(player.getMana() - 1);
-                        setJumlahMana();
-                        setBoardCard();
-                        setHandCard();
-                    } else {
-                        System.out.println("MANA HABISSS");
-                    }
-                } else if (this.currentHandCard instanceof KartuSpell) {
-                    if (player.getMana() > 0) {
-                        player.getBoard().get(idx).addSpell((KartuSpell) this.currentHandCard);
-                        player.getHandCard().remove(this.currentHandCard);
-                        this.currentHandCard = null;
-                        player.setMana(player.getMana() - 1);
-                        setJumlahMana();
-                        setBoardCard();
-                        setHandCard();
-                    } else {
-                        System.out.println("MANA HABISSS");
+            } else{
+                if (this.currentHandCard == null) {
+                    System.out.println("BELUM MENCET KARTU APAPUN WOI");
+                } else if (this.currentHandCard instanceof KartuKarakter && !player.getBoard().get(idx).getNama().equals("-")){
+                    System.out.println("KARTU KARAKTER SUDAH TERISI");
+                } else if (this.currentHandCard instanceof KartuSpell && player.getBoard().get(idx).getNama().equals("-")){
+                    System.out.println("KARTU SPELL HANYA BISA DITAROH DI SPELL YANG TERISI");
+                } else {
+                    if (this.currentHandCard instanceof KartuKarakter) {
+                        if (player.getMana() > 0) {
+                            player.getBoard().set(idx, (KartuKarakter) this.currentHandCard);
+                            player.getHandCard().remove(this.currentHandCard);
+                            this.currentHandCard = null;
+                            player.setMana(player.getMana() - 1);
+                        } else {
+                            System.out.println("MANA HABISSS");
+                        }
+                    } else if (this.currentHandCard instanceof KartuSpell) {
+                        if (player.getMana() > 0) {
+                            player.getBoard().get(idx).addSpell((KartuSpell) this.currentHandCard);
+                            player.getHandCard().remove(this.currentHandCard);
+                            this.currentHandCard = null;
+                            player.setMana(player.getMana() - 1);
+                        } else {
+                            System.out.println("MANA HABISSS");
+                        }
                     }
                 }
             }
@@ -770,10 +766,11 @@ public class FXMLController
 
                 idxLeft=-1;
                 idxRight=-1;
-
-                setBoardCard();
             }
         }
+        setJumlahMana();
+        setBoardCard();
+        setHandCard();
     }
 
     
@@ -820,12 +817,10 @@ public class FXMLController
         jumlah_mana.setText(player.getMana() + "/" + game.getManaCap());
     }
 
-    @FXML
-    Pane mana_pane;
-
     public void upExp(ActionEvent event){
         event.consume();
         if((game.getPlayerIndex()==0 && game.getPlayerOne().getMana()>0) || (game.getPlayerIndex()==1 && game.getPlayerTwo().getMana()>0)){
+            System.out.println("Start up exp");
             currAction = CAction.UpMana;
         }
     }
