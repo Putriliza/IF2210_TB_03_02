@@ -14,7 +14,7 @@ Data                | Isi
 ----                | ---
 Tahun Ajaran        | 2022
 Tanggal Mulai       | 01 April 2022
-Tanggal Selesai     | 29 Spril 2022
+Tanggal Selesai     | 29 April 2022
 Tanggal Pengumpulan | 28 - 29 April 2022
 Kelas               | 3
 Dosen               | Habibur Muhaimin ST,M.Sc.
