@@ -62,10 +62,10 @@ Pembagian Kerja         | :green_square:
 ## Pembagian Tugas
 NAMA                              | Tugas
 -----------                       | ------
-Marcellus Michael Herman K        | Mana, Apply Spell, Attack
-Putri Nurhaliza                   | KartuSpell, Lvl, Potion dan implementasi, GUI: Bind deck, mana, hand card, dan Hover Card Details
+Marcellus Michael Herman K        | Mana, Apply Spell, Attack, Debugging
+Putri Nurhaliza                   | KartuSpell, Lvl, Potion dan implementasi, GUI: Bind deck, mana, hand card, dan Hover Card Details, Testing spell, character
 Adelline Kania Setiyawan          | Player dan implementasi, GUI: Bind Turn, Health Progress, Phase, Membuat logic pemindahan kartu dari hand ke board pada GUI
-Dimas Shidqi Parikesit            | CSetup gradle Membuat class Game, Reference Testing class Game, Reference Membuat logic attack Membuat logic spell GUI : next phase bind, Debugging spell, attack, GUI
+Dimas Shidqi Parikesit            | CSetup gradle Membuat class Game, Reference Testing class Game, Reference Membuat logic attack, Membuat logic spell, Membuat converter mana to exp dan GUI : next phase bind, Debugging spell, attack, GUI
 Rizky Akbar Asmaran               | Membuat kelas Kartu, Membuat kelas KartuKarakter, Laporan
 Vito Ghifari                      | Membuat GUI kerangka tampilan utama, tampilan draw phase, dan tampilan game finish, Membuat fungsionalitas draw phase, Membuat kelas KartuSpellMorph dan KartuSpellSwap, Membuat Test kelas Player
 
