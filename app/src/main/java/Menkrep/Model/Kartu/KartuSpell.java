@@ -9,4 +9,9 @@ public class KartuSpell extends Kartu {
     public KartuSpell(KartuSpell other) {
         this(other.getNama(), other.getDeskripsi(), other.getTipe(), other.getMana(), other.getImgPath());
     }
+
+    @Override
+    public String getDisplayString() {
+        return "SPELL";
+    }
 }

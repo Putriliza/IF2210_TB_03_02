@@ -98,4 +98,9 @@ public class KartuSpellPotion extends KartuSpell implements KartuSpellTemp{
                 "\nAtk=" + attackModifier +
                 "\nHp=" + healthModifier;
     }
+
+    @Override
+    public String getDisplayString() {
+        return String.format("ATK%+d/HP%+d", getAttackModifier(), getHealthModifier());
+    }
 }

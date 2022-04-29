@@ -269,24 +269,11 @@ public class FXMLController
             gambar.setImage(null);
         } else {
             mana.setText("MANA " + player.getHandCard().get(index).getMana());
-            if (player.getHandCard().get(index).getTipe() == "KARAKTER") {
-                desc.setText("ATK " + ((KartuKarakter)player.getHandCard().get(index)).getAttack() + 
-                                "/HP " + ((KartuKarakter)player.getHandCard().get(index)).getHealth());
-            } else {
-                if (player.getHandCard().get(index).getTipe() == "MORPH") {
-                    desc.setText("MORPH");
-                } else if (player.getHandCard().get(index).getTipe() == "POTION") {
-                    int atk = ((KartuSpellPotion)player.getHandCard().get(index)).getAttackModifier();
-                    int hp = ((KartuSpellPotion)player.getHandCard().get(index)).getHealthModifier();
-                    desc.setText(String.format("ATK%+d/HP%+d", atk, hp));
-                } else if (player.getHandCard().get(index).getTipe() == "SWAP") {
-                    desc.setText("ATK <-> HP");
-                } else if (player.getHandCard().get(index).getTipe() == "LVL") {
-                    mana.setText("MANA X");
-                    desc.setText(((KartuSpellLvl)player.getHandCard().get(index)).getNama());
-                } else {
-                    desc.setText("");
-                }
+
+            desc.setText(player.getHandCard().get(index).getDisplayString());
+
+            if (player.getHandCard().get(index).getTipe().equals("LVL")) {
+                mana.setText("MANA X");
             }
 
             String cwd = System.getProperty("user.dir");
