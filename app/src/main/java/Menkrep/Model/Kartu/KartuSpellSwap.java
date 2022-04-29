@@ -29,6 +29,11 @@ public class KartuSpellSwap extends KartuSpell implements KartuSpellTemp{
         }
     }
 
+    public KartuSpellSwap(KartuSpellSwap other) {
+        super(other);
+        this.duration = other.getDuration();
+    }
+
     public int getDuration() {
         return duration;
     }
@@ -60,5 +65,10 @@ public class KartuSpellSwap extends KartuSpell implements KartuSpellTemp{
     public String toString() {
         return "Mana= " + getMana() +
                 "\nDuration=" + duration;
+    }
+
+    @Override
+    public String getDisplayString() {
+        return "ATK <-> HP";
     }
 }

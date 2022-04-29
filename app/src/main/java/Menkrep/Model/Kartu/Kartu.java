@@ -15,6 +15,12 @@ public class Kartu {
         this.mana = mana;
     }
 
+    public Kartu(Kartu other) {
+        this.nama = other.getNama();
+        this.deskripsi = other.getDeskripsi();
+        this.tipe = other.getTipe();
+    }
+
     public String getNama() {
         return nama;
     }
@@ -53,5 +59,9 @@ public class Kartu {
 
     public void setMana(int mana){
         this.mana = mana;
+    }
+
+    public String getDisplayString() {
+        return "";
     }
 }

@@ -1,8 +1,7 @@
 package Menkrep.Model.Player;
 
 import Menkrep.Model.Enum.DrawStatus;
-import Menkrep.Model.Kartu.Kartu;
-import Menkrep.Model.Kartu.KartuKarakter;
+import Menkrep.Model.Kartu.*;
 import Menkrep.Model.Reference.Reference;
 
 import java.util.ArrayList;
@@ -38,7 +37,20 @@ public class Player implements Attackable {
         ArrayList<Kartu> referenceDeck = ref.getReferenceDeck();
         for (int i = 0; i < this.deckCapacity; i++) {
             int idx = rand.nextInt(referenceDeck.size());
-            this.deck.add(referenceDeck.get(idx));
+
+            if (referenceDeck.get(idx) instanceof KartuKarakter) {
+                this.deck.add(new KartuKarakter((KartuKarakter) referenceDeck.get(idx)));
+            } else if (referenceDeck.get(idx) instanceof KartuSpellSwap) {
+                this.deck.add(new KartuSpellSwap((KartuSpellSwap) referenceDeck.get(idx)));
+            } else if (referenceDeck.get(idx) instanceof KartuSpellPotion) {
+                this.deck.add(new KartuSpellPotion((KartuSpellPotion) referenceDeck.get(idx)));
+            } else if (referenceDeck.get(idx) instanceof KartuSpellMorph) {
+                this.deck.add(new KartuSpellMorph((KartuSpellMorph) referenceDeck.get(idx)));
+            } else if (referenceDeck.get(idx) instanceof KartuSpellLvl) {
+                this.deck.add(new KartuSpellLvl((KartuSpellLvl) referenceDeck.get(idx)));
+            } else {
+                this.deck.add(new Kartu(referenceDeck.get(idx)));
+            }
         }
 
         // Inisiasi kartu di hand
@@ -96,13 +108,22 @@ public class Player implements Attackable {
 
     public void reduceAllSwap() {
         for (int i = 0; i < 5; i++) {
-            board.get(i).reduceSwapDuration();
-            if(board.get(i).getSwapDuration()==0){
+            boolean needSwap = board.get(i).reduceSwapDuration();
+            if(needSwap){
                 int health = board.get(i).getHealth();
                 board.get(i).setHealth(board.get(i).getAttack());
                 board.get(i).setAttack(health);
             }
             if (board.get(i).getHealth() <= 0) {
+                removeBoardCardAtIndex(i);
+            }
+        }
+    }
+
+    public void reduceAllDuration(){
+        for (int i = 0; i < 5; i++) {
+            boolean needDelete = board.get(i).reduceDuration();
+            if (needDelete) {
                 removeBoardCardAtIndex(i);
             }
         }

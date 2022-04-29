@@ -35,6 +35,13 @@ public class KartuSpellPotion extends KartuSpell implements KartuSpellTemp{
         }
     }
 
+    public KartuSpellPotion(KartuSpellPotion other) {
+        super(other);
+        this.duration = other.getDuration();
+        this.attackModifier = other.getAttackModifier();
+        this.healthModifier = other.getHealthModifier();
+    }
+
     public int getDuration() {
         return duration;
     }
@@ -80,6 +87,10 @@ public class KartuSpellPotion extends KartuSpell implements KartuSpellTemp{
         karakter.setAttack(newAttack);
         karakter.setHealth(newHealth);
 
+        karakter.getHealthTemp().add(this.healthModifier);
+        karakter.getAttackTemp().add(this.attackModifier);
+        karakter.getDuration().add(this.duration);
+
         // if duration is 0, potion hilang
         // if karakter.getHealth() = 0, karakter mati
     }
@@ -90,5 +101,10 @@ public class KartuSpellPotion extends KartuSpell implements KartuSpellTemp{
                 "\nDuration=" + duration +
                 "\nAtk=" + attackModifier +
                 "\nHp=" + healthModifier;
+    }
+
+    @Override
+    public String getDisplayString() {
+        return String.format("ATK%+d/HP%+d", getAttackModifier(), getHealthModifier());
     }
 }
