@@ -65,12 +65,12 @@ public class Game {
                 this.playerIndex = 0;
                 nextRound();
             }
+            players[0].reduceAllSwap();
+            players[0].reduceAllSwap();
             this.phase = Phase.Draw;
         }
         players[0].setMana(getManaCap());
         players[1].setMana(getManaCap());
-        players[0].reduceAllSwap();
-        players[0].reduceAllSwap();
     }
 
     public Player getPlayerOne() {
