@@ -86,7 +86,10 @@ public class KartuSpellPotion extends KartuSpell implements KartuSpellTemp{
         }
         karakter.setAttack(newAttack);
         karakter.setHealth(newHealth);
-
+        System.out.println("Masuk potion");
+        System.out.println(karakter.getAttack());
+        System.out.println(karakter.getHealth());
+        System.out.println(newAttack);
         karakter.getHealthTemp().add(this.healthModifier);
         karakter.getAttackTemp().add(this.attackModifier);
         karakter.getDuration().add(this.duration);
