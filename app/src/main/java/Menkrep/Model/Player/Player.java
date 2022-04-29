@@ -23,7 +23,7 @@ public class Player implements Attackable {
     // Konstruktor
     public Player(String name) throws IOException {
         this.name = name;
-        this.healthPoints = 10;
+        this.healthPoints = 80;
         this.mana = 1;
 
         // kapasitas deck random antara 40 dan 60
