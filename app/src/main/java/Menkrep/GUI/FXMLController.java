@@ -730,7 +730,6 @@ public class FXMLController
                             player.getBoard().set(idx, (KartuKarakter) this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
                             player.setMana(player.getMana() - this.currentHandCard.getMana());
-                            this.currentHandCard = null;
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -740,7 +739,6 @@ public class FXMLController
                             applySpell(idx, this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
                             player.setMana(player.getMana() - this.currentHandCard.getMana());
-                            this.currentHandCard = null;
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -794,6 +792,7 @@ public class FXMLController
                 idxRight=-1;
             }
         }
+        this.currentHandCard = null;
         setJumlahMana();
         setBoardCard();
         setHandCard();
@@ -910,7 +909,7 @@ public class FXMLController
                 if (morph[4].equals(Integer.toString(id))) {
                     System.out.println("Testing_2");
                     System.out.println(morph[1]);
-                    KartuKarakter kartu_karakter = new KartuKarakter(ref.getKarakter(), nama);
+                    KartuKarakter kartu_karakter = new KartuKarakter(ref.getKarakter(), morph[1]);
                     System.out.println("Testing_3");
                     ((KartuSpellMorph) this.currentHandCard).morph(player.getBoard().get(idx), kartu_karakter);
                     System.out.println("Testing_4");
