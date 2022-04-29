@@ -739,7 +739,6 @@ public class FXMLController
                             applySpell(idx, this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
                             player.setMana(player.getMana() - this.currentHandCard.getMana());
-                            System.out.println(player.getBoard().get(idx).getNama());
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -883,7 +882,7 @@ public class FXMLController
         } else {
             player = game.getPlayerTwo();
         }
-        if (this.currentHandCard instanceof KartuSpellLvl) {
+        if (this.currentHandCard instanceof KartuSpellLvl && player.getMana()>=(int)Math.ceil(player.getBoard().get(idx).getLevel()/2.0)) {
             ((KartuSpellLvl) this.currentHandCard).lvl(player.getBoard().get(idx));
         } else if (kartu instanceof KartuSpellPotion) {
             if (((KartuSpellPotion) this.currentHandCard).getDuration() == 0) {
