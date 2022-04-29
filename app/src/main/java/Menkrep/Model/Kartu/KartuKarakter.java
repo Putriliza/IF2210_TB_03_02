@@ -17,7 +17,7 @@ public class KartuKarakter extends Kartu {
     private ArrayList<KartuSpell> activeSpells;
     private boolean doneAttack;
 
-    private int swapDuration = -1;
+    private int swapDuration = 0;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
         int attack, int attackUp, int healthUp, String imgPath, int mana) {
@@ -64,23 +64,12 @@ public class KartuKarakter extends Kartu {
     }
 
     public void addSwapDuration(int newDur){
-        if(newDur==0){
-            swapDuration=0;
-        } else{
-            if(swapDuration==-1){
-                swapDuration=0;
-            }
-            swapDuration += newDur;
-        }
+        swapDuration += newDur;
     }
 
     public void reduceSwapDuration(){
-        if(swapDuration!=0){
-            if(swapDuration>1){
-                swapDuration -= 1;
-            } else{
-                swapDuration=-1;
-            }
+        if(swapDuration>0){
+            swapDuration -= 1;
         }
     }
 
