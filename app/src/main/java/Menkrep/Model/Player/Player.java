@@ -21,7 +21,7 @@ public class Player implements Attackable {
     private ArrayList<KartuKarakter> board;
 
     // Konstruktor
-    public Player(String name) throws IOException {
+    public Player(String name) {
         this.name = name;
         this.healthPoints = 80;
         this.mana = 1;
@@ -30,9 +30,11 @@ public class Player implements Attackable {
         Random rand = new Random();
         this.deckCapacity = 40 + rand.nextInt(21);
 
-        // Inisialisasi kartu di deck
-        this.deck = new ArrayList<Kartu>();
-    
+        // Inisialisasi kartu
+        this.deck = new ArrayList<>();
+        this.draw = new ArrayList<>();
+        this.board = new ArrayList<>();
+
         Reference ref = Reference.getInstance();
         ArrayList<Kartu> referenceDeck = ref.getReferenceDeck();
         for (int i = 0; i < this.deckCapacity; i++) {
@@ -48,15 +50,13 @@ public class Player implements Attackable {
             this.hand.add(this.deck.remove(0));
         }
 
-        this.board = new ArrayList<KartuKarakter>();
-
-        for (int index = this.board.size(); index < 5; index++) {
+        for (int index = 0; index < 5; index++) {
             this.board.add(new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-", 0));
         }
     }
     
     public void removeBoardCardAtIndex(int index) {
-        if (index < 5) {
+        if (index >= 0 && index < 5) {
             this.board.set(index, new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-", 0));
         }
     }
