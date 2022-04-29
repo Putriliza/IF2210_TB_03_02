@@ -118,27 +118,28 @@ public class FXMLController
     private Button button_attack;
     @FXML
     private Button button_end;
-
+    @FXML
     private boolean giliranMain = false;
 
+    @FXML
+    public void cekGiliranActiveSpell() {
+        if(!giliranMain) {
+            giliranMain = true;
+        } else if (giliranMain) {
+            checkActive();
+            giliranMain = false;
+        }
+    }
     @FXML
     public void nextPhase(ActionEvent event){
         event.consume();
         game.nextPhase();
-
         if (game.getPhase() == Phase.Draw){
-            if(!giliranMain) {
-                giliranMain = true;
-            } else if (giliranMain) {
-                checkActive();
-                giliranMain = false;
-            }
             button_draw.setDisable(false);
             button_end.setDisable(true);
             button_delete.setDisable(false);
             game.setHasDrawn(false);
-            resetPlayerMana(event);
-
+            cekGiliranActiveSpell();
             if (game.getPlayerOne().getDeck().size() == 0 && game.getPlayerIndex() == 0) {
                 endGame(game.getPlayerTwo());
                 return;
@@ -728,8 +729,8 @@ public class FXMLController
                         if (player.getMana() > 0) {
                             player.getBoard().set(idx, (KartuKarakter) this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
+                            player.setMana(player.getMana() - this.currentHandCard.getMana());
                             this.currentHandCard = null;
-                            player.setMana(player.getMana() - 1);
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -738,8 +739,8 @@ public class FXMLController
                             player.getBoard().get(idx).addSpell((KartuSpell) this.currentHandCard);
                             applySpell(idx, this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
+                            player.setMana(player.getMana() - this.currentHandCard.getMana());
                             this.currentHandCard = null;
-                            player.setMana(player.getMana() - 1);
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -817,18 +818,6 @@ public class FXMLController
     // -------------------------------------------------------------------------------------
     // Fungsi untuk bind jumlah mana
 
-    public void resetPlayerMana(ActionEvent event){
-        event.consume();
-
-        Player player;
-        if (game.getPlayerIndex() == 0) {
-            player = game.getPlayerOne();
-        } else {
-            player = game.getPlayerTwo();
-        }
-        player.setMana(game.getManaCap());
-    }
-
     @FXML
     Label jumlah_mana;
 
@@ -901,8 +890,8 @@ public class FXMLController
                 player.getBoard().get(idx).setHealth(player.getBoard().get(idx).getHealth() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
                 player.getBoard().get(idx).setAttack(player.getBoard().get(idx).getAttack() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
             } else {
-                player.getBoard().get(idx).setAttackTemp(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
-                player.getBoard().get(idx).setHealthTemp(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
+                player.getBoard().get(idx).setAttackTemp(player.getBoard().get(idx).getAttackTemp() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
+                player.getBoard().get(idx).setHealthTemp(player.getBoard().get(idx).getHealthTemp() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
             }
@@ -912,13 +901,19 @@ public class FXMLController
                 player.removeBoardCardAtIndex(idx);
             }
         } else if (kartu instanceof KartuSpellMorph) {
+            System.out.println("Testing_1");
             int id = ((KartuSpellMorph) this.currentHandCard).getTargetId();
             Reference ref = Reference.getInstance();
+            System.out.println(id);
             for (String[] morph: ref.getMorph()) {
-                if (morph[4].equals(id)) {
-                    KartuKarakter kartu_karakter = new KartuKarakter(ref.getMorph(), morph[1]);
+                System.out.println(morph[4]);
+                if (morph[4].equals(Integer.toString(id))) {
+                    System.out.println("Testing_2");
+                    System.out.println(morph[1]);
+                    KartuKarakter kartu_karakter = new KartuKarakter(ref.getKarakter(), nama);
+                    System.out.println("Testing_3");
                     ((KartuSpellMorph) this.currentHandCard).morph(player.getBoard().get(idx), kartu_karakter);
-                    break;
+                    System.out.println("Testing_4");
                 }
             }
         }

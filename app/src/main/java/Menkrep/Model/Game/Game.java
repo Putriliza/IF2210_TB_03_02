@@ -74,7 +74,8 @@ public class Game {
             }
             this.phase = Phase.Draw;
         }
-
+        players[0].setMana(getManaCap());
+        players[1].setMana(getManaCap());
     }
 
     public Player getPlayerOne(){
