@@ -140,6 +140,8 @@ public class KartuKarakter extends Kartu {
                 return true;
             }
             return false;
+        } else {
+            return false;
         }
     }
 
