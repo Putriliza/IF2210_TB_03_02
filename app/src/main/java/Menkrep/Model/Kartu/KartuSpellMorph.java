@@ -28,6 +28,11 @@ public class KartuSpellMorph extends KartuSpell {
         }
     }
 
+    public KartuSpellMorph(KartuSpellMorph other) {
+        super(other);
+        this.targetId = other.getTargetId();
+    }
+
     public int getTargetId() {
         return this.targetId;
     }
@@ -48,10 +53,12 @@ public class KartuSpellMorph extends KartuSpell {
         karakter.setAttackUp(tujuan.getAttackUp());
         karakter.setHealthUp(tujuan.getHealthUp());
         karakter.setImgPath(tujuan.getImgPath());
+        karakter.setMana(tujuan.getMana());
+        karakter.setAttackTemp(tujuan.getAttackTemp());
+        karakter.setHealthTemp(tujuan.getHealthTemp());
+        // karakter.setDoneAttack(tujuan.getDoneAttack());
         karakter.setActiveSpells(new ArrayList<KartuSpell>());
 
-        // karakter.setBaseAttack(tujuan.getBaseAttack());
-        // karakter.setBaseHealth(tujuan.getBaseHealth());
         
     }
 

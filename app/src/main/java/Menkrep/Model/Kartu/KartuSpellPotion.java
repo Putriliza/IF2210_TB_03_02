@@ -35,6 +35,13 @@ public class KartuSpellPotion extends KartuSpell implements KartuSpellTemp{
         }
     }
 
+    public KartuSpellPotion(KartuSpellPotion other) {
+        super(other);
+        this.duration = other.getDuration();
+        this.attackModifier = other.getAttackModifier();
+        this.healthModifier = other.getHealthModifier();
+    }
+
     public int getDuration() {
         return duration;
     }

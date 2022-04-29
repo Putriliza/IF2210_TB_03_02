@@ -16,14 +16,14 @@ public class KartuKarakter extends Kartu {
     private ArrayList<KartuSpell> activeSpells;
     private boolean doneAttack;
 
-    private int swapDuration = 0;
     private ArrayList<Integer> healthTemp;
     private ArrayList<Integer> attackTemp;
     private ArrayList<Integer> duration;
+    private int swapDuration;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
-        int attack, int attackUp, int healthUp, String imgPath, int mana) {
-        super(nama, deskripsi, "KARAKTER");
+            int attack, int attackUp, int healthUp, String imgPath, int mana) {
+        super(nama, deskripsi, "KARAKTER", mana, imgPath);
         this.jenis = jenis;
         this.exp = exp;
         this.level = level;
@@ -35,13 +35,15 @@ public class KartuKarakter extends Kartu {
         this.healthTemp = new ArrayList<>();
         this.attackTemp = new ArrayList<>();
         this.duration = new ArrayList<>();
-        this.doneAttack=false;
+        this.doneAttack = false;
+        this.doneAttack = false;
+        this.swapDuration = 0;
         super.setImgPath(imgPath);
         super.setMana(mana);
     }
 
     public KartuKarakter(List<String[]> reference, String nama) {
-        super(nama, "", "KARAKTER");
+        super(nama, "", "KARAKTER", 0, "-");
         for (String[] karakter : reference) {
             if (karakter[1].equals(nama)) {
                 this.setDeskripsi(karakter[3]);
@@ -56,22 +58,22 @@ public class KartuKarakter extends Kartu {
                 this.healthTemp = new ArrayList<>();
                 this.attackTemp = new ArrayList<>();
                 this.duration = new ArrayList<>();
-                this.doneAttack=false;
+                this.doneAttack = false;
                 super.setImgPath(karakter[4]);
                 super.setMana(Integer.parseInt(karakter[7]));
             }
         }
     }
 
-    private void reduceHealthTemp(int damage){
-        if(healthTemp.size()>0){
+    private void reduceHealthTemp(int damage) {
+        if (healthTemp.size() > 0) {
             int sisa = damage;
-            for (int i = healthTemp.size()-1; i >= 0; i--) {
-                if(sisa>0 && duration.get(i)>0){
-                    if(healthTemp.get(i)>=sisa){
-                        healthTemp.set(i, healthTemp.get(i)-sisa);
+            for (int i = healthTemp.size() - 1; i >= 0; i--) {
+                if (sisa > 0 && duration.get(i) > 0) {
+                    if (healthTemp.get(i) >= sisa) {
+                        healthTemp.set(i, healthTemp.get(i) - sisa);
                         sisa = 0;
-                    } else{
+                    } else {
                         sisa -= healthTemp.get(i);
                         healthTemp.set(i, 0);
                     }
@@ -81,11 +83,11 @@ public class KartuKarakter extends Kartu {
 
     }
 
-    public void reduceDuration(){
-        for (int i = duration.size()-1; i >=0 ; i--) {
-            if(duration.get(i) > 1){
-                duration.set(i, duration.get(i)-1);
-            } else if(duration.get(i)==1){
+    public void reduceDuration() {
+        for (int i = duration.size() - 1; i >= 0; i--) {
+            if (duration.get(i) > 1) {
+                duration.set(i, duration.get(i) - 1);
+            } else if (duration.get(i) == 1) {
                 duration.set(i, 0);
                 health -= healthTemp.get(i);
                 attack -= attackTemp.get(i);
@@ -93,40 +95,59 @@ public class KartuKarakter extends Kartu {
         }
     }
 
-
-    public ArrayList<Integer> getHealthTemp(){
+    public ArrayList<Integer> getHealthTemp() {
         return healthTemp;
     }
 
-    public ArrayList<Integer> getAttackTemp(){
+    public ArrayList<Integer> getAttackTemp() {
         return attackTemp;
     }
 
-    public ArrayList<Integer> getDuration(){
+    public ArrayList<Integer> getDuration() {
         return duration;
     }
 
-    public int getSwapDuration(){
+    public KartuKarakter(KartuKarakter other) {
+        super(other);
+        this.jenis = other.getJenis();
+        this.exp = other.getExp();
+        this.level = other.getLevel();
+        this.health = other.getHealth();
+        this.attack = other.getAttack();
+        this.attackUp = other.getAttackUp();
+        this.healthUp = other.getHealthUp();
+        this.activeSpells = other.getActiveSpells();
+        this.doneAttack = other.getDoneAttack();
+        this.attackTemp = other.getAttackTemp();
+        this.healthTemp = other.getHealthTemp();
+        this.swapDuration = other.getSwapDuration();
+        super.setImgPath(other.getImgPath());
+        super.setMana(other.getMana());
+    }
+
+    public int getSwapDuration() {
         return swapDuration;
     }
 
-    public void addSwapDuration(int newDur){
+    public void addSwapDuration(int newDur) {
         swapDuration += newDur;
     }
 
-    public void reduceSwapDuration(){
-        if(swapDuration>0){
+    public void reduceSwapDuration() {
+        if (swapDuration > 0) {
             swapDuration -= 1;
         }
     }
 
-    public void resetAttack(){
-        this.doneAttack=false;
+    public void resetAttack() {
+        this.doneAttack = false;
     }
-    public void alrAttack(){
-        this.doneAttack=true;
+
+    public void alrAttack() {
+        this.doneAttack = true;
     }
-    public boolean getDoneAttack(){
+
+    public boolean getDoneAttack() {
         return this.doneAttack;
     }
 
@@ -144,7 +165,9 @@ public class KartuKarakter extends Kartu {
         return exp;
     }
 
-    public int getMaxExp(){return (level*2)-1;}
+    public int getMaxExp() {
+        return (level * 2) - 1;
+    }
 
     public void setExp(int exp) {
         this.exp = exp;
@@ -187,7 +210,7 @@ public class KartuKarakter extends Kartu {
     }
 
     public void setAttackUp(int attackUp) {
-//        this.attackUp = this.getAttack() + ((this.getLevel() - 1) * attackUp);
+        // this.attackUp = this.getAttack() + ((this.getLevel() - 1) * attackUp);
         this.attackUp = attackUp;
     }
 
@@ -197,7 +220,7 @@ public class KartuKarakter extends Kartu {
     }
 
     public void setHealthUp(int healthUp) {
-//        this.healthUp = this.getHealth() + ((this.getLevel() - 1) * healthUp);
+        // this.healthUp = this.getHealth() + ((this.getLevel() - 1) * healthUp);
         this.healthUp = healthUp;
     }
 
@@ -275,7 +298,7 @@ public class KartuKarakter extends Kartu {
             }
         }
 
-        if(newHealth<0){
+        if (newHealth < 0) {
             newHealth = 0;
         }
         kartu.setHealth(newHealth);

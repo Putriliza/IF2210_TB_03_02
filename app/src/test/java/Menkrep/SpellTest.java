@@ -36,11 +36,20 @@ public class SpellTest {
         morphTest.morph(karakterTest1, karakterTest2);
         assertEquals("Sheep", karakterTest1.getNama());
         assertEquals("Sheep are common passive mobs that supply wool and mutton and are found in many of the grassy biomes.", karakterTest1.getDeskripsi());
+        assertEquals("OVERWORLD", karakterTest1.getJenis());
         assertEquals(1, karakterTest1.getLevel());
         assertEquals(1, karakterTest1.getHealth());
         assertEquals(1, karakterTest1.getAttack());
         assertEquals("card/image/character/Sheep.png", karakterTest1.getImgPath());
-        assertEquals(4, karakterTest1.getMana());
+        assertEquals(1, karakterTest1.getMana());
+        assertEquals(0, karakterTest1.getExp());            // reset exp jadi 0
+        assertEquals(1, karakterTest1.getLevel());          // reset level jadi 1
+        assertEquals(0, karakterTest1.getAttackTemp());
+        assertEquals(0, karakterTest1.getHealthTemp());
+        assertEquals(0, karakterTest1.getAttackUp());
+        assertEquals(0, karakterTest1.getHealthUp());
+        assertEquals(new ArrayList<KartuSpell>(), karakterTest1.getActiveSpells());
+
     }
 
     @Test
