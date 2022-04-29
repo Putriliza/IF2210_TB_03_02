@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-public class KartuSpellSwap extends KartuSpell {
+public class KartuSpellSwap extends KartuSpell implements KartuSpellTemp{
     private int duration;
 
     public KartuSpellSwap() {
@@ -35,6 +35,10 @@ public class KartuSpellSwap extends KartuSpell {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public void reduceDuration() {
+        this.duration -= 1;
     }
 
     /* Menukar attack dan health. Khusus untuk swap,

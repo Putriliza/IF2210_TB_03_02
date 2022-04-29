@@ -2,7 +2,7 @@ package Menkrep.Model.Kartu;
 
 import java.util.List;
 
-public class KartuSpellPotion extends KartuSpell {
+public class KartuSpellPotion extends KartuSpell implements KartuSpellTemp{
     private int duration;
     private int attackModifier;
     private int healthModifier;
@@ -41,6 +41,10 @@ public class KartuSpellPotion extends KartuSpell {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public void reduceDuration() {
+        this.duration -= 1;
     }
 
     public int getAttackModifier() {
