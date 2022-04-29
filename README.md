@@ -20,12 +20,12 @@ Kelas               | 3
 Dosen               | Habibur Muhaimin ST,M.Sc.
 
 ## Setup
-0. 
-1. 
-2. 
-3. 
-4. 
-5. 
+0. PC dengan OS Windows. WSL tidak bisa, Ubuntu tidak dicoba sehingga do at your own risk.
+1. Install JDK 17
+2. Masuk ke directory tempat folder di clone
+3. Untuk menjalankan program, `.\gradlew run`
+4. Untuk menjalankan testing, `.\gradlew test`
+5. Selamat bermain !!!
 
 ## Spesifikasi
 **Mekanisme**
