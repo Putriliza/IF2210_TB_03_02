@@ -90,22 +90,7 @@ public class DrawPageController {
         image.setImage(new Image(dir + card.getImgPath()));
         mana.setText("MANA " + card.getMana());
 
-        String atkHpText = "";
-        if (card.getTipe() == "POTION") {
-            KartuSpellPotion potion = (KartuSpellPotion) card;
-            atkHpText = String.format("ATK%+d/HP%+d", potion.getAttackModifier(), potion.getHealthModifier());
-        } else if (card.getTipe() == "SWAP") {
-            atkHpText = "ATK <-> HP";
-        } else if (card.getTipe() == "LVL") {
-            atkHpText = card.getNama();
-        } else if (card.getTipe() == "MORPH") {
-            atkHpText = "MORPH";
-        } else {
-            // karakter
-            KartuKarakter karakter = (KartuKarakter) card;
-            atkHpText = String.format("ATK %d/HP %d", karakter.getAttack(), karakter.getHealth());
-        }
-        atk_hp.setText(atkHpText);
+        atk_hp.setText(card.getDisplayString());
     }
 
     public void drawCardOnClick(MouseEvent event) {

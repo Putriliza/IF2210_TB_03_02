@@ -257,24 +257,11 @@ public class FXMLController
             gambar.setImage(null);
         } else {
             mana.setText("MANA " + player.getHandCard().get(index).getMana());
-            if (player.getHandCard().get(index).getTipe() == "KARAKTER") {
-                desc.setText("ATK " + ((KartuKarakter)player.getHandCard().get(index)).getAttack() + 
-                                "/HP " + ((KartuKarakter)player.getHandCard().get(index)).getHealth());
-            } else {
-                if (player.getHandCard().get(index).getTipe() == "MORPH") {
-                    desc.setText("MORPH");
-                } else if (player.getHandCard().get(index).getTipe() == "POTION") {
-                    int atk = ((KartuSpellPotion)player.getHandCard().get(index)).getAttackModifier();
-                    int hp = ((KartuSpellPotion)player.getHandCard().get(index)).getHealthModifier();
-                    desc.setText(String.format("ATK%+d/HP%+d", atk, hp));
-                } else if (player.getHandCard().get(index).getTipe() == "SWAP") {
-                    desc.setText("ATK <-> HP");
-                } else if (player.getHandCard().get(index).getTipe() == "LVL") {
-                    mana.setText("MANA X");
-                    desc.setText(((KartuSpellLvl)player.getHandCard().get(index)).getNama());
-                } else {
-                    desc.setText("");
-                }
+
+            desc.setText(player.getHandCard().get(index).getDisplayString());
+
+            if (player.getHandCard().get(index).getTipe().equals("LVL")) {
+                mana.setText("MANA X");
             }
 
             String cwd = System.getProperty("user.dir");
@@ -840,22 +827,24 @@ public class FXMLController
         }
         if (this.currentHandCard instanceof KartuSpellLvl && player.getMana()>=(int)Math.ceil(player.getBoard().get(idx).getLevel()/2.0)) {
             ((KartuSpellLvl) this.currentHandCard).lvl(player.getBoard().get(idx));
-        } else if (kartu instanceof KartuSpellPotion) {
+        } else if (kartu instanceof KartuSpellPotion && player.getMana()>=currentHandCard.getMana()) {
             if (((KartuSpellPotion) this.currentHandCard).getDuration() == 0) {
                 player.getBoard().get(idx).setHealth(player.getBoard().get(idx).getHealth() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
                 player.getBoard().get(idx).setAttack(player.getBoard().get(idx).getAttack() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
             } else {
-//                player.getBoard().get(idx).setAttackTemp(player.getBoard().get(idx).getAttackTemp() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
-//                player.getBoard().get(idx).setHealthTemp(player.getBoard().get(idx).getHealthTemp() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
+                ((KartuSpellPotion) this.currentHandCard).potion(player.getBoard().get(idx));
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
             }
-        } else if (kartu instanceof KartuSpellSwap && player.getMana() >= currentHandCard.getMana()) {
-            ((KartuSpellSwap) this.currentHandCard).swap(player.getBoard().get(idx));
-            if (player.getBoard().get(idx).getHealth() == 0) {
+            if (player.getBoard().get(idx).getHealth() <= 0) {
                 player.removeBoardCardAtIndex(idx);
             }
-        } else if (kartu instanceof KartuSpellMorph) {
+        } else if (kartu instanceof KartuSpellSwap && player.getMana() >= currentHandCard.getMana()) {
+            ((KartuSpellSwap) this.currentHandCard).swap(player.getBoard().get(idx));
+            if (player.getBoard().get(idx).getHealth() <= 0) {
+                player.removeBoardCardAtIndex(idx);
+            }
+        } else if (kartu instanceof KartuSpellMorph&& player.getMana()>=currentHandCard.getMana()) {
             int id = ((KartuSpellMorph) this.currentHandCard).getTargetId();
             Reference ref = Reference.getInstance();
             String target_name = ref.getKarakter().get(id-1)[1];

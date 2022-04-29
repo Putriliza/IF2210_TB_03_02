@@ -66,4 +66,9 @@ public class KartuSpellSwap extends KartuSpell implements KartuSpellTemp{
         return "Mana= " + getMana() +
                 "\nDuration=" + duration;
     }
+
+    @Override
+    public String getDisplayString() {
+        return "ATK <-> HP";
+    }
 }
