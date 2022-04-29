@@ -11,6 +11,8 @@ public class KartuKarakter extends Kartu {
     private int attack;
     private int attackUp;
     private int healthUp;
+    private int healthTemp;
+    private int attackTemp;
     private String imgPath;
     private ArrayList<KartuSpell> activeSpells;
     private boolean doneAttack;
@@ -29,6 +31,8 @@ public class KartuKarakter extends Kartu {
         this.imgPath = imgPath;
         this.activeSpells = new ArrayList<KartuSpell>();
         this.doneAttack=false;
+        this.attackTemp = 0;
+        this.healthTemp = 0;
         super.setImgPath(imgPath);
         super.setMana(mana);
     }
@@ -108,7 +112,7 @@ public class KartuKarakter extends Kartu {
 
     // Attack
     public int getAttack() {
-        return attack;
+        return attack + this.attackTemp;
     }
 
     public void setAttack(int attack) {
@@ -131,7 +135,7 @@ public class KartuKarakter extends Kartu {
 
     // Health Up
     public int getHealthUp() {
-        return healthUp;
+        return healthUp + this.healthTemp;
     }
 
     public void setHealthUp(int healthUp) {
@@ -217,6 +221,22 @@ public class KartuKarakter extends Kartu {
             newHealth = 0;
         }
         kartu.setHealth(newHealth);
+    }
+
+    public int getAttackTemp() {
+        return this.attackTemp;
+    }
+
+    public int getHealthTemp() {
+        return this.healthTemp;
+    }
+
+    public void setAttackTemp(int attack) {
+        this.attackTemp = attack;
+    }
+
+    public void setHealthTemp(int health) {
+        this.healthTemp = health;
     }
 
     @Override

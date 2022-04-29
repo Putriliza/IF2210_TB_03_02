@@ -3,11 +3,7 @@ package Menkrep.GUI;
 import Menkrep.Model.Enum.CAction;
 import Menkrep.Model.Enum.Phase;
 import Menkrep.Model.Game.Game;
-import Menkrep.Model.Kartu.Kartu;
-import Menkrep.Model.Kartu.KartuKarakter;
-import Menkrep.Model.Kartu.KartuSpell;
-import Menkrep.Model.Kartu.KartuSpellLvl;
-import Menkrep.Model.Kartu.KartuSpellPotion;
+import Menkrep.Model.Kartu.*;
 import Menkrep.Model.Player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import java.util.ArrayList;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -61,7 +58,6 @@ public class FXMLController
         event.consume();
 
         if (game.getHasDrawn()) return;
-
         Player player;
         if (game.getPlayerIndex() == 0) {
             player = game.getPlayerOne();
@@ -121,12 +117,20 @@ public class FXMLController
     @FXML
     private Button button_end;
 
+    private boolean giliranMain = false;
+
     @FXML
     public void nextPhase(ActionEvent event){
         event.consume();
         game.nextPhase();
 
         if (game.getPhase() == Phase.Draw){
+            if(!giliranMain) {
+                giliranMain = true;
+            } else if (giliranMain) {
+                checkActive();
+                giliranMain = false;
+            }
             button_draw.setDisable(false);
             button_end.setDisable(true);
             button_delete.setDisable(false);
@@ -721,6 +725,7 @@ public class FXMLController
                     } else if (this.currentHandCard instanceof KartuSpell) {
                         if (player.getMana() > 0) {
                             player.getBoard().get(idx).addSpell((KartuSpell) this.currentHandCard);
+                            applySpell(idx, this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
                             this.currentHandCard = null;
                             player.setMana(player.getMana() - 1);
@@ -822,5 +827,76 @@ public class FXMLController
         if((game.getPlayerIndex()==0 && game.getPlayerOne().getMana()>0) || (game.getPlayerIndex()==1 && game.getPlayerTwo().getMana()>0)){
             currAction = CAction.UpMana;
         }
+    }
+
+    // -------------------------------------------------------------------------------------
+    // Fungsi untuk aplikasi spell
+
+    public void checkActive() {
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+        System.out.println("Utama");
+        for(int i = 0; i < 5; i++) {
+            for(KartuSpell kartu: player.getBoard().get(i).getActiveSpells()) {
+                if(kartu instanceof KartuSpellPotion) {
+                    ((KartuSpellPotion) kartu).setDuration(((KartuSpellPotion) kartu).getDuration()-1);
+                    if(((KartuSpellPotion) kartu).getDuration() == 0) {
+                        player.getBoard().get(i).setHealthTemp(0);
+                        player.getBoard().get(i).setAttackTemp(0);
+                    }
+                }
+                System.out.println("Masukkk");
+                if (kartu instanceof KartuSpellSwap) {
+                    ((KartuSpellSwap) kartu).setDuration(((KartuSpellSwap) kartu).getDuration() - 1);
+                    System.out.println(((KartuSpellSwap) kartu).getDuration());
+                    if(((KartuSpellSwap) kartu).getDuration() == 0) {
+                        player.getBoard().get(i).getActiveSpells().remove(kartu);
+                        int health_temp = player.getBoard().get(i).getHealth();
+                        int attack_temp = player.getBoard().get(i).getAttack();
+
+                        player.getBoard().get(i).setHealth(attack_temp);
+                        player.getBoard().get(i).setAttack(health_temp);
+                    }
+                }
+            }
+        }
+    }
+
+    public void applySpell(int idx, Kartu kartu) {
+        Player player;
+        if (game.getPlayerIndex() == 0) {
+            player = game.getPlayerOne();
+        } else {
+            player = game.getPlayerTwo();
+        }
+        if(this.currentHandCard instanceof KartuSpellLvl) {
+            if(this.currentHandCard.getNama().equals("LVLUP")) {
+                ((KartuSpellLvl) this.currentHandCard).lvl(player.getBoard().get(idx), true);
+            } else {
+                ((KartuSpellLvl) this.currentHandCard).lvl(player.getBoard().get(idx), false);
+            }
+        } else if (kartu instanceof  KartuSpellPotion) {
+            if(((KartuSpellPotion) this.currentHandCard).getDuration() == 0) {
+                player.getBoard().get(idx).setHealth(player.getBoard().get(idx).getHealth() + ((KartuSpellPotion) this.currentHandCard).getHealthModifier());
+                player.getBoard().get(idx).setAttack(player.getBoard().get(idx).getAttack() + ((KartuSpellPotion) this.currentHandCard).getAttackModifier());
+            } else {
+                player.getBoard().get(idx).setAttackTemp(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
+                player.getBoard().get(idx).setHealthTemp(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
+                System.out.println(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
+                System.out.println(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
+            }
+        } else if (kartu instanceof  KartuSpellSwap) {
+            ((KartuSpellSwap)this.currentHandCard).swap(player.getBoard().get(idx));
+            if(player.getBoard().get(idx).getHealth() == 0) {
+                player.removeBoardCardAtIndex(idx);
+            }
+        } else if (kartu instanceof  KartuSpellMorph) {
+            // ((KartuSpellMorph) this.currentHandCard).morph(player.getBoard().get(idx));
+        }
+
     }
 }
