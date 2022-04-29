@@ -69,7 +69,7 @@ public class Reference {
             this.referenceDeck.add(new KartuKarakter(getKarakter(), karakter[1]));
         }
         for (String[] morph : morph) {
-            this.referenceDeck.add(new KartuSpellMorph(morph[1], morph[2], Integer.parseInt(morph[5]), morph[3], Integer.parseInt(morph[4])));
+            this.referenceDeck.add(new KartuSpellMorph(getMorph(), morph[1]));
         }
         for (String[] potion : ptn) {
             this.referenceDeck.add(new KartuSpellPotion(getPtn(), potion[1]));
