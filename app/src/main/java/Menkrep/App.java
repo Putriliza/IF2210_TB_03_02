@@ -18,10 +18,9 @@ import static javafx.application.Application.launch;
 
 
 public class App extends Application {
-    public String getGreeting() {
-        return "Hello world";
+    public int penjumlahan(int a, int b){
+        return a+b;
     }
-
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GUI/scene.fxml"));
