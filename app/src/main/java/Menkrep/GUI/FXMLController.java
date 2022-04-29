@@ -128,7 +128,6 @@ public class FXMLController
             button_end.setDisable(true);
             button_delete.setDisable(false);
             game.setHasDrawn(false);
-            resetPlayerMana(event);
 
             if (game.getPlayerOne().getDeck().size() == 0 && game.getPlayerIndex() == 0) {
                 endGame(game.getPlayerTwo());
@@ -719,8 +718,8 @@ public class FXMLController
                         if (player.getMana() > 0) {
                             player.getBoard().set(idx, (KartuKarakter) this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
+                            player.setMana(player.getMana() - this.currentHandCard.getMana());
                             this.currentHandCard = null;
-                            player.setMana(player.getMana() - 1);
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -728,8 +727,8 @@ public class FXMLController
                         if (player.getMana() > 0) {
                             player.getBoard().get(idx).addSpell((KartuSpell) this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
+                            player.setMana(player.getMana() - this.currentHandCard.getMana());
                             this.currentHandCard = null;
-                            player.setMana(player.getMana() - 1);
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -806,18 +805,6 @@ public class FXMLController
 
     // -------------------------------------------------------------------------------------
     // Fungsi untuk bind jumlah mana
-
-    public void resetPlayerMana(ActionEvent event){
-        event.consume();
-
-        Player player;
-        if (game.getPlayerIndex() == 0) {
-            player = game.getPlayerOne();
-        } else {
-            player = game.getPlayerTwo();
-        }
-        player.setMana(game.getManaCap());
-    }
 
     @FXML
     Label jumlah_mana;
