@@ -558,12 +558,12 @@ public class FXMLController
         // Cek apakah kartu card valid
         // Tampilkan detail handover card
         if (idx < player.getHandCard().size()){
-            currentHandCard = player.getHandCard().get(idx);
+            Kartu currentSelectd = player.getHandCard().get(idx);
             String cwd = System.getProperty("user.dir");
-            gambar_kartu_hand_hover.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + currentHandCard.getImgPath()));
-            nama_kartu_hand_hover.setText(currentHandCard.getNama());
-            stat_kartu_hand_hover.setText(currentHandCard.toString());
-            deskripsi_kartu_hand_hover.setText("\""+ currentHandCard.getDeskripsi() + "\"");
+            gambar_kartu_hand_hover.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + currentSelectd.getImgPath()));
+            nama_kartu_hand_hover.setText(currentSelectd.getNama());
+            stat_kartu_hand_hover.setText(currentSelectd.toString());
+            deskripsi_kartu_hand_hover.setText("\""+ currentSelectd.getDeskripsi() + "\"");
             setHandCardEffect(idx);
         }
         else {
@@ -639,12 +639,12 @@ public class FXMLController
 
         // Tampilkan detail handover card
         if (idx < player.getHandCard().size()){
-            currentHandCard = player.getHandCard().get(idx);
+            Kartu currentSelected = player.getHandCard().get(idx);
             String cwd = System.getProperty("user.dir");
-            gambar_kartu_hand_hover.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + currentHandCard.getImgPath()));
-            nama_kartu_hand_hover.setText(currentHandCard.getNama());
-            stat_kartu_hand_hover.setText(currentHandCard.toString());
-            deskripsi_kartu_hand_hover.setText("\""+ currentHandCard.getDeskripsi() + "\"");
+            gambar_kartu_hand_hover.setImage(new Image(cwd + "/src/main/resources/Menkrep/" + currentSelected.getImgPath()));
+            nama_kartu_hand_hover.setText(currentSelected.getNama());
+            stat_kartu_hand_hover.setText(currentSelected.toString());
+            deskripsi_kartu_hand_hover.setText("\""+ currentSelected.getDeskripsi() + "\"");
             setHandCardEffect(idx);
         }
         else {
