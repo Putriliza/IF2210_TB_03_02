@@ -7,10 +7,12 @@ public class Kartu {
     private String imgPath;
     private int mana;
 
-    public Kartu(String nama, String deskripsi, String tipe) {
+    public Kartu(String nama, String deskripsi, String tipe, int mana, String imgPath) {
         this.nama = nama;
         this.deskripsi = deskripsi;
         this.tipe = tipe;
+        this.imgPath = imgPath;
+        this.mana = mana;
     }
 
     public String getNama() {

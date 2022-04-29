@@ -21,7 +21,7 @@ public class KartuKarakter extends Kartu {
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
         int attack, int attackUp, int healthUp, String imgPath, int mana) {
-        super(nama, deskripsi, "KARAKTER");
+        super(nama, deskripsi, "KARAKTER", mana, imgPath);
         this.jenis = jenis;
         this.exp = exp;
         this.level = level;
@@ -34,12 +34,10 @@ public class KartuKarakter extends Kartu {
         this.doneAttack=false;
         this.attackTemp = 0;
         this.healthTemp = 0;
-        super.setImgPath(imgPath);
-        super.setMana(mana);
     }
 
     public KartuKarakter(List<String[]> reference, String nama) {
-        super(nama, "", "KARAKTER");
+        super(nama, "", "KARAKTER", 0, "-");
         for (String[] karakter : reference) {
             if (karakter[1].equals(nama)) {
                 this.setDeskripsi(karakter[3]);
