@@ -695,12 +695,12 @@ public class FXMLController
 
         if (game.getPhase() == Phase.Plan){
             if(currAction == CAction.UpMana){
-                System.out.println("Halo");
                 if(game.getPlayerIndex()==0){
                     game.getPlayerOne().upMana(idx);
                 }else{
                     game.getPlayerTwo().upMana(idx);
                 }
+                currAction = CAction.Nothing;
             } else{
                 if (this.currentHandCard == null) {
                     System.out.println("BELUM MENCET KARTU APAPUN WOI");
@@ -820,7 +820,6 @@ public class FXMLController
     public void upExp(ActionEvent event){
         event.consume();
         if((game.getPlayerIndex()==0 && game.getPlayerOne().getMana()>0) || (game.getPlayerIndex()==1 && game.getPlayerTwo().getMana()>0)){
-            System.out.println("Start up exp");
             currAction = CAction.UpMana;
         }
     }
