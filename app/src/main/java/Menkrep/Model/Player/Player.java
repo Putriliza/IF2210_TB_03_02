@@ -7,7 +7,7 @@ import Menkrep.Model.Reference.Reference;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Player implements Attackable {
+public class Player {
     // Atribut
     private final String name;
     private int healthPoints;
@@ -215,46 +215,6 @@ public class Player implements Attackable {
     public void resetBoardAttack() {
         for (KartuKarakter kartu : board) {
             kartu.resetAttack();
-        }
-    }
-
-    public void attack(Player opponent) {
-        // Pilih kartu di board yang mau dipake
-        int idxPlayerBoard, idxOpponentBoard;
-        KartuKarakter playerCard, opponentCard;
-
-        // Semua kartu yang ada di board bakal disimpan sementara
-        // di tempPlayerBoard, jadii player bisaa attack sampai
-        // semua kartu yang ada di tempPlayerBoard habisss
-
-        // Kalo ada kartu karakter yang mati, bakal langsung 
-        // di remove di boardnya
-        ArrayList<KartuKarakter> tempPlayerBoard = new ArrayList<KartuKarakter>();
-        tempPlayerBoard.addAll(this.board);
-
-        while (tempPlayerBoard.size() > 0) {
-            // TO DO: Minta ke user mau kartu posisi yang index keberapa
-            // ATAUUU nanti bisa langsung minta kartu yang mauu dipakenya ajaa, bukan indexnya
-            idxPlayerBoard = 0;
-            playerCard = tempPlayerBoard.remove(idxPlayerBoard);
-
-            // Kalo lawan udah ga punya kartu yang bisa diattack
-            if (opponent.getBoard().size() == 0) {
-                opponent.setHealthPoints(opponent.getHealthPoints() - playerCard.getAttack());
-            } else {
-                // TO DO: Minta ke user mau lawan posisi yang index keberapa
-                idxOpponentBoard = 0;
-                opponentCard = opponent.getBoard().get(idxOpponentBoard);
-                playerCard.attack(opponentCard);
-
-                // Apabila kartu player atau opponent mati
-                if (playerCard.getHealth() <= 0) {
-                    this.removeBoardCardAtIndex(idxPlayerBoard);
-                }
-                if (opponentCard.getHealth() <= 0) {
-                    opponent.removeBoardCardAtIndex(idxOpponentBoard);
-                }
-            }
         }
     }
 }
