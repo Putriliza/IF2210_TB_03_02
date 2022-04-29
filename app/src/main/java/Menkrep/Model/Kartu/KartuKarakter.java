@@ -140,22 +140,18 @@ public class KartuKarakter extends Kartu {
     }
 
     public void setAttackUp(int attackUp) {
-        this.attackUp = this.getAttack() + ((this.getLevel() - 1) * attackUp);
-        // if (this.level == 10) {
-        // this.attackUp = 0;
-        // } else {
-        // this.attackUp = attackUp;
-        // }
+//        this.attackUp = this.getAttack() + ((this.getLevel() - 1) * attackUp);
+        this.attackUp = attackUp;
     }
 
     // Health Up
     public int getHealthUp() {
-        return healthUp + this.healthTemp;
+        return healthUp;
     }
 
     public void setHealthUp(int healthUp) {
-        this.healthUp = this.getHealth() + ((this.getLevel() - 1) * healthUp);
-        // this.healthUp = healthUp;
+//        this.healthUp = this.getHealth() + ((this.getLevel() - 1) * healthUp);
+        this.healthUp = healthUp;
     }
 
     // Active Spell
