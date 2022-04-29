@@ -1,4 +1,5 @@
 package Menkrep;
+
 import Menkrep.Model.Enum.DrawStatus;
 import Menkrep.Model.Player.Player;
 import org.junit.jupiter.api.DisplayName;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerTest {
     @Test
     @DisplayName("Player instantiation check")
-    void testPlayerConstructor(){
+    void testPlayerConstructor() {
         String name = "steve";
         Player player = new Player(name);
         assertEquals(player.getName(), name);

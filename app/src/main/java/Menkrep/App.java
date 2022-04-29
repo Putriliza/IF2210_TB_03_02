@@ -3,24 +3,18 @@
  */
 package Menkrep;
 
-import Menkrep.GUI.DrawPageController;
-import Menkrep.GUI.FXMLController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import static javafx.application.Application.launch;
-
-//
 
 
 public class App extends Application {
-    public int penjumlahan(int a, int b){
-        return a+b;
+    public int penjumlahan(int a, int b) {
+        return a + b;
     }
+
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("GUI/scene.fxml"));

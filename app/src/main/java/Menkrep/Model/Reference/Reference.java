@@ -21,10 +21,10 @@ public class Reference {
     private final List<String[]> ptn;
     private final List<String[]> swap;
     private final List<String[]> lvl;
-    private ArrayList<Kartu> referenceDeck;
+    private final ArrayList<Kartu> referenceDeck;
 
-    public static Reference getInstance(){
-        if(refInstance == null){
+    public static Reference getInstance() {
+        if (refInstance == null) {
             try {
                 refInstance = new Reference();
             } catch (IOException e) {
@@ -74,7 +74,7 @@ public class Reference {
         for (String[] potion : ptn) {
             this.referenceDeck.add(new KartuSpellPotion(getPtn(), potion[1]));
         }
-        for (String[] swap: swap) {
+        for (String[] swap : swap) {
             this.referenceDeck.add(new KartuSpellSwap(getSwap(), swap[1]));
         }
         for (String[] lvl : lvl) {
