@@ -16,7 +16,8 @@ public class KartuKarakter extends Kartu {
     private String imgPath;
     private ArrayList<KartuSpell> activeSpells;
     private boolean doneAttack;
-    // private List<String> karakter;
+
+    private int swapDuration = 0;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
         int attack, int attackUp, int healthUp, String imgPath, int mana) {
@@ -55,6 +56,25 @@ public class KartuKarakter extends Kartu {
                 super.setImgPath(karakter[4]);
                 super.setMana(Integer.parseInt(karakter[7]));
             }
+        }
+    }
+
+    public int getSwapDuration(){
+        return swapDuration;
+    }
+
+    public void addSwapDuration(int newDur){
+        swapDuration += newDur;
+    }
+
+    public void reduceSwapDuration(){
+        if(swapDuration==1){
+            int temp = health;
+            attack = health;
+            health = temp;
+        }
+        if(swapDuration>0){
+            swapDuration -= 1;
         }
     }
 

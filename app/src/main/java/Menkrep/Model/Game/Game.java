@@ -1,11 +1,8 @@
 package Menkrep.Model.Game;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import Menkrep.Model.Enum.Phase;
 import Menkrep.Model.Kartu.KartuKarakter;
-import Menkrep.Model.Player.*;
+import Menkrep.Model.Player.Player;
 
 public class Game {
 
@@ -14,7 +11,7 @@ public class Game {
     private int round;
     private int playerIndex;
     private Phase phase;
-    private Player[] players;
+    private final Player[] players;
     private boolean hasDrawn;
     // private ArrayList<Player> players;
 
@@ -22,24 +19,20 @@ public class Game {
         return gameInstance;
     }
 
-    public Game(){
+    public Game() {
         this.round = 1;
         this.playerIndex = 0;
         this.phase = Phase.Draw;
         this.hasDrawn = false;
         this.players = new Player[2];
-        try {
-            Player playerOne = new Player("Steve");
-            Player playerTwo = new Player("Alex");
-            this.players[0] = playerOne;
-            this.players[1] = playerTwo;
-        } catch (IOException e) {
-            //TODO: handle exception
-        }
+        Player playerOne = new Player("Steve");
+        Player playerTwo = new Player("Alex");
+        this.players[0] = playerOne;
+        this.players[1] = playerTwo;
     }
 
-    public int getManaCap(){
-        return this.round<=10 ? this.round : 10;
+    public int getManaCap() {
+        return this.round <= 10 ? this.round : 10;
     }
 
     public int getRound() {
@@ -47,42 +40,44 @@ public class Game {
     }
 
     public void nextRound() {
-        this.round +=1;
+        this.round += 1;
     }
 
-    public int getPlayerIndex(){
+    public int getPlayerIndex() {
         return this.playerIndex;
     }
 
-    public Phase getPhase(){
+    public Phase getPhase() {
         return this.phase;
     }
 
     public void nextPhase() {
-        if (this.phase == Phase.Draw){
+        if (this.phase == Phase.Draw) {
             this.phase = Phase.Plan;
-        } else if (this.phase == Phase.Plan){
+        } else if (this.phase == Phase.Plan) {
             this.phase = Phase.Attack;
-        }else if (this.phase == Phase.Attack){
+        } else if (this.phase == Phase.Attack) {
             this.phase = Phase.End;
-        }else if (this.phase == Phase.End){
-            if(this.playerIndex==0){
-                this.playerIndex=1;
-            } else{
-                this.playerIndex=0;
+        } else if (this.phase == Phase.End) {
+            if (this.playerIndex == 0) {
+                this.playerIndex = 1;
+            } else {
+                this.playerIndex = 0;
                 nextRound();
             }
             this.phase = Phase.Draw;
         }
         players[0].setMana(getManaCap());
         players[1].setMana(getManaCap());
+        players[0].reduceAllSwap();
+        players[0].reduceAllSwap();
     }
 
-    public Player getPlayerOne(){
+    public Player getPlayerOne() {
         return this.players[0];
     }
 
-    public Player getPlayerTwo(){
+    public Player getPlayerTwo() {
         return this.players[1];
     }
 
@@ -94,12 +89,12 @@ public class Game {
         this.hasDrawn = hasDrawn;
     }
 
-    public void resetBoardAttack(){
+    public void resetBoardAttack() {
         players[0].resetBoardAttack();
         players[1].resetBoardAttack();
     }
 
-    public void attack(int idxLeft, int idxRight){
+    public void attack(int idxLeft, int idxRight) {
         Player playerOne = players[0];
         Player playerTwo = players[1];
         KartuKarakter leftBoardSelected = playerOne.getBoard().get(idxLeft);
@@ -108,22 +103,22 @@ public class Game {
         leftBoardSelected.attack(rightBoardSelected);
         rightBoardSelected.attack(leftBoardSelected);
 
-        if (leftBoardSelected.getHealth()==0 && rightBoardSelected.getHealth()!=0){
+        if (leftBoardSelected.getHealth() == 0 && rightBoardSelected.getHealth() != 0) {
             rightBoardSelected.naikExp(leftBoardSelected.getLevel());
         }
-        if(rightBoardSelected.getHealth()==0 && leftBoardSelected.getHealth()!=0){
+        if (rightBoardSelected.getHealth() == 0 && leftBoardSelected.getHealth() != 0) {
             leftBoardSelected.naikExp(rightBoardSelected.getLevel());
         }
 
-        if(leftBoardSelected.getHealth()==0){
+        if (leftBoardSelected.getHealth() == 0) {
             playerOne.removeBoardCardAtIndex(idxLeft);
-        }else{
+        } else {
             playerOne.getBoard().set(idxLeft, leftBoardSelected);
         }
 
-        if(rightBoardSelected.getHealth()==0){
+        if (rightBoardSelected.getHealth() == 0) {
             playerTwo.removeBoardCardAtIndex(idxRight);
-        }else{
+        } else {
             playerTwo.getBoard().set(idxRight, rightBoardSelected);
         }
     }

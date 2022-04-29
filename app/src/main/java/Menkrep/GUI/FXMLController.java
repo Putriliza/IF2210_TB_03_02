@@ -739,7 +739,6 @@ public class FXMLController
                             applySpell(idx, this.currentHandCard);
                             player.getHandCard().remove(this.currentHandCard);
                             player.setMana(player.getMana() - this.currentHandCard.getMana());
-                            System.out.println(player.getBoard().get(idx).getNama());
                         } else {
                             System.out.println("MANA HABISSS");
                         }
@@ -760,6 +759,7 @@ public class FXMLController
             } else{
                 if(game.getPlayerIndex()==0 && playerTwo.boardIsEmpty()){
                     playerTwo.reduceHP(playerOne.getBoard().get(idxLeft).getAttack());
+                    playerTwo.getBoard().get(idxRight).alrAttack();
                     bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
                     bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
                     if (playerTwo.getHealthPoints() <= 0) {
@@ -768,7 +768,7 @@ public class FXMLController
                     }
                 } else if(game.getPlayerIndex()==1 && playerOne.boardIsEmpty()){
                     playerOne.reduceHP(playerTwo.getBoard().get(idxRight).getAttack());
-
+                    playerOne.getBoard().get(idxLeft).alrAttack();
                     bar_health_steve.setProgress(game.getPlayerOne().getHealthPoints()/80.0);
                     bar_health_alex.setProgress(game.getPlayerTwo().getHealthPoints()/80.0);
                     if (playerOne.getHealthPoints() <= 0) {
@@ -883,7 +883,7 @@ public class FXMLController
         } else {
             player = game.getPlayerTwo();
         }
-        if (this.currentHandCard instanceof KartuSpellLvl) {
+        if (this.currentHandCard instanceof KartuSpellLvl && player.getMana()>=(int)Math.ceil(player.getBoard().get(idx).getLevel()/2.0)) {
             ((KartuSpellLvl) this.currentHandCard).lvl(player.getBoard().get(idx));
         } else if (kartu instanceof KartuSpellPotion) {
             if (((KartuSpellPotion) this.currentHandCard).getDuration() == 0) {
@@ -895,7 +895,7 @@ public class FXMLController
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getAttackModifier());
                 System.out.println(((KartuSpellPotion) this.currentHandCard).getHealthModifier());
             }
-        } else if (kartu instanceof KartuSpellSwap) {
+        } else if (kartu instanceof KartuSpellSwap && player.getMana() >= currentHandCard.getMana()) {
             ((KartuSpellSwap) this.currentHandCard).swap(player.getBoard().get(idx));
             if (player.getBoard().get(idx).getHealth() == 0) {
                 player.removeBoardCardAtIndex(idx);

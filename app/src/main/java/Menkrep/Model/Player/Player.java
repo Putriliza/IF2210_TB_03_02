@@ -1,27 +1,26 @@
 package Menkrep.Model.Player;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
-
 import Menkrep.Model.Enum.DrawStatus;
 import Menkrep.Model.Kartu.Kartu;
 import Menkrep.Model.Kartu.KartuKarakter;
 import Menkrep.Model.Reference.Reference;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Player implements Attackable {
     // Atribut
-    private String name;
+    private final String name;
     private int healthPoints;
     private int mana;
-    private int deckCapacity;
-    private ArrayList<Kartu> deck;
-    private ArrayList<Kartu> hand;
+    private final int deckCapacity;
+    private final ArrayList<Kartu> deck;
+    private final ArrayList<Kartu> hand;
     private ArrayList<Kartu> draw;
-    private ArrayList<KartuKarakter> board;
+    private final ArrayList<KartuKarakter> board;
 
     // Konstruktor
-    public Player(String name) throws IOException {
+    public Player(String name) {
         this.name = name;
         this.healthPoints = 80;
         this.mana = 1;
@@ -30,9 +29,11 @@ public class Player implements Attackable {
         Random rand = new Random();
         this.deckCapacity = 40 + rand.nextInt(21);
 
-        // Inisialisasi kartu di deck
-        this.deck = new ArrayList<Kartu>();
-    
+        // Inisialisasi kartu
+        this.deck = new ArrayList<>();
+        this.draw = new ArrayList<>();
+        this.board = new ArrayList<>();
+
         Reference ref = Reference.getInstance();
         ArrayList<Kartu> referenceDeck = ref.getReferenceDeck();
         for (int i = 0; i < this.deckCapacity; i++) {
@@ -48,15 +49,13 @@ public class Player implements Attackable {
             this.hand.add(this.deck.remove(0));
         }
 
-        this.board = new ArrayList<KartuKarakter>();
-
-        for (int index = this.board.size(); index < 5; index++) {
+        for (int index = 0; index < 5; index++) {
             this.board.add(new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-", 0));
         }
     }
-    
+
     public void removeBoardCardAtIndex(int index) {
-        if (index < 5) {
+        if (index >= 0 && index < 5) {
             this.board.set(index, new KartuKarakter("-", "-", "-", 0, 0, 0, 0, 0, 0, "-", 0));
         }
     }
@@ -66,11 +65,11 @@ public class Player implements Attackable {
         return this.name;
     }
 
-    public ArrayList<Kartu> getHandCard(){
+    public ArrayList<Kartu> getHandCard() {
         return this.hand;
     }
 
-    public int getHealthPoints(){
+    public int getHealthPoints() {
         return this.healthPoints;
     }
 
@@ -80,10 +79,10 @@ public class Player implements Attackable {
         }
     }
 
-    public void reduceHP(int att){
+    public void reduceHP(int att) {
         this.healthPoints -= att;
-        if(this.healthPoints<0){
-            this.healthPoints=0;
+        if (this.healthPoints < 0) {
+            this.healthPoints = 0;
         }
     }
 
@@ -92,6 +91,15 @@ public class Player implements Attackable {
             this.mana = mana;
         } else {
             this.mana = 10;
+        }
+    }
+
+    public void reduceAllSwap() {
+        for (int i = 0; i < 5; i++) {
+            board.get(i).reduceSwapDuration();
+            if (board.get(i).getHealth() <= 0) {
+                removeBoardCardAtIndex(i);
+            }
         }
     }
 
@@ -153,10 +161,10 @@ public class Player implements Attackable {
         }
     }
 
-    public void upMana(int idx){
-        if(!board.get(idx).getNama().equals("-")){
+    public void upMana(int idx) {
+        if (!board.get(idx).getNama().equals("-")) {
             board.get(idx).naikExp(1);
-            setMana(mana-1);
+            setMana(mana - 1);
         }
     }
 
@@ -164,22 +172,22 @@ public class Player implements Attackable {
         // TO DO:
         // Keluarkan kartu yang ada di hand
         // Masukin ke dalam board, cek apakah di board masih ada slot atau ga
-        if((hand.size() - 1) > src && board.size() <= 6){
-            board.add(new KartuKarakter(reference.getKarakter(),hand.get(src).getNama()));
+        if ((hand.size() - 1) > src && board.size() <= 6) {
+            board.add(new KartuKarakter(reference.getKarakter(), hand.get(src).getNama()));
         }
     }
 
-    public boolean boardIsEmpty(){
-        for (KartuKarakter kartu: board) {
-            if(!kartu.getNama().equals("-")){
+    public boolean boardIsEmpty() {
+        for (KartuKarakter kartu : board) {
+            if (!kartu.getNama().equals("-")) {
                 return false;
             }
         }
         return true;
     }
 
-    public void resetBoardAttack(){
-        for (KartuKarakter kartu: board) {
+    public void resetBoardAttack() {
+        for (KartuKarakter kartu : board) {
             kartu.resetAttack();
         }
     }
@@ -215,10 +223,10 @@ public class Player implements Attackable {
 
                 // Apabila kartu player atau opponent mati
                 if (playerCard.getHealth() <= 0) {
-                    this.removeBoardCardAtIndex(idxPlayerBoard);;
+                    this.removeBoardCardAtIndex(idxPlayerBoard);
                 }
                 if (opponentCard.getHealth() <= 0) {
-                    opponent.removeBoardCardAtIndex(idxOpponentBoard);;
+                    opponent.removeBoardCardAtIndex(idxOpponentBoard);
                 }
             }
         }
