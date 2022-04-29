@@ -13,11 +13,9 @@ public class KartuKarakter extends Kartu {
     private int healthUp;
     private int healthTemp;
     private int attackTemp;
-    private String imgPath;
     private ArrayList<KartuSpell> activeSpells;
     private boolean doneAttack;
-
-    private int swapDuration = 0;
+    private int swapDuration;
 
     public KartuKarakter(String nama, String deskripsi, String jenis, int exp, int level, int health,
         int attack, int attackUp, int healthUp, String imgPath, int mana) {
@@ -29,11 +27,11 @@ public class KartuKarakter extends Kartu {
         this.attack = attack;
         this.attackUp = attackUp;
         this.healthUp = healthUp;
-        this.imgPath = imgPath;
         this.activeSpells = new ArrayList<KartuSpell>();
-        this.doneAttack=false;
+        this.doneAttack = false;
         this.attackTemp = 0;
         this.healthTemp = 0;
+        this.swapDuration = 0;
         super.setImgPath(imgPath);
         super.setMana(mana);
     }
@@ -50,13 +48,30 @@ public class KartuKarakter extends Kartu {
                 this.health = Integer.parseInt(karakter[6]);
                 this.attackUp = Integer.parseInt(karakter[8]);
                 this.healthUp = Integer.parseInt(karakter[9]);
-                this.imgPath = karakter[7];
                 this.activeSpells = new ArrayList<KartuSpell>();
                 this.doneAttack=false;
                 super.setImgPath(karakter[4]);
                 super.setMana(Integer.parseInt(karakter[7]));
             }
         }
+    }
+
+    public KartuKarakter(KartuKarakter other) {
+        super(other);
+        this.jenis = other.getJenis();
+        this.exp = other.getExp();
+        this.level = other.getLevel();
+        this.health = other.getHealth();
+        this.attack = other.getAttack();
+        this.attackUp = other.getAttackUp();
+        this.healthUp = other.getHealthUp();
+        this.activeSpells = other.getActiveSpells();
+        this.doneAttack = other.getDoneAttack();
+        this.attackTemp = other.getAttackTemp();
+        this.healthTemp = other.getHealthTemp();
+        this.swapDuration = other.getSwapDuration();
+        super.setImgPath(other.getImgPath());
+        super.setMana(other.getMana());
     }
 
     public int getSwapDuration(){

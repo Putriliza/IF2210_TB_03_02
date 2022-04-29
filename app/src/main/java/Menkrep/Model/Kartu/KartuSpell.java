@@ -7,4 +7,8 @@ public class KartuSpell extends Kartu {
         super.setImgPath(imgPath);
         super.setMana(mana);
     }
+
+    public KartuSpell(KartuSpell other) {
+        this(other.getNama(), other.getDeskripsi(), other.getTipe(), other.getMana(), other.getImgPath());
+    }
 }

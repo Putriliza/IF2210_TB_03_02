@@ -29,6 +29,11 @@ public class KartuSpellSwap extends KartuSpell implements KartuSpellTemp{
         }
     }
 
+    public KartuSpellSwap(KartuSpellSwap other) {
+        super(other);
+        this.duration = other.getDuration();
+    }
+
     public int getDuration() {
         return duration;
     }

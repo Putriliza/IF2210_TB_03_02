@@ -13,6 +13,12 @@ public class Kartu {
         this.tipe = tipe;
     }
 
+    public Kartu(Kartu other) {
+        this.nama = other.getNama();
+        this.deskripsi = other.getDeskripsi();
+        this.tipe = other.getTipe();
+    }
+
     public String getNama() {
         return nama;
     }

@@ -28,6 +28,11 @@ public class KartuSpellMorph extends KartuSpell {
         }
     }
 
+    public KartuSpellMorph(KartuSpellMorph other) {
+        super(other);
+        this.targetId = other.getTargetId();
+    }
+
     public int getTargetId() {
         return this.targetId;
     }

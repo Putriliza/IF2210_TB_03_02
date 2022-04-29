@@ -24,6 +24,10 @@ public class KartuSpellLvl extends KartuSpell {
         }
     }
 
+    public KartuSpellLvl(KartuSpellLvl other) {
+        super(other);
+    }
+
     // Meningkatkan/menurunkan level dari sebuah karakter sebanyak 1
     // serta mereset exp (membuat exp menjadi 0). Batas minimal level tetap 1 dan maksimal tetap 10.
     public void lvl(KartuKarakter karakter) {
