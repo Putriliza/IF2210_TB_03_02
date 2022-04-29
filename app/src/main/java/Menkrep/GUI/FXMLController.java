@@ -842,9 +842,9 @@ public class FXMLController
 
     // Fungsi untuk aplikasi spell
 
-    public void checkActive() {
+    public void checkActive(int idx) {
         Player player;
-        if (game.getPlayerIndex() == 0) {
+        if (idx == 0) {
             player = game.getPlayerOne();
         } else {
             player = game.getPlayerTwo();
