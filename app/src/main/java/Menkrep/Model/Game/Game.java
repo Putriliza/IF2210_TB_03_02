@@ -28,14 +28,10 @@ public class Game {
         this.phase = Phase.Draw;
         this.hasDrawn = false;
         this.players = new Player[2];
-        try {
-            Player playerOne = new Player("Steve");
-            Player playerTwo = new Player("Alex");
-            this.players[0] = playerOne;
-            this.players[1] = playerTwo;
-        } catch (IOException e) {
-            //TODO: handle exception
-        }
+        Player playerOne = new Player("Steve");
+        Player playerTwo = new Player("Alex");
+        this.players[0] = playerOne;
+        this.players[1] = playerTwo;
     }
 
     public int getManaCap(){
